@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarangsTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateBarangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('barangs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create('units', function (Blueprint $table) {
+        $table->bigIncrements('id');
+        $table->string('uuid')->length(36);
+        $table->string('nama_unit');
+        $table->timestamps();
+    });
     }
+
 
     /**
      * Reverse the migrations.
@@ -26,6 +29,6 @@ class CreateBarangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barangs');
+        Schema::dropIfExists('units');
     }
 }

@@ -19,8 +19,11 @@ class CreatePemesanandetailsTable extends Migration
             $table->unsignedBigInteger('pemesanan_id');
             $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('barang_id');
-            $table->string('jumlah');
+            $table->string('jumlah', 50);
             $table->timestamps();
+            $table->foreign('pemesanan_id')->references('id')->on('pemesanans')->onDelete('restrict');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict');
+            $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('restrict');
         });
     }
 

@@ -16,7 +16,7 @@ class CreateUnitsTable extends Migration
         Schema::create('units', function (Blueprint $table) {
         $table->bigIncrements('id');
         $table->string('uuid')->length(36);
-        $table->string('nama_unit');
+        $table->string('nama_unit', 100);
         $table->timestamps();
     });
     }

@@ -16,7 +16,7 @@ class CreateSatuansTable extends Migration
         Schema::create('satuans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
-            $table->string('nama_satuan');
+            $table->string('nama_satuan', 50);
             $table->timestamps();
         });
     }

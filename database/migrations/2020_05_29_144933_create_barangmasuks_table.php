@@ -16,11 +16,13 @@ class CreateBarangmasuksTable extends Migration
         Schema::create('barangmasuks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
-            $table->date('tgl_masuk');
             $table->unsignedBigInteger('supplier_id');
-            $table->string('total');
             $table->unsignedBigInteger('user_id');
+            $table->date('tgl_masuk');
+            $table->string('total', 50);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict');
         });
     }
 

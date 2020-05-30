@@ -16,10 +16,10 @@ class CreateSuppliersTable extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
-            $table->string('nama_suppliers');
+            $table->string('nama_suppliers', 100);
             $table->text('alamat');
-            $table->string('telepon');
-            $table->string('keterangan');
+            $table->string('telepon', 20);
+            $table->text('keterangan');
             $table->timestamps();
         });
     }

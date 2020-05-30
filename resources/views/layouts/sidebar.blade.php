@@ -14,6 +14,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('satuanIndex')}}">
+                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Data Satuan</span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Data</span>
                 </a>

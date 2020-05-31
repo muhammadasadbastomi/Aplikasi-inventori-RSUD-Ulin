@@ -46,7 +46,7 @@ Route::put('/admin/supplier', 'SupplierController@update')->name('supplierUpdate
 Route::delete('/admin/supplier/delete/{id}', 'SupplierController@destroy')->name('supplierDelete');
 
 Route::get('/admin/barang', 'BarangController@index')->name('barangIndex');
-Route::post('/admin/barang', 'BarangController@create')->name('barangCreate');
-Route::get('/admin/barang/edit', 'BarangController@edit')->name('barangEdit');
-Route::post('/admin/barang/edit/{id}', 'BarangController@update')->name('barangUpdate');
+Route::post('/admin/barang', 'BarangController@store')->name('baranStore');
+//Route::get('/admin/barang/edit', 'BarangController@edit')->name('barangEdit');
+Route::post('/admin/barang', 'BarangController@update')->name('barangUpdate');
 Route::delete('/admin/barang/delete/{id}', 'BarangController@destroy')->name('barangDelete');

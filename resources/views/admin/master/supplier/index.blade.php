@@ -13,6 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Master</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Supplier</a></li>
             </ol>
         </div>
@@ -26,10 +27,7 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
-                                    Data</span></button>
-                            @include('admin.master.supplier.create')
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -53,16 +51,10 @@
                                         <td scope="col" class="text-center">{{ $s->telepon }}</td>
                                         <td scope="col" class="text-center">{{ $s->keterangan }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$s->id}}"
-                                                data-nama_suppliers="{{$s->nama_suppliers}}"
-                                                data-alamat="{{$s->alamat}}" data-telepon="{{$s->telepon}}"
-                                                data-keterangan="{{$s->keterangan}}" data-toggle="modal"
-                                                data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$s->id}}" data-nama_suppliers="{{$s->nama_suppliers}}" data-alamat="{{$s->alamat}}" data-telepon="{{$s->telepon}}" data-keterangan="{{$s->keterangan}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$s->uuid}}"
-                                                href="#" data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Hapus"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$s->uuid}}" href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -77,61 +69,9 @@
     <!-- #/ container -->
     </div>
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="edit-modal-label" style="padding-left: 10px;">Edit Supplier</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        {{ method_field('put') }}
-                        @csrf
-                        <div class=" modal-body">
-                            <input type="hidden" name="id" id="id">
-                            <div class="form-group">
-                                <label class="col-form-label" for="nama_suppliers">Nama Supplier</label>
-                                <input type="text" class="form-control @error ('nama_suppliers') is-invalid @enderror"
-                                    placeholder="Masukkan Supplier" name="nama_suppliers"
-                                    value="{{old('nama_suppliers')}}" id="nama_suppliers" autofocus>
-                                @error('nama_suppliers')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="alamat">Alamat</label>
-                                <textarea type="text" class="form-control @error ('alamat') is-invalid @enderror"
-                                    placeholder="Masukkan Alamat" name="alamat" id="alamat"
-                                    autofocus>{{old('alamat')}}</textarea>
-                                @error('alamat')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="telepon">Telepon</label>
-                                <input type="number" class="form-control @error ('telepon') is-invalid @enderror"
-                                    placeholder="Masukkan Satuan" name="telepon" value="{{old('telepon')}}" id="telepon"
-                                    autofocus>
-                                @error('telepon')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="keterangan">Keterangan</label>
-                                <textarea type="text" class="form-control @error ('keterangan') is-invalid @enderror"
-                                    placeholder="Masukkan Satuan" name="keterangan" id="keterangan"
-                                    autofocus>{{old('keterangan')}}</textarea>
-                                @error('keterangan')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                            </div>
-                        </div>
-                        <div class="edit modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="edit btn btn-primary">Ubah</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('admin.master.supplier.create')
+    @include('admin.master.supplier.edit')
+
     @endsection
 
     @section('script')

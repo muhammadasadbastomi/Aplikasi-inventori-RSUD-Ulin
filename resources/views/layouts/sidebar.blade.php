@@ -8,7 +8,7 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-notebook menu-icon"></i><span class="nav-text"> Master Data </span>
+                    <i class="icon-notebook menu-icon"></i><span class="nav-text"> Data Master</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{route('merkIndex')}}" aria-expanded="false">Data Merk</a></li>
@@ -19,7 +19,22 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-calculator menu-icon"></i><span class="nav-text"> Transaksi </span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{route('pemesananIndex')}}" aria-expanded="false">Pemesanan</a></li>
+                    <li><a href="{{route('masukIndex')}}" aria-expanded="false">Barang Masuk</a></li>
+                    <li><a href="{{route('keluarIndex')}}" aria-expanded="false">Barang Keluar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{route('stokIndex')}}">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Stok Barang </span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('userIndex')}}">
                     <i class="icon-user menu-icon"></i><span class="nav-text"> Admin </span>
                 </a>
             </li>

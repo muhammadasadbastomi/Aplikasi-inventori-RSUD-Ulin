@@ -11,37 +11,35 @@
                 <form method="POST">
                     <div class="body">
                         @csrf
-                        <label>Nama Barang</label>
                         <div class="form-group">
-                            <input type="text" name="nama_barang" id="nama_barang" placeholder="Masukkan Nama Barang" value="{{old('nama_barang')}}" class="form-control  @error ('nama_barang') is-invalid @enderror">
-                            @error('nama_barang')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="merk_id">Merk</label>
-                            <select class="custom-select" name="merk_id" id="merk_id">
-                                @foreach($merk as $m)
-                                <option value="{{$m->id}}">{{ $m->nama_merk}}</option>
+                            <label for="supllier_id">Nama Supplier</label>
+                            <select class="custom-select" name="supllier_id" id="supllier_id">
+                                @foreach($supplier as $d)
+                                <option value="{{$d->id}}">{{ $d->id}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="satuan_id">Satuan</label>
-                            <select class="custom-select" name="satuan_id" id="satuan_id">
-                                @foreach($satuan as $s)
-                                <option value="{{$s->id}}">{{ $s->nama_satuan}}</option>
+                            <label for="user_id">User</label>
+                            <select class="custom-select" name="user_id" id="user_id">
+                                @foreach($user as $d)
+                                <option value="{{$d->id}}">{{ $d->id}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <label>Stok</label>
+                        <label>Tanggal Masuk</label>
                         <div class="form-group">
-                            <input type="number" name="stok" id="stok" placeholder="Masukkan Stok" value="{{old('stok')}}" class="form-control ">
-                            @error('stok')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                            <input type="date" name="tgl_masuk" id="tgl_masuk" placeholder="Masukkan Nama Barang" value="{{old('tgl_masuk')}}" class="form-control  @error ('tgl_masuk') is-invalid @enderror">
+                            @error('tgl_masuk')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
 
-                        <br>
+                        <label>Total</label>
+                        <div class="form-group">
+                            <input type="number" name="total" id="total" placeholder="Masukkan total" value="{{old('total')}}" class="form-control ">
+                            @error('total')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>

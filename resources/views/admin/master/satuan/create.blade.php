@@ -1,5 +1,4 @@
-<div class="modal fade text-left" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-    aria-hidden="true" style="display: none;">
+<div class="modal fade text-left" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,15 +13,12 @@
                         @csrf
                         <label>Nama Satuan</label>
                         <div class="form-group">
-                            <input type="text" name="nama_satuan" id="nama_satuan" placeholder="Masukkan Nama Satuan"
-                                value="{{old('nama_satuan')}}"
-                                class="form-control  @error ('nama_satuan') is-invalid @enderror">
+                            <input type="text" name="nama_satuan" id="nama_satuan" placeholder="Masukkan Nama Satuan" value="{{old('nama_satuan')}}" class="form-control  @error ('nama_satuan') is-invalid @enderror">
                             @error('nama_satuan')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
-                        <br>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
 @extends('layouts/admin')
 
-@section('title') Admin Data Barang @endsection
+@section('title') Admin Data Barang Keluar @endsection
 
 @section('head')
 <link href="{{asset('plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -13,8 +13,8 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Master</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang Keluar</a></li>
             </ol>
         </div>
     </div>
@@ -43,18 +43,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($barang as $b)
+                                    @foreach ($data as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $b->nama_barang }}</td>
-                                        <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
-                                        <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
-                                        <td scope="col" class="text-center">{{ $b->stok }}</td>
+                                        <td scope="col" class="text-center">{{ $d->unit_id }}</td>
+                                        <td scope="col" class="text-center">{{ $d->user_id }}</td>
+                                        <td scope="col" class="text-center">{{ $d->tgl_keluar }}</td>
+                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}" data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -69,8 +69,8 @@
     <!-- #/ container -->
     </div>
 
-    @include('admin.master.barang.create')
-    @include('admin.master.barang.edit')
+    @include('admin.transaksi.keluar.create')
+    @include('admin.transaksi.keluar.edit')
     @endsection
 
     @section('script')
@@ -82,17 +82,9 @@
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var nama_barang = button.data('nama_barang')
-            var merk_id = button.data('merk_id')
-            var satuan_id = button.data('satuan_id')
-            var stok = button.data('stok')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
-            modal.find('.modal-body #nama_barang').val(nama_barang);
-            modal.find('.modal-body #merk_id').val(merk_id);
-            modal.find('.modal-body #satuan_id').val(satuan_id);
-            modal.find('.modal-body #stok').val(stok);
         })
     </script>
 

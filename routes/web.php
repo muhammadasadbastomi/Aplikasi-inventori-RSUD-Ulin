@@ -46,7 +46,33 @@ Route::put('/admin/supplier', 'SupplierController@update')->name('supplierUpdate
 Route::delete('/admin/supplier/delete/{id}', 'SupplierController@destroy')->name('supplierDelete');
 
 Route::get('/admin/barang', 'BarangController@index')->name('barangIndex');
-Route::post('/admin/barang', 'BarangController@store')->name('baranStore');
+Route::post('/admin/barang', 'BarangController@store')->name('barangStore');
 //Route::get('/admin/barang/edit', 'BarangController@edit')->name('barangEdit');
 Route::post('/admin/barang', 'BarangController@update')->name('barangUpdate');
 Route::delete('/admin/barang/delete/{id}', 'BarangController@destroy')->name('barangDelete');
+
+Route::get('/admin/pemesanan', 'PemesananController@index')->name('pemesananIndex');
+Route::post('/admin/pemesanan', 'PemesananController@store')->name('pemesananStore');
+//Route::get('/admin/pemesanan/edit', 'pemesananController@edit')->name('pemesananEdit');
+Route::post('/admin/pemesanan', 'PemesananController@update')->name('pemesananUpdate');
+Route::delete('/admin/pemesanan/delete/{id}', 'PemesananController@destroy')->name('pemesananDelete');
+
+Route::get('/admin/masuk', 'BarangmasukController@index')->name('masukIndex');
+Route::post('/admin/masuk', 'BarangmasukController@store')->name('masukStore');
+//Route::get('/admin/masuk/edit', 'BarangmasukController@edit')->name('masukEdit');
+Route::post('/admin/masuk', 'BarangmasukController@update')->name('masukUpdate');
+Route::delete('/admin/masuk/delete/{id}', 'BarangmasukController@destroy')->name('masukDelete');
+
+Route::get('/admin/keluar', 'BarangkeluarController@index')->name('keluarIndex');
+Route::post('/admin/keluar', 'BarangkeluarController@store')->name('keluarStore');
+//Route::get('/admin/keluar/edit', 'BarangkeluarController@edit')->name('keluarEdit');
+Route::post('/admin/keluar', 'BarangkeluarController@update')->name('keluarUpdate');
+Route::delete('/admin/keluar/delete/{id}', 'BarangkeluarController@destroy')->name('keluarDelete');
+
+Route::get('/admin/stok', 'StokController@index')->name('stokIndex');
+Route::post('/admin/stok', 'StokController@store')->name('stokStore');
+//Route::get('/admin/stok/edit', 'stokController@edit')->name('stokEdit');
+Route::post('/admin/stok', 'StokController@update')->name('stokUpdate');
+Route::delete('/admin/stok/delete/{id}', 'StokController@destroy')->name('stokDelete');
+
+Route::get('/admin/user', 'AdminController@index')->name('userIndex');

@@ -1,6 +1,6 @@
 @extends('layouts/admin')
 
-@section('title') Admin Data Barang @endsection
+@section('title') Admin Data Stok Barang @endsection
 
 @section('head')
 <link href="{{asset('plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -37,19 +37,19 @@
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
                                         <th scope="col" class="text-center">Merk</th>
-                                        <th scope="col" class="text-center">Satuan</th>
+                                        <th scope="col" class="text-center">Stok</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($barang as $b)
+                                    @foreach ($data as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $b->nama_barang }}</td>
-                                        <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
-                                        <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
+                                        <td scope="col" class="text-center">{{ $d->nama_barang }}</td>
+                                        <td scope="col" class="text-center">{{ $d->merk->nama_merk }}</td>
+                                        <td scope="col" class="text-center">{{ $d->stok }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}" data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-nama_barang="{{$d->nama_barang}}" data-merk_id="{{$d->merk->id}}" data-satuan_id="{{$d->satuan->id}}" data-stok="{{$d->stok}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
                                             <a class="btn btn-sm btn-danger text-white" href="#"><i class="fa fa-close color-danger"></i></a>

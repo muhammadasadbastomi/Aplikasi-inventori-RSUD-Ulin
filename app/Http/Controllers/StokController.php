@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Barang;
 use App\Merk;
+use App\Satuan;
 use Illuminate\Http\Request;
 
 class StokController extends Controller
@@ -16,9 +17,10 @@ class StokController extends Controller
     public function index()
     {
         $data = Barang::OrderBy('id', 'desc')->get();
+        $satuan = Satuan::OrderBy('id', 'desc')->get();
         $merk = Merk::OrderBy('id', 'desc')->get();
 
-        return view('admin.transaksi.stok.index', compact('data', 'merk'));
+        return view('admin.master.stok.index', compact('data', 'merk', 'satuan'));
     }
 
     /**

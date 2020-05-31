@@ -26,8 +26,7 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             @include('admin.master.barang.create')
                             <!-- Modal End -->
@@ -51,14 +50,10 @@
                                         <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
                                         <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}"
-                                                data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk_id}}"
-                                                data-satuan_id="{{$b->satuan_id}}" data-toggle="modal"
-                                                data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->nama_merk}}" data-satuan_id="{{$b->satuan->nama_satuan}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -73,8 +68,7 @@
     <!-- #/ container -->
     </div>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
-        aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,19 +85,15 @@
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label class="col-form-label" for="nama_barang">Nama Barang</label>
-                                <input type="text" class="form-control @error ('nama_barang') is-invalid @enderror"
-                                    placeholder="Masukkan Nama Barang" name="nama_barang" value="{{old('nama_barang')}}"
-                                    id="nama_barang" autofocus>
+                                <input type="text" class="form-control @error ('nama_barang') is-invalid @enderror" placeholder="Masukkan Nama Barang" name="nama_barang" value="{{old('nama_barang')}}" id="nama_barang" autofocus>
                                 @error('nama_barang')<div class="invalid-feedback"> {{$message}} </div>@enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="merk_id">Merk</label>
                                 <select class="custom-select" name="merk_id" id="merk_id">
-                                    @foreach($merk as $m)
-                                    <option value="{{$m->id}}" {{ $barang->merk_id == $m->id ? 'selected' : ''}}
-                                        selected>
-                                        {{$m->merk}}</option>
+                                    @foreach($merk as $d)
+                                    <option id="{{$d->id}}">{{$d->nama_merk}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -111,10 +101,8 @@
                             <div class="form-group">
                                 <label for="satuan_id">Satuan</label>
                                 <select class="custom-select" name="satuan_id" id="satuan_id">
-                                    @foreach($satuan as $s)
-                                    <option value="{{$s->id}}" {{ $barang->satuan_id == $s->id ? 'selected' : ''}}
-                                        selected>
-                                        {{$s->satuan}}</option>
+                                    @foreach($satuan as $d)
+                                    <option value="{{$d->id}}">{{$d->nama_satuan}}</option>
                                     @endforeach
                                 </select>
                             </div>

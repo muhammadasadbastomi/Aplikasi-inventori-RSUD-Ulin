@@ -26,8 +26,7 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             @include('admin.master.merk.create')
                             <!-- Modal End -->
@@ -47,14 +46,10 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $m->nama_merk }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$m->id}}"
-                                                data-nama_merk="{{$m->nama_merk}}" data-toggle="modal"
-                                                data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$m->id}}" data-nama_merk="{{$m->nama_merk}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$m->uuid}}"
-                                                href="#" data-toggle="tooltip" data-placement="top" title=""
-                                                data-original-title="Hapus"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$m->uuid}}" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -70,8 +65,7 @@
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label"
-        aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,9 +82,7 @@
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label class="col-form-label" for="nama_merk">Nama Merk</label>
-                                <input type="text" class="form-control @error ('nama_merk') is-invalid @enderror"
-                                    placeholder="Masukkan Satuan" name="nama_merk" value="{{old('nama_merk')}}"
-                                    id="nama_merk" autofocus>
+                                <input type="text" class="form-control @error ('nama_merk') is-invalid @enderror" placeholder="Masukkan Satuan" name="nama_merk" value="{{old('nama_merk')}}" id="nama_merk" autofocus>
                                 @error('nama_merk')<div class="invalid-feedback"> {{$message}} </div>@enderror
                             </div>
                         </div>

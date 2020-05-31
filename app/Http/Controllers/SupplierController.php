@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Satuan;
+use App\Supplier;
 use Illuminate\Http\Request;
 
-class satuanController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,9 @@ class satuanController extends Controller
      */
     public function index()
     {
-        $satuan = satuan::orderBy('id', 'desc')->get();
+        $supplier = supplier::orderBy('id', 'desc')->get();
 
-        return view('admin.master.satuan.index', compact('satuan'));
-
+        return view('admin.master.supplier.index', compact('supplier'));
     }
 
     /**
@@ -44,14 +43,20 @@ class satuanController extends Controller
         ];
         $request->validate([
 
-            'nama_satuan' => 'required',
+            'nama_supplier' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'keterangan' => 'required',
         ], $messages);
 
         // create new object
-        $satuan = new satuan;
-        $request->request->add(['satuan_id' => $satuan->id]);
-        $satuan->nama_satuan = $request->nama_satuan;
-        $satuan->save();
+        $supplier = new supplier;
+        $request->request->add(['supplier_id' => $supplier->id]);
+        $supplier->nama_suppliers = $request->nama_supplier;
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
+        $supplier->keterangan = $request->keterangan;
+        $supplier->save();
 
         return back()->with('success', 'Data berhasil disimpan');
     }
@@ -90,19 +95,24 @@ class satuanController extends Controller
         $messages = [
             'unique' => ':attribute sudah terdaftar.',
             'required' => ':attribute harus diisi.',
-
         ];
         $request->validate([
 
-            'nama_satuan' => 'required',
-
+            'nama_suppliers' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'keterangan' => 'required',
         ], $messages);
 
-        $satuan = Satuan::findOrFail($request->id);
-        $satuan->nama_satuan = $request->nama_satuan;
-        $satuan->update();
-        // dd($data);
-        return back()->with('success', 'Data Berhasil Diubah');
+        // create new object
+        $supplier = supplier::findOrFail($request->id);
+        $supplier->nama_suppliers = $request->nama_suppliers;
+        $supplier->alamat = $request->alamat;
+        $supplier->telepon = $request->telepon;
+        $supplier->keterangan = $request->keterangan;
+        $supplier->update();
+
+        return back()->with('success', 'Data berhasil Diubah');
     }
 
     /**
@@ -113,10 +123,6 @@ class satuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = satuan::where('uuid', $id)->first();
-
-        $satuan->delete();
-
-        return redirect()->route('satuanIndex');
+        //
     }
 }

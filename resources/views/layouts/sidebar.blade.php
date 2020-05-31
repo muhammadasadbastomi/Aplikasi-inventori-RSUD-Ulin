@@ -14,8 +14,23 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('merkIndex')}}">
+                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Data Merk</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('unitIndex')}}">
+                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Data Unit</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{route('satuanIndex')}}">
                     <i class="icon-envelope menu-icon"></i> <span class="nav-text">Data Satuan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('supplierIndex')}}">
+                    <i class="icon-envelope menu-icon"></i> <span class="nav-text">Data Supplier</span>
                 </a>
             </li>
             <li>

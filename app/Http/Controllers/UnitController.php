@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Satuan;
+use App\Unit;
 use Illuminate\Http\Request;
 
-class satuanController extends Controller
+class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,9 @@ class satuanController extends Controller
      */
     public function index()
     {
-        $satuan = satuan::orderBy('id', 'desc')->get();
+        $unit = unit::orderBy('id', 'desc')->get();
 
-        return view('admin.master.satuan.index', compact('satuan'));
-
+        return view('admin.master.unit.index', compact('unit'));
     }
 
     /**
@@ -44,14 +43,14 @@ class satuanController extends Controller
         ];
         $request->validate([
 
-            'nama_satuan' => 'required',
+            'nama_unit' => 'required',
         ], $messages);
 
         // create new object
-        $satuan = new satuan;
-        $request->request->add(['satuan_id' => $satuan->id]);
-        $satuan->nama_satuan = $request->nama_satuan;
-        $satuan->save();
+        $unit = new unit;
+        $request->request->add(['unit_id' => $unit->id]);
+        $unit->nama_unit = $request->nama_unit;
+        $unit->save();
 
         return back()->with('success', 'Data berhasil disimpan');
     }
@@ -94,13 +93,13 @@ class satuanController extends Controller
         ];
         $request->validate([
 
-            'nama_satuan' => 'required',
+            'nama_unit' => 'required',
 
         ], $messages);
 
-        $satuan = Satuan::findOrFail($request->id);
-        $satuan->nama_satuan = $request->nama_satuan;
-        $satuan->update();
+        $unit = unit::findOrFail($request->id);
+        $unit->nama_unit = $request->nama_unit;
+        $unit->update();
         // dd($data);
         return back()->with('success', 'Data Berhasil Diubah');
     }
@@ -113,10 +112,6 @@ class satuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = satuan::where('uuid', $id)->first();
-
-        $satuan->delete();
-
-        return redirect()->route('satuanIndex');
+        //
     }
 }

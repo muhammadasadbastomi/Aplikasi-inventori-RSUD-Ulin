@@ -1,6 +1,6 @@
 @extends('layouts/admin')
 
-@section('title') Admin Data Satuan @endsection
+@section('title') Admin Data Unit @endsection
 
 @section('head')
 <link href="{{asset('plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -13,7 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Satuan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Unit</a></li>
             </ol>
         </div>
     </div>
@@ -29,7 +29,7 @@
                             <button class="btn btn-outline-primary" data-toggle="modal"
                                 data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
-                            @include('admin.master.satuan.create')
+                            @include('admin.master.unit.create')
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -37,22 +37,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Satuan</th>
+                                        <th scope="col" class="text-center">Nama Unit</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($satuan as $s)
+                                    @foreach ($unit as $u)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $s->nama_satuan }}</td>
+                                        <td scope="col" class="text-center">{{ $u->nama_unit }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$s->id}}"
-                                                data-nama_satuan="{{$s->nama_satuan}}" data-toggle="modal"
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$u->id}}"
+                                                data-nama_unit="{{$u->nama_unit}}" data-toggle="modal"
                                                 data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$s->uuid}}"
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$u->uuid}}"
                                                 href="#" data-toggle="tooltip" data-placement="top" title=""
                                                 data-original-title="Hapus"><i class="fa fa-close color-danger"></i></a>
                                         </td>
@@ -87,11 +87,11 @@
                         <div class=" modal-body">
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
-                                <label class="col-form-label" for="nama_satuan">Nama Satuan</label>
-                                <input type="text" class="form-control @error ('judul') is-invalid @enderror"
-                                    placeholder="Masukkan Satuan" name="nama_satuan" value="{{old('nama_satuan')}}"
-                                    id="nama_satuan" autofocus>
-                                @error('nama_satuan')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                                <label class="col-form-label" for="nama_unit">Nama Unit</label>
+                                <input type="text" class="form-control @error ('nama_unit') is-invalid @enderror"
+                                    placeholder="Masukkan Nama Unit" name="nama_unit" value="{{old('nama_unit')}}"
+                                    id="nama_unit" autofocus>
+                                @error('nama_unit')<div class="invalid-feedback"> {{$message}} </div>@enderror
                             </div>
                         </div>
                         <div class="edit modal-footer">
@@ -114,11 +114,11 @@
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var nama_satuan = button.data('nama_satuan')
+            var nama_unit = button.data('nama_unit')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
-            modal.find('.modal-body #nama_satuan').val(nama_satuan);
+            modal.find('.modal-body #nama_unit').val(nama_unit);
         })
     </script>
 
@@ -137,7 +137,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "{{ url('/admin/satuan/delete')}}" + '/' + id,
+                        url: "{{ url('/admin/unit/delete')}}" + '/' + id,
                         type: "POST",
                         data: {
                             '_method': 'DELETE',

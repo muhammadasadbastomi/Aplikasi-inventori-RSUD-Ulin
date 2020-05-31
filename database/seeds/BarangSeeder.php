@@ -2,11 +2,18 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Merk;
+use App\Satuan;
 
 class BarangSeeder extends Seeder
 {
     public function run()
     {
+        $merk = Merk::all()->pluck('id')->toArray();
+        $satuan = Satuan::all()->pluck('id')->toArray();
+
         $faker = Faker::create('id_ID');
 
         for ($i = 1; $i <= 10; $i++) {
@@ -14,10 +21,10 @@ class BarangSeeder extends Seeder
             // insert data ke table pegawai
             DB::table('barangs')->insert([
                 'uuid' => Str::random(36),
-                'nama' => $faker->name,
-                'id_merk' => $faker->numberBetween(25, 40),
-                'id_satuan' => $faker->numberBetween(25, 40),
-                'stok' => $faker->numberBetween(25, 40)
+                'nama_barang' => $faker->name,
+                'merk_id' => $faker->randomElement($merk),
+                'satuan_id' => $faker->randomElement($satuan),
+                'stok' => $faker->numberBetween(10, 20)
             ]);
         }
     }

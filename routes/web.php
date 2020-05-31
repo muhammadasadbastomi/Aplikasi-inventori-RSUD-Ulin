@@ -75,4 +75,4 @@ Route::post('/admin/stok', 'StokController@store')->name('stokStore');
 Route::post('/admin/stok', 'StokController@update')->name('stokUpdate');
 Route::delete('/admin/stok/delete/{id}', 'StokController@destroy')->name('stokDelete');
 
-Route::get('/admin/user', 'AdminController@index')->name('userIndex');
+Route::get('/admin/user/', 'AdminController@index')->name('userIndex');

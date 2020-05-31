@@ -13,8 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Master</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Stok Barang</a></li>
             </ol>
         </div>
     </div>

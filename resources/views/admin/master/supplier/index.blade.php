@@ -83,7 +83,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="edit-modal-label" style="padding-left: 10px;">Edit Satuan</h4>
+                    <h4 class="modal-title" id="edit-modal-label" style="padding-left: 10px;">Edit Supplier</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

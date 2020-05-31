@@ -50,7 +50,7 @@
                                         <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
                                         <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->nama_merk}}" data-satuan_id="{{$b->satuan->nama_satuan}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}" data-satuan_id="{{$b->satuan->id}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
@@ -93,7 +93,7 @@
                                 <label for="merk_id">Merk</label>
                                 <select class="custom-select" name="merk_id" id="merk_id">
                                     @foreach($merk as $d)
-                                    <option id="{{$d->id}}">{{$d->nama_merk}}</option>
+                                    <option value="{{$d->id}}">{{$d->nama_merk}}</option>
                                     @endforeach
                                 </select>
                             </div>

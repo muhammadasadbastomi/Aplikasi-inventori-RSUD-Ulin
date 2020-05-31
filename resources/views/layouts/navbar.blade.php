@@ -10,7 +10,7 @@
             <ul class="clearfix">
                 <!-- <li class="icons dropdown d-none d-md-flex">
                     <a>
-                        {{ Auth::user()->id }} <span class="caret"></span>
+                        {{ Auth::user() }} <span class="caret"></span>
                     </a>
                 </li> -->
                 <li class="icons dropdown">

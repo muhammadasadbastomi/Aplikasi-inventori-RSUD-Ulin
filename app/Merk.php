@@ -10,4 +10,9 @@ class Merk extends Model
 {
     use Notifiable;
     use Uuid;
+
+    public function barang()
+    {
+        return $this->hasMany(Barang::class);
+    }
 }

@@ -19,8 +19,7 @@ class CreateBarangsTable extends Migration
             $table->unsignedBigInteger('merk_id');
             $table->unsignedBigInteger('satuan_id');
             $table->string('nama_barang', 100);
-            $table->string('kode_barang', 50);
-            $table->string('stok', 50);
+            $table->integer('stok')->nullable();
             $table->timestamps();
             $table->foreign('merk_id')->references('id')->on('merks')->onDelete('restrict');
             $table->foreign('satuan_id')->references('id')->on('satuans')->onDelete('restrict');

@@ -16,7 +16,7 @@ class UnitSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 12; $i++) {
 
             // insert data ke table pegawai
             DB::table('units')->insert([

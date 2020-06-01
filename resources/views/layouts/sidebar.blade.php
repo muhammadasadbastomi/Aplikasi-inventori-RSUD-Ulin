@@ -8,7 +8,7 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-notebook menu-icon"></i><span class="nav-text"> Data Master</span>
+                    <i class="icon-layers menu-icon"></i><span class="nav-text"> Data Master</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{route('barangIndex')}}" aria-expanded="false">Data Barang</a></li>
@@ -30,12 +30,12 @@
             </li>
             <li>
                 <a href="{{route('stokIndex')}}">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text"> Stok Barang </span>
+                    <i class="icon-briefcase menu-icon"></i><span class="nav-text"> Stok Barang </span>
                 </a>
             </li>
             <li>
                 <a href="{{route('userIndex')}}">
-                    <i class="icon-user menu-icon"></i><span class="nav-text"> Admin </span>
+                    <i class="icon-settings menu-icon"></i><span class="nav-text"> Setting </span>
                 </a>
             </li>
         </ul>

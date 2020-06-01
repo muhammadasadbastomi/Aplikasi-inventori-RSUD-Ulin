@@ -1,20 +1,20 @@
 @extends('layouts/admin')
 
-@section('title') Admin Data Pemesanan Barang @endsection
+@section('title') Admin Detail Masuk @endsection
 
 @section('head')
 <link href="{{asset('plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
-<div class="content-body">
+<<div class="content-body">
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Pemesanan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang Masuk</a></li>
             </ol>
         </div>
     </div>
@@ -37,34 +37,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Unit</th>
+                                        <th scope="col" class="text-center">Nama Supplier</th>
                                         <th scope="col" class="text-center">Nama User</th>
-                                        <th scope="col" class="text-center">Tanggal Pesanan</th>
-                                        <th scope="col" class="text-center">Alamat</th>
-                                        <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col" class="text-center">Tanggal Masuk</th>
+                                        <th scope="col" class="text-center">Total</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pemesanan as $d)
+                                    @foreach ($data as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->unit->nama_unit }}</td>
+                                        <td scope="col" class="text-center">{{ $d->supplier->nama_suppliers }}</td>
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $d->tgl_pesan }}</td>
-                                        <td scope="col" class="text-center">{{ $d->alamat }}</td>
-                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
+                                        <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
+                                        <td scope="col" class="text-center">{{ $d->total }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-success text-white"
-                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
-                                                <i class="fa icon-plus color-muted m-r-5"></i>
-                                            </a>
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
-                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
-                                                data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}"
-                                                data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil color-muted m-r-5"></i>
-                                            </a>
                                             <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
                                                 data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
@@ -79,37 +67,20 @@
         </div>
     </div>
     <!-- #/ container -->
-</div>
+    </div>
 
-@include('admin.transaksi.pemesanan.create')
-@include('admin.transaksi.pemesanan.edit')
-@endsection
+    @include('admin.transaksi.masuk.create')
+    @include('admin.transaksi.masuk.edit')
+    @endsection
 
-@section('script')
-<script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+    @section('script')
+    <script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
 
-<script>
-    $('#editModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var unit_id = button.data('unit_id')
-            var user_id = button.data('user_id')
-            var alamat = button.data('alamat')
-            var tgl_pesan = button.data('tgl_pesan')
-            var modal = $(this)
 
-            modal.find('.modal-body #id').val(id)
-            modal.find('.modal-body #unit_id').val(unit_id)
-            modal.find('.modal-body #user_id').val(user_id)
-            modal.find('.modal-body #alamat').val(alamat)
-            modal.find('.modal-body #tgl_pesan').val(tgl_pesan)
-        })
-</script>
-
-<script>
-    $(document).on('click', '.delete', function(e) {
+    <script>
+        $(document).on('click', '.delete', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
         swal.fire({
@@ -123,7 +94,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "{{ url('/admin/pemesanan/delete')}}" + '/' + id,
+                    url: "{{ url('/admin/pemesanandetail/delete')}}" + '/' + id,
                     type: "POST",
                     data: {
                         '_method': 'DELETE',
@@ -150,6 +121,6 @@
             }
         })
     });
-</script>
+    </script>
 
-@endsection
+    @endsection

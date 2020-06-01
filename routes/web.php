@@ -69,6 +69,12 @@ Route::post('/admin/keluar', 'BarangkeluarController@store')->name('keluarStore'
 Route::put('/admin/keluar', 'BarangkeluarController@update')->name('keluarUpdate');
 Route::delete('/admin/keluar/delete/{id}', 'BarangkeluarController@destroy')->name('keluarDelete');
 
+Route::get('/admin/pemesanandetail/{id}', 'PemesanandetailController@index')->name('pemesanandetailIndex');
+Route::post('/admin/pemesanandetail/{id}', 'PemesanandetailController@store')->name('pemesanandetailStore');
+//Route::get('/admin/pemesanandetail/edit', 'PemesanandetailController@edit')->name('pemesanandetailEdit');
+//Route::put('/admin/pemesanandetail', 'PemesanandetailController@update')->name('pemesanandetailUpdate');
+Route::delete('/admin/pemesanandetail/delete/{id}', 'PemesanandetailController@destroy')->name('pemesanandetailDelete');
+
 Route::get('/admin/stok', 'StokController@index')->name('stokIndex');
 Route::post('/admin/stok', 'StokController@store')->name('stokStore');
 //Route::get('/admin/stok/edit', 'stokController@edit')->name('stokEdit');

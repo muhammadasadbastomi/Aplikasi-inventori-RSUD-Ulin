@@ -10,4 +10,9 @@ class Supplier extends Model
 {
     use Notifiable;
     use Uuid;
+
+    public function barang_masuk()
+    {
+        return $this->hasMany(Barang_masuk::class);
+    }
 }

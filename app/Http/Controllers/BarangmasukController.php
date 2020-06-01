@@ -41,7 +41,26 @@ class BarangmasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+
+
+
+        ], $messages);
+
+        // create new object
+        $barangmasuk = new Barang_masuk;
+        $request->request->add(['barangmasuk_id' => $barangmasuk->id]);
+        $barangmasuk->supplier_id = $request->supplier_id;
+        $barangmasuk->user_id = $request->user_id;
+        $barangmasuk->tgl_masuk = $request->tgl_masuk;
+        $barangmasuk->total = 0;
+        $barangmasuk->save();
+
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -75,7 +94,25 @@ class BarangmasukController extends Controller
      */
     public function update(Request $request, Barang_masuk $barang_masuk)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+            'mimes' => 'photo berupa :attribute.'
+        ];
+        $request->validate([
+
+            'supplier_id' => 'required',
+            'user_id' => 'required',
+            'tgl_masuk' => 'required',
+
+        ], $messages);
+        $barangmasuk = Barang_masuk::findOrFail($request->id);
+        $barangmasuk->supplier_id = $request->supplier_id;
+        $barangmasuk->user_id = $request->user_id;
+        $barangmasuk->tgl_masuk = $request->tgl_masuk;
+        $barangmasuk->update();
+
+        return back()->with('success', 'Data berhasil diubah');
     }
 
     /**

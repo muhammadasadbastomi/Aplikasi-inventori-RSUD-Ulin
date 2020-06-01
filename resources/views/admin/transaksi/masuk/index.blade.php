@@ -27,7 +27,8 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             <!-- Modal End -->
                         </div>
@@ -47,15 +48,19 @@
                                     @foreach ($data as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->supplier_id }}</td>
-                                        <td scope="col" class="text-center">{{ $d->user_id }}</td>
+                                        <td scope="col" class="text-center">{{ $d->supplier->nama_suppliers }}</td>
+                                        <td scope="col" class="text-center">{{ $d->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
                                         <td scope="col" class="text-center">{{ $d->total }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                data-supplier_id="{{$d->supplier->id}}" data-user_id="{{$d->user->id}}"
+                                                data-tgl_masuk="{{$d->tgl_masuk}}" data-toggle="modal"
+                                                data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
+                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -83,10 +88,60 @@
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var supplier_id = button.data('supplier_id')
+            var user_id = button.data('user_id')
+            var tgl_masuk = button.data('tgl_masuk')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #supplier_id').val(supplier_id)
+            modal.find('.modal-body #user_id').val(user_id)
+            modal.find('.modal-body #tgl_masuk').val(tgl_masuk)
         })
+    </script>
+
+    <script>
+        $(document).on('click', '.delete', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal.fire({
+            title: "Apakah anda yakin?",
+            icon: "warning",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "{{ url('/admin/masuk/delete')}}" + '/' + id,
+                    type: "POST",
+                    data: {
+                        '_method': 'DELETE',
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            document.location.reload(true);
+                        }, 1000);
+                    },
+                })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Dibatalkan',
+                    'data batal dihapus',
+                    'error'
+                )
+            }
+        })
+    });
     </script>
 
     @endsection

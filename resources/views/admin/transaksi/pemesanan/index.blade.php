@@ -107,4 +107,48 @@
         })
     </script>
 
+    <script>
+        $(document).on('click', '.delete', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal.fire({
+            title: "Apakah anda yakin?",
+            icon: "warning",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "{{ url('/admin/pemesanan/delete')}}" + '/' + id,
+                    type: "POST",
+                    data: {
+                        '_method': 'DELETE',
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            document.location.reload(true);
+                        }, 1000);
+                    },
+                })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Dibatalkan',
+                    'data batal dihapus',
+                    'error'
+                )
+            }
+        })
+    });
+    </script>
+
     @endsection

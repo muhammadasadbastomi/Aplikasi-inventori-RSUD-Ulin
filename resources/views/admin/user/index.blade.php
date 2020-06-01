@@ -20,152 +20,139 @@
     <!-- row -->
     <div class="container-fluid">
         <div class="card">
-            <form class="form-valide" method="post" enctype="multipart/form-data">
-                <div class="row" style="margin-top:45px; margin-bottom: -50px;">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                            <h3> {{ Auth::user()->name }} </h3>
-                            <br>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Edit Profile</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary" style="border: none; border-radius: 1.5rem;">Ubah Profile</button>
+            <div class="row" style="margin-top:47px; margin-bottom: -95px;">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ url('img/default.png')}}" alt="">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <!-- <p>WORK LINK</p>
-                            <a href="">Website Link</a><br />
-                            <a href="">Bootsnipp Profile</a><br />
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br />
-                            <a href="">Web Developer</a><br />
-                            <a href="">WordPress</a><br />
-                            <a href="">WooCommerce</a><br />
-                            <a href="">PHP, .Net</a><br /> -->
-                        </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h3> {{ Auth::user()->name }} </h3>
+                        <br>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Edit Profile</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Role</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p> Admin</p>
-                                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="margin-top:150px; margin-bottom:47px;">
+                    <div class="profile-img">
+                        <img src="{{ url('logo/blank.jpg')}}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Role</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Nama Lengkap</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p> {{ Auth::user()->name }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>E-Mail</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p> {{ Auth::user()->email }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Nomor Telepon</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        @if(auth()->user()->telp== !null)
-                                        <p>{{ Auth::user()->telp }}</p>
-                                        @else
-                                        <p> - </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Alamat</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        @if(auth()->user()->alamat== !null)
-                                        <p>{{ Auth::user()->alamat }}</p>
-                                        @else
-                                        <p> - </p>
-                                        @endif
-                                    </div>
+                                <div class="col-md-6">
+                                    <p> Admin</p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nama Lengkap</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p> {{ Auth::user()->name }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>E-Mail</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p> {{ Auth::user()->email }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nomor Telepon</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @if(auth()->user()->telp== !null)
+                                    <p>{{ Auth::user()->telp }}</p>
+                                    @else
+                                    <p> - </p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Alamat</label>
+                                </div>
+                                <div class="col-md-6">
+                                    @if(auth()->user()->alamat== !null)
+                                    <p>{{ Auth::user()->alamat }}</p>
+                                    @else
+                                    <p> - </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form class="form-valide" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="val-username">Username <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="name">Nama Lengkap <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Lengkap" value=" {{ Auth::user()->name }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="email">E-mail <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Your valid email..">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan E-mail" value=" {{ Auth::user()->email }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="val-password">Password <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="password">Password <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="konfirmasi">Confirm Password <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
+                                        <input type="password" class="form-control" id="konfirmasi" name="konfirmasi" placeholder="Konfirmasi Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="telp">Nomor Telepon
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="telp" name="telp" placeholder="212-999-0000">
+                                        <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telepon" value="{{Auth::user()->telp}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="alamat">Alamat
                                     </label>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" id="alamat" name="alamat" rows="5" placeholder="What would you like to see?"></textarea>
+                                        <textarea class="form-control" id="alamat" name="alamat" rows="5" placeholder="Masukkan Alamat">{{Auth::user()->Alamat}}</textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <br>
+                                <div class="modal-footer" style="margin-right: 45px;">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
                         </div>
+                        <br>
+                        <br>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

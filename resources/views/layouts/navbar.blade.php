@@ -8,11 +8,9 @@
         </div>
         <div class="header-right">
             <ul class="clearfix">
-                <!-- <li class="icons dropdown d-none d-md-flex">
-                    <a>
-                        {{ Auth::user() }} <span class="caret"></span>
-                    </a>
-                </li> -->
+                <li class="icons dropdown d-none d-md-flex">
+                    <h4>{{ Auth::user()->name }}</h4>
+                </li>
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                         <span class="activity active"></span>

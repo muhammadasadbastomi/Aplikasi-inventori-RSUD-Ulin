@@ -95,7 +95,25 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+            'mimes' => 'photo berupa :attribute.'
+        ];
+        $request->validate([
+
+            'nama_barang' => 'required',
+            'merk_id' => 'required',
+            'satuan_id' => 'required',
+
+        ], $messages);
+        $barang = Barang::findOrFail($request->id);
+        $barang->nama_barang = $request->nama_barang;
+        $barang->merk_id = $request->merk_id;
+        $barang->satuan_id = $request->satuan_id;
+        $barang->update();
+
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**

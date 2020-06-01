@@ -15,6 +15,7 @@
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang Masuk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Detail Barang Masuk</a></li>
             </ol>
         </div>
     </div>
@@ -28,7 +29,7 @@
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
                             <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                                data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             <!-- Modal End -->
                         </div>
@@ -38,23 +39,22 @@
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Supplier</th>
-                                        <th scope="col" class="text-center">Nama User</th>
-                                        <th scope="col" class="text-center">Tanggal Masuk</th>
-                                        <th scope="col" class="text-center">Total</th>
+                                        <th scope="col" class="text-center">Nama Barang</th>
+                                        <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $d)
+                                    @foreach ($pemesanandetail as $p)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->supplier->nama_suppliers }}</td>
-                                        <td scope="col" class="text-center">{{ $d->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
-                                        <td scope="col" class="text-center">{{ $d->total }}</td>
+                                        <td scope="col" class="text-center">{{ $p->supplier->nama_suppliers }}</td>
+                                        <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
+                                        <td scope="col" class="text-center">{{ $p->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
-                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" href="#"
+                                                data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -69,8 +69,7 @@
     <!-- #/ container -->
     </div>
 
-    @include('admin.transaksi.masuk.create')
-    @include('admin.transaksi.masuk.edit')
+    @include('admin.transaksi.masuk.detail.create')
     @endsection
 
     @section('script')
@@ -94,7 +93,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "{{ url('/admin/pemesanandetail/delete')}}" + '/' + id,
+                    url: "{{ url('/admin/masukdetail/delete')}}" + '/' + id,
                     type: "POST",
                     data: {
                         '_method': 'DELETE',
@@ -120,7 +119,7 @@
                 )
             }
         })
-    });
+        });
     </script>
 
     @endsection

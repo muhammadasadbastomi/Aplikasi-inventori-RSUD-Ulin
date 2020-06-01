@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Satuan;
 use Illuminate\Http\Request;
 
-class satuanController extends Controller
+class SatuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,6 @@ class satuanController extends Controller
         $satuan = satuan::orderBy('id', 'desc')->get();
 
         return view('admin.master.satuan.index', compact('satuan'));
-
     }
 
     /**

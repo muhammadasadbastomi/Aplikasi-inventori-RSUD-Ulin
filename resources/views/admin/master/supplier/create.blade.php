@@ -18,7 +18,7 @@
                         </div>
                         <label>Alamat</label>
                         <div class="form-group">
-                            <textarea type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control @error ('alamat') is-invalid @enderror"> {{old('alamat')}}</textarea>
+                            <textarea name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control  @error ('alamat') is-invalid @enderror">{{old('alamat')}}</textarea>
                             @error('alamat')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
                         <label>Telepon</label>
@@ -28,7 +28,7 @@
                         </div>
                         <label>Keterangan</label>
                         <div class="form-group">
-                            <textarea type="text" name="keterangan" id="keterangan" placeholder="Masukkan Keterangan" class="form-control @error ('keterangan') is-invalid @enderror"> {{old('keterangan')}}</textarea>
+                            <textarea name="keterangan" id="keterangan" placeholder="Masukkan Keterangan" class="form-control  @error ('keterangan') is-invalid @enderror">{{old('keterangan')}}</textarea>
                             @error('keterangan')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
                     </div>

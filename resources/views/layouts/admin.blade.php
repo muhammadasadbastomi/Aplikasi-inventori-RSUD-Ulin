@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title')</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('logo/logo.png')}}">
     @yield('head')
     <!-- Pignose Calender -->
     <link href="{{url('plugins/pg-calendar/css/pignose.calendar.min.css')}}" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <!-- Chartist -->
     <link rel="stylesheet" href="{{url('plugins/chartist/css/chartist.min.css')}}">
     <link rel="stylesheet" href="{{url('plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
@@ -45,11 +46,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="{{url('images/logo.png')}}" alt=""> </b>
-                    <span class="logo-compact"><img src="{{url('images/logo-compact.png')}}" alt=""></span>
+                <a href="{{route('dashboard')}}">
+                    <b class="logo-abbr"><img src="{{url('logo/logo.png')}}" alt=""> </b>
+                    <span class="logo-compact"><img src="{{url('/logo/logo.png')}}" alt=""></span>
                     <span class="brand-title">
-                        <img src="{{url('images/logo-text.png')}}" alt="">
+                        <img height="60" width="108" src="{{url('logo/logo.png')}}" alt="" style="margin-top:-15px; margin-left:35px;">
                     </span>
                 </a>
             </div>

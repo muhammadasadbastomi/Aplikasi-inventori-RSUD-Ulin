@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pemesanan;
 use App\Unit;
+use App\Barang;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class PemesananController extends Controller
     {
         $unit = Unit::OrderBy('id', 'desc')->get();
         $user = User::OrderBy('id', 'desc')->get();
-        $data = pemesanan::OrderBy('id', 'desc')->get();
+        $pemesanan = pemesanan::OrderBy('id', 'desc')->get();
+        $barang = barang::OrderBy('id', 'desc')->get();
 
-        return view('admin.transaksi.pemesanan.index', compact('data', 'unit', 'user'));
+        return view('admin.transaksi.pemesanan.index', compact('pemesanan', 'barang', 'unit', 'user'));
     }
 
     /**
@@ -41,7 +43,30 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+
+            'unit_id' => 'required',
+            'user_id' => 'required',
+            'alamat' => 'required',
+            'tgl_pesan' => 'required',
+
+        ], $messages);
+
+        // create new object
+        $pemesanan = new pemesanan;
+        $request->request->add(['pemesanan_id' => $pemesanan->id]);
+        $pemesanan->unit_id = $request->unit_id;
+        $pemesanan->user_id = $request->user_id;
+        $pemesanan->alamat = $request->alamat;
+        $pemesanan->tgl_pesan = $request->tgl_pesan;
+        $pemesanan->jumlah = 0;
+        $pemesanan->save();
+
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -75,7 +100,27 @@ class PemesananController extends Controller
      */
     public function update(Request $request, pemesanan $pemesanan)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+            'mimes' => 'photo berupa :attribute.'
+        ];
+        $request->validate([
+
+            'unit_id' => 'required',
+            'user_id' => 'required',
+            'alamat' => 'required',
+            'tgl_pesan' => 'required',
+
+        ], $messages);
+        $pemesanan = pemesanan::findOrFail($request->id);
+        $pemesanan->unit_id = $request->unit_id;
+        $pemesanan->user_id = $request->user_id;
+        $pemesanan->alamat = $request->alamat;
+        $pemesanan->tgl_pesan = $request->tgl_pesan;
+        $pemesanan->update();
+
+        return back()->with('success', 'Data berhasil diubah');
     }
 
     /**

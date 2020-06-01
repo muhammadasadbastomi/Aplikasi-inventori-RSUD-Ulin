@@ -113,7 +113,7 @@ class BarangController extends Controller
         $barang->satuan_id = $request->satuan_id;
         $barang->update();
 
-        return back()->with('success', 'Data berhasil disimpan');
+        return back()->with('success', 'Data berhasil diubah');
     }
 
     /**

@@ -10,4 +10,9 @@ class Unit extends Model
 {
     use Notifiable;
     use Uuid;
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
 }

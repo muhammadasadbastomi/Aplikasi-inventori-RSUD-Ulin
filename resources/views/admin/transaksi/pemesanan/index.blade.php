@@ -27,7 +27,8 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             <!-- Modal End -->
                         </div>
@@ -45,19 +46,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $d)
+                                    @foreach ($pemesanan as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->unit_id }}</td>
-                                        <td scope="col" class="text-center">{{ $d->user_id }}</td>
+                                        <td scope="col" class="text-center">{{ $d->unit->nama_unit }}</td>
+                                        <td scope="col" class="text-center">{{ $d->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->tgl_pesan }}</td>
                                         <td scope="col" class="text-center">{{ $d->alamat }}</td>
                                         <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-success text-white" data-id="{{$d->id}}">
+                                                <i class="fa icon-plus color-muted m-r-5"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
+                                                data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
+                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -85,9 +93,17 @@
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var unit_id = button.data('unit_id')
+            var user_id = button.data('user_id')
+            var alamat = button.data('alamat')
+            var tgl_pesan = button.data('tgl_pesan')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #unit_id').val(unit_id)
+            modal.find('.modal-body #user_id').val(user_id)
+            modal.find('.modal-body #alamat').val(alamat)
+            modal.find('.modal-body #tgl_pesan').val(tgl_pesan)
         })
     </script>
 

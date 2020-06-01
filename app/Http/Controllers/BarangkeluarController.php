@@ -41,7 +41,28 @@ class BarangkeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+
+            'unit_id' => 'required',
+            'user_id' => 'required',
+            'tgl_keluar' => 'required',
+
+        ], $messages);
+
+        // create new object
+        $barangkeluar = new Barang_keluar;
+        $request->request->add(['barangkeluar_id' => $barangkeluar->id]);
+        $barangkeluar->unit_id = $request->unit_id;
+        $barangkeluar->user_id = $request->user_id;
+        $barangkeluar->tgl_keluar = $request->tgl_keluar;
+        $barangkeluar->jumlah = 0;
+        $barangkeluar->save();
+
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -75,7 +96,25 @@ class BarangkeluarController extends Controller
      */
     public function update(Request $request, Barang_keluar $barang_keluar)
     {
-        //
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+
+            'unit_id' => 'required',
+            'user_id' => 'required',
+            'tgl_keluar' => 'required',
+
+        ], $messages);
+
+        $barangkeluar = Barang_keluar::findOrFail($request->id);
+        $barangkeluar->unit_id = $request->unit_id;
+        $barangkeluar->user_id = $request->user_id;
+        $barangkeluar->tgl_keluar = $request->tgl_keluar;
+        $barangkeluar->update();
+
+        return back()->with('success', 'Data berhasil diubah');
     }
 
     /**

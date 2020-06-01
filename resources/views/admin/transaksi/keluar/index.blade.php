@@ -27,7 +27,9 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                                    Data</span></button>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -35,10 +37,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Barang</th>
-                                        <th scope="col" class="text-center">Merk</th>
-                                        <th scope="col" class="text-center">Satuan</th>
-                                        <th scope="col" class="text-center">Stok Barang</th>
+                                        <th scope="col" class="text-center">Nama Unit</th>
+                                        <th scope="col" class="text-center">Nama User</th>
+                                        <th scope="col" class="text-center">Tanggal Keluar</th>
+                                        <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -46,15 +48,19 @@
                                     @foreach ($data as $d)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->unit_id }}</td>
-                                        <td scope="col" class="text-center">{{ $d->user_id }}</td>
+                                        <td scope="col" class="text-center">{{ $d->unit->nama_unit }}</td>
+                                        <td scope="col" class="text-center">{{ $d->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->tgl_keluar }}</td>
                                         <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
+                                                data-tgl_keluar="{{$d->tgl_keluar}}" data-toggle="modal"
+                                                data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
+                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -82,10 +88,60 @@
         $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var user_id = button.data('user_id')
+            var unit_id = button.data('unit_id')
+            var tgl_keluar = button.data('tgl_keluar')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #user_id').val(user_id)
+            modal.find('.modal-body #unit_id').val(unit_id)
+            modal.find('.modal-body #tgl_keluar').val(tgl_keluar)
         })
+    </script>
+
+    <script>
+        $(document).on('click', '.delete', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal.fire({
+            title: "Apakah anda yakin?",
+            icon: "warning",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "{{ url('/admin/keluar/delete')}}" + '/' + id,
+                    type: "POST",
+                    data: {
+                        '_method': 'DELETE',
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data Berhasil Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            document.location.reload(true);
+                        }, 1000);
+                    },
+                })
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Dibatalkan',
+                    'data batal dihapus',
+                    'error'
+                )
+            }
+        })
+    });
     </script>
 
     @endsection

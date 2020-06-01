@@ -15,4 +15,9 @@ class Unit extends Model
     {
         return $this->hasMany(Pemesanan::class);
     }
+
+    public function barangkeluar()
+    {
+        return $this->hasMany(Barang_keluar::class);
+    }
 }

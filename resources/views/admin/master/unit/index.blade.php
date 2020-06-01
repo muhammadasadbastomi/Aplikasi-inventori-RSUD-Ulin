@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<<div class="content-body">
+<div class="content-body">
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -27,7 +27,9 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                                    Data</span></button>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -45,10 +47,13 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $u->nama_unit }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$u->id}}" data-nama_unit="{{$u->nama_unit}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$u->id}}"
+                                                data-nama_unit="{{$u->nama_unit}}" data-toggle="modal"
+                                                data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$u->uuid}}" href="#"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$u->uuid}}"
+                                                href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -61,20 +66,20 @@
         </div>
     </div>
     <!-- #/ container -->
-    </div>
+</div>
 
-    @include('admin.master.unit.create')
-    @include('admin.master.unit.edit')
+@include('admin.master.unit.create')
+@include('admin.master.unit.edit')
 
-    @endsection
+@endsection
 
-    @section('script')
-    <script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+@section('script')
+<script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
 
-    <script>
-        $('#editModal').on('show.bs.modal', function(event) {
+<script>
+    $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
             var nama_unit = button.data('nama_unit')
@@ -83,10 +88,10 @@
             modal.find('.modal-body #id').val(id)
             modal.find('.modal-body #nama_unit').val(nama_unit);
         })
-    </script>
+</script>
 
-    <script>
-        $(document).on('click', '.delete', function(e) {
+<script>
+    $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             swal.fire({
@@ -127,5 +132,5 @@
                 }
             })
         });
-    </script>
-    @endsection
+</script>
+@endsection

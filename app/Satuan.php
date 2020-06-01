@@ -15,4 +15,9 @@ class Satuan extends Model
     {
         return $this->hasMany(Barang::class);
     }
+
+    public function barang_keluar()
+    {
+        return $this->hasMany(Barang_keluar::class);
+    }
 }

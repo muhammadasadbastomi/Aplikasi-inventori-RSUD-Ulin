@@ -47,7 +47,9 @@ class BarangmasukController extends Controller
         ];
         $request->validate([
 
-
+            'supplier_id' => 'required',
+            'user_id' => 'required',
+            'tgl_masuk' => 'required',
 
         ], $messages);
 

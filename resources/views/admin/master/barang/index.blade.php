@@ -84,13 +84,13 @@
 
     <script>
         $('#editModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var nama_barang = button.data('nama_barang')
-            var merk_id = button.data('merk_id')
-            var satuan_id = button.data('satuan_id')
-            var stok = button.data('stok')
-            var modal = $(this)
+            let button = $(event.relatedTarget)
+            let id = button.data('id')
+            let nama_barang = button.data('nama_barang')
+            let merk_id = button.data('merk_id')
+            let satuan_id = button.data('satuan_id')
+            let stok = button.data('stok')
+            let modal = $(this)
 
             modal.find('.modal-body #id').val(id)
             modal.find('.modal-body #nama_barang').val(nama_barang);

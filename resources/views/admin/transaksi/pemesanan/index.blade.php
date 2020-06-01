@@ -7,14 +7,14 @@
 @endsection
 
 @section('content')
-<<div class="content-body">
+<div class="content-body">
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Pemesanan</a></li>
             </ol>
         </div>
     </div>
@@ -78,19 +78,19 @@
         </div>
     </div>
     <!-- #/ container -->
-    </div>
+</div>
 
-    @include('admin.transaksi.pemesanan.create')
-    @include('admin.transaksi.pemesanan.edit')
-    @endsection
+@include('admin.transaksi.pemesanan.create')
+@include('admin.transaksi.pemesanan.edit')
+@endsection
 
-    @section('script')
-    <script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+@section('script')
+<script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
 
-    <script>
-        $('#editModal').on('show.bs.modal', function(event) {
+<script>
+    $('#editModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
             var unit_id = button.data('unit_id')
@@ -105,10 +105,10 @@
             modal.find('.modal-body #alamat').val(alamat)
             modal.find('.modal-body #tgl_pesan').val(tgl_pesan)
         })
-    </script>
+</script>
 
-    <script>
-        $(document).on('click', '.delete', function(e) {
+<script>
+    $(document).on('click', '.delete', function(e) {
         e.preventDefault();
         var id = $(this).data('id');
         swal.fire({
@@ -149,6 +149,6 @@
             }
         })
     });
-    </script>
+</script>
 
-    @endsection
+@endsection

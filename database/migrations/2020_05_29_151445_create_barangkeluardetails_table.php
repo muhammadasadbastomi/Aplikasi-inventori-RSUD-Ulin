@@ -18,7 +18,9 @@ class CreateBarangkeluardetailsTable extends Migration
             $table->string('uuid')->length(36);
             $table->unsignedBigInteger('barangkeluar_id');
             $table->unsignedBigInteger('barang_id');
-            $table->string('jumlah', 50);
+            $table->integer('jumlah');
+            $table->integer('harga');
+            $table->integer('subtotal');
             $table->timestamps();
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('restrict');
             $table->foreign('barangkeluar_id')->references('id')->on('barangkeluars')->onDelete('restrict');

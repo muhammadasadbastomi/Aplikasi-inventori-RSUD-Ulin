@@ -38,7 +38,6 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Supplier</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Aksi</th>
@@ -48,12 +47,11 @@
                                     @foreach ($pemesanandetail as $p)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $p->supplier->nama_suppliers }}</td>
                                         <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
                                         <td scope="col" class="text-center">{{ $p->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="delete btn btn-sm btn-danger text-white" href="#"
-                                                data-toggle="tooltip" data-placement="top"><i
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
                                                     class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>

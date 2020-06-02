@@ -11,36 +11,40 @@
             <div class="modal-body">
                 <form method="POST">
                     <div class="body">
-                        {{-- @csrf
+                        @csrf
                         <div class="form-group">
-                            <label for="supplier_id">Nama supplier</label>
-                            <select class="custom-select" name="supplier_id" id="supplier_id">
-                                @foreach($supplier as $d)
-                                <option value="{{$d->id}}">{{$d->nama_suppliers}}</option>
-                        @endforeach
-                        </select>
+                            <label for="barang_id">Nama Barang</label>
+                            <select class="custom-select" name="barang_id" id="barang_id">
+                                @foreach($barang as $d)
+                                <option value="{{$d->id}}">{{$d->nama_barang}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <label>Harga</label>
+                        <div class="form-group">
+                            <input type="number" name="harga" id="input1" value="{{old('harga')}}"
+                                class="form-control   @error ('harga') is-invalid @enderror">
+                            @error('harga')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                        </div>
+                        <label>Jumlah</label>
+                        <div class="form-group">
+                            <input type="number" name="jumlah" id="input2" value="{{old('jumlah')}}"
+                                class="form-control  @error ('jumlah') is-invalid @enderror">
+                            @error('jumlah')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                        </div>
+                        <label>Subtotal</label>
+                        <div class="form-group">
+                            <input type="number" name="subtotal" id="input3" value=""
+                                class="form-control  @error ('subtotal') is-invalid @enderror" readonly="">
+                            @error('subtotal')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="barang_id">Nama Barang</label>
-                        <select class="custom-select" name="barang_id" id="barang_id">
-                            @foreach($barang as $d)
-                            <option value="{{$d->id}}">{{$d->nama_barang}}</option>
-                            @endforeach
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
-                    <label>Jumlah</label>
-                    <div class="form-group">
-                        <input type="number" name="jumlah" id="jumlah" value="{{old('jumlah')}}"
-                            class="form-control  @error ('jumlah') is-invalid @enderror">
-                        @error('jumlah')<div class="invalid-feedback"> {{$message}} </div>@enderror
-                    </div> --}}
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
-            </div>
-            </form>
         </div>
     </div>
-</div>
 </div>

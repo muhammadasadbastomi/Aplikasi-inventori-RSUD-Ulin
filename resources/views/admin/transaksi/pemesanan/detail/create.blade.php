@@ -13,14 +13,6 @@
                     <div class="body">
                         @csrf
                         <div class="form-group">
-                            <label for="supplier_id">Nama supplier</label>
-                            <select class="custom-select" name="supplier_id" id="supplier_id">
-                                @foreach($supplier as $d)
-                                <option value="{{$d->id}}">{{$d->nama_suppliers}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="barang_id">Nama Barang</label>
                             <select class="custom-select" name="barang_id" id="barang_id">
                                 @foreach($barang as $d)

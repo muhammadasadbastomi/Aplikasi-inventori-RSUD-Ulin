@@ -51,7 +51,8 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $d->unit->nama_unit }}</td>
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $d->tgl_pesan }}</td>
+                                        <td scope="col" class="text-center">
+                                            {{carbon\carbon::parse($d->tgl_pesan)->translatedFormat('d F Y')}}</td>
                                         <td scope="col" class="text-center">{{ $d->alamat }}</td>
                                         <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
@@ -65,8 +66,9 @@
                                                 data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
-                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

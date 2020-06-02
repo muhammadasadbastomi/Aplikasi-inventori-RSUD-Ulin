@@ -63,8 +63,9 @@
                                                 data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#" data-toggle="tooltip"
-                                                data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="btn btn-sm btn-danger text-white" data-id="{{ $d->uuid }}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

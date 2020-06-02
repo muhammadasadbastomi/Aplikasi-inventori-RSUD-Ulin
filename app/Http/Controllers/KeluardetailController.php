@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang_keluar;
+use App\Keluardetail;
+use App\Barang;
 use Illuminate\Http\Request;
 
 class KeluardetailController extends Controller
@@ -11,9 +14,13 @@ class KeluardetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $barangkeluar = Barang_keluar::where('uuid', $id)->first();
+        $data = Keluardetail::OrderBy('id', 'desc')->where('barangkeluar_id', $barangkeluar->id)->get();
+        $barang = barang::OrderBy('id', 'desc')->get();
+
+        return view('admin.transaksi.keluar.detail.index', compact('barangkeluar', 'barang', 'data'));
     }
 
     /**
@@ -32,9 +39,20 @@ class KeluardetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $barangkeluar = barang_keluar::where('uuid', $id)->first();
+
+        $data = new Keluardetail;
+        $request->request->add(['barangkeluardetail_id' => $data->id]);
+        $data->barang_id = $request->barang_id;
+        $data->barangkeluar_id = $barangkeluar->id;
+        $data->harga = $request->harga;
+        $data->jumlah = $request->jumlah;
+        $data->subtotal = $request->subtotal;
+        $data->save();
+
+        return back()->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -79,6 +97,10 @@ class KeluardetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Keluardetail::where('uuid', $id)->first();
+
+        $data->delete();
+
+        return back();
     }
 }

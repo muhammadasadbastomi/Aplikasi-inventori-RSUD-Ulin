@@ -50,7 +50,6 @@ class PemesanandetailController extends Controller
         $request->validate([
 
             'barang_id' => 'required',
-            'supplier_id' => 'required',
             'jumlah' => 'required',
 
         ], $messages);
@@ -61,7 +60,6 @@ class PemesanandetailController extends Controller
         $request->request->add(['pemesanandetail_id' => $pemesanandet->id]);
         $pemesanandet->barang_id = $request->barang_id;
         $pemesanandet->pemesanan_id = $pemesanan->id;
-        $pemesanandet->supplier_id = $request->supplier_id;
         $pemesanandet->jumlah = $request->jumlah;
         $pemesanandet->save();
 

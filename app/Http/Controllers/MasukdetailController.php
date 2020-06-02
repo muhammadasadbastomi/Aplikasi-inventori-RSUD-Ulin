@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang_masuk;
+use App\Masukdetail;
+use App\Barang;
 use Illuminate\Http\Request;
 
 class MasukdetailController extends Controller
@@ -11,9 +14,13 @@ class MasukdetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $barangmasuk = Barang_masuk::where('uuid', $id)->first();
+        $data = Masukdetail::OrderBy('id', 'desc')->where('barangmasuk_id', $barangmasuk->id)->get();
+        $barang = barang::OrderBy('id', 'desc')->get();
+
+        return view('admin.transaksi.masuk.detail.index', compact('pemesanan', 'barang', 'data'));
     }
 
     /**
@@ -32,9 +39,20 @@ class MasukdetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $barangmasuk = barang_masuk::where('uuid', $id)->first();
+
+        $data = new Masukdetail;
+        $request->request->add(['barangmasukdetail_id' => $data->id]);
+        $data->barang_id = $request->barang_id;
+        $data->barangmasuk_id = $barangmasuk->id;
+        $data->harga = $request->harga;
+        $data->jumlah = $request->jumlah;
+        $data->subtotal = $request->subtotal;
+        $data->save();
+
+        return back()->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -79,6 +97,10 @@ class MasukdetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Masukdetail::where('uuid', $id)->first();
+
+        $data->delete();
+
+        return back();
     }
 }

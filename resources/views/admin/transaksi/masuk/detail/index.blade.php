@@ -38,22 +38,24 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Supplier</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
+                                        <th scope="col" class="text-center">Harga</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col" class="text-center">Total</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pemesanandetail as $p)
+                                    @foreach ($data as $b)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $p->supplier->nama_suppliers }}</td>
-                                        <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
-                                        <td scope="col" class="text-center">{{ $p->jumlah }}</td>
+                                        <td scope="col" class="text-center">{{ $b->barang->nama_barang }}</td>
+                                        <td scope="col" class="text-center">{{ $b->harga }}</td>
+                                        <td scope="col" class="text-center">{{ $b->jumlah }}</td>
+                                        <td scope="col" class="text-center">{{ $b->subtotal }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="delete btn btn-sm btn-danger text-white" href="#"
-                                                data-toggle="tooltip" data-placement="top"><i
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{ $b->uuid }}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
                                                     class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
@@ -120,6 +122,17 @@
             }
         })
         });
+    </script>
+
+    <script>
+        $("#input1,#input2").keyup(function() {
+        var val1 = $('#input1').val();
+        var val2 = $('#input2').val();
+        var kali = Number(val1) * Number(val2);
+        if ( val1 != "" && val2 != "" ) {
+        $('#input3').val(kali);
+        }
+        })
     </script>
 
     @endsection

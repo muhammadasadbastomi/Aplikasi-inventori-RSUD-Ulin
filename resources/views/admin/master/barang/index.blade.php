@@ -57,8 +57,8 @@
                                                 data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#"><i
-                                                    class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$b->uuid}}"
+                                                href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -27,7 +27,9 @@
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
+                                    Data</span></button>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -45,10 +47,13 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $m->nama_merk }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$m->id}}" data-nama_merk="{{$m->nama_merk}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$m->id}}"
+                                                data-nama_merk="{{$m->nama_merk}}" data-toggle="modal"
+                                                data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$m->uuid}}" href="#"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$m->uuid}}"
+                                                href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -100,7 +105,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "{{ url('/admin/satuan/delete')}}" + '/' + id,
+                        url: "{{ url('/admin/merk/delete')}}" + '/' + id,
                         type: "POST",
                         data: {
                             '_method': 'DELETE',

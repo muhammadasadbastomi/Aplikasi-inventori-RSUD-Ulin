@@ -123,6 +123,9 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $supplier = Supplier::where('uuid', $id)->first();
+        $supplier->delete();
+
+        return back();
     }
 }

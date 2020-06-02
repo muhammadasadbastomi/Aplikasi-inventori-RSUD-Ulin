@@ -112,6 +112,9 @@ class MerkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $merk = Merk::where('uuid', $id)->first();
+        $merk->delete();
+
+        return back();
     }
 }

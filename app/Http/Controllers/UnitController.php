@@ -112,6 +112,9 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unit = Unit::where('uuid', $id)->first();
+        $unit->delete();
+
+        return back();
     }
 }

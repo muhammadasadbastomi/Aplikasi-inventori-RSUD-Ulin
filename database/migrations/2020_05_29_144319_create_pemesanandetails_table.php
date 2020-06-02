@@ -16,14 +16,10 @@ class CreatePemesanandetailsTable extends Migration
         Schema::create('pemesanandetails', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
-            $table->unsignedBigInteger('pemesanan_id');
-            $table->unsignedBigInteger('supplier_id');
-            $table->unsignedBigInteger('barang_id');
+            $table->foreignId('barang_id')->constrained()->OnDelete('restrict');
+            $table->foreignId('pemesanan_id')->constrained()->OnDelete('cascade');
             $table->string('jumlah', 50);
             $table->timestamps();
-            $table->foreign('pemesanan_id')->references('id')->on('pemesanans')->onDelete('restrict');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict');
-            $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('restrict');
         });
     }
 

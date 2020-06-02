@@ -122,8 +122,11 @@ class BarangController extends Controller
      * @param  \App\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang)
+    public function destroy($id)
     {
-        //
+        $barang = Barang::where('uuid', $id)->first();
+        $barang->delete();
+
+        return back();
     }
 }

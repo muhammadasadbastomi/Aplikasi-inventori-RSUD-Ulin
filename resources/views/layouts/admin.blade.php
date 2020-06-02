@@ -50,7 +50,8 @@
                     <b class="logo-abbr"><img src="{{url('logo/logo.png')}}" alt=""> </b>
                     <span class="logo-compact"><img src="{{url('/logo/logo.png')}}" alt=""></span>
                     <span class="brand-title">
-                        <img height="60" width="108" src="{{url('logo/logo.png')}}" alt="" style="margin-top:-15px; margin-left:35px;">
+                        <img height="60" width="108" src="{{url('logo/logo.png')}}" alt=""
+                            style="margin-top:-15px; margin-left:35px;">
                     </span>
                 </a>
             </div>
@@ -112,6 +113,7 @@
     <script src="{{asset('js/settings.js')}}"></script>
     <script src="{{asset('js/gleek.js')}}"></script>
     <script src="{{asset('js/styleSwitcher.js')}}"></script>
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     @yield('script')
 </body>
 

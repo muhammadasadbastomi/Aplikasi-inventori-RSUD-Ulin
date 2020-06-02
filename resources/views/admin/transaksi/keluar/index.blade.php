@@ -53,6 +53,10 @@
                                         <td scope="col" class="text-center">{{ $d->tgl_keluar }}</td>
                                         <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('keluardetailIndex', ['id' => $d->uuid])}}">
+                                                <i class="fa icon-plus color-muted m-r-5"></i>
+                                            </a>
                                             <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
                                                 data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
                                                 data-tgl_keluar="{{$d->tgl_keluar}}" data-toggle="modal"
@@ -141,7 +145,7 @@
                 )
             }
         })
-    });
+        });
     </script>
 
     @endsection

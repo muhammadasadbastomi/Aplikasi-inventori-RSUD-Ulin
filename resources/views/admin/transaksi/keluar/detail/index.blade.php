@@ -1,6 +1,6 @@
 @extends('layouts/admin')
 
-@section('title') Admin Detail Masuk @endsection
+@section('title') Admin Detail Barang Keluar @endsection
 
 @section('head')
 <link href="{{asset('plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -14,8 +14,8 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Pemesanan</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Detail Pemesanan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang Keluar</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Detail Barang Keluar</a></li>
             </ol>
         </div>
     </div>

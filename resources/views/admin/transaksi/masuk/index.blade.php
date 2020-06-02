@@ -53,6 +53,10 @@
                                         <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
                                         <td scope="col" class="text-center">{{ $d->total }}</td>
                                         <td scope="col" class="text-center">
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('masukdetailIndex', ['id' => $d->uuid])}}">
+                                                <i class="fa icon-plus color-muted m-r-5"></i>
+                                            </a>
                                             <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
                                                 data-supplier_id="{{$d->supplier->id}}" data-user_id="{{$d->user->id}}"
                                                 data-tgl_masuk="{{$d->tgl_masuk}}" data-toggle="modal"

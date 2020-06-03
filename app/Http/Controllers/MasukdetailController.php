@@ -20,6 +20,8 @@ class MasukdetailController extends Controller
         $data = Masukdetail::OrderBy('id', 'desc')->where('barangmasuk_id', $barangmasuk->id)->get();
         $barang = barang::OrderBy('id', 'desc')->get();
 
+        //dd($totaljumlah);
+
         return view('admin.transaksi.masuk.detail.index', compact('pemesanan', 'barang', 'data'));
     }
 

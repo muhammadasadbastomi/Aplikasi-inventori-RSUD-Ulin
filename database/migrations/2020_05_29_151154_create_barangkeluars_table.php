@@ -19,7 +19,6 @@ class CreateBarangkeluarsTable extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('user_id');
             $table->date('tgl_keluar');
-            $table->string('jumlah', 50);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('restrict');

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
 use App\pemesanan;
 use App\pemesanandetail;
-use App\Barang;
 use App\Supplier;
 use Illuminate\Http\Request;
 
@@ -63,6 +63,11 @@ class PemesanandetailController extends Controller
         $pemesanandet->jumlah = $request->jumlah;
         $pemesanandet->save();
 
+        $sum = $pemesanan->pemesanandetail->sum('jumlah');
+
+        $pemesanan->jumlah = $sum;
+        $pemesanan->update();
+
         return back()->with('success', 'Data berhasil ditambah');
     }
 
@@ -95,9 +100,14 @@ class PemesanandetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $pemesanan = Pemesanan::where('uuid', $request->uuid)->first();
+        $sum = $pemesanan->pemesanandetail->sum('jumlah');
+
+        $pemesanan->jumlah = $sum;
+        $pemesanan->update();
+
     }
 
     /**
@@ -110,7 +120,13 @@ class PemesanandetailController extends Controller
     {
         $data = Pemesanandetail::where('uuid', $id)->first();
 
+        $pemesanan = pemesanan::where('id', $data->pemesanan_id)->first();
+
         $data->delete();
+
+        $sum = $pemesanan->pemesanandetail->sum('jumlah');
+        $pemesanan->jumlah = $sum;
+        $pemesanan->update();
 
         return back();
     }

@@ -22,4 +22,9 @@ class Barang_keluar extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function keluardetail()
+    {
+        return $this->hasMany('App\Keluardetail', 'barangkeluar_id');
+    }
 }

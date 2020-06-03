@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
 use App\Barang_masuk;
 use App\Masukdetail;
-use App\Barang;
 use Illuminate\Http\Request;
 
 class MasukdetailController extends Controller
@@ -22,7 +22,7 @@ class MasukdetailController extends Controller
 
         //dd($totaljumlah);
 
-        return view('admin.transaksi.masuk.detail.index', compact('pemesanan', 'barang', 'data'));
+        return view('admin.transaksi.masuk.detail.index', compact('barang', 'data'));
     }
 
     /**
@@ -53,6 +53,17 @@ class MasukdetailController extends Controller
         $data->jumlah = $request->jumlah;
         $data->subtotal = $request->subtotal;
         $data->save();
+
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->stok = $barang->stok + $request->jumlah;
+        $barang->update();
+
+        $jumlah = $barangmasuk->masukdetail->sum('jumlah');
+        $total = $barangmasuk->masukdetail->sum('subtotal');
+
+        $barangmasuk->jumlah = $jumlah;
+        $barangmasuk->total = $total;
+        $barangmasuk->update();
 
         return back()->with('success', 'Data berhasil ditambah');
     }
@@ -100,8 +111,23 @@ class MasukdetailController extends Controller
     public function destroy($id)
     {
         $data = Masukdetail::where('uuid', $id)->first();
+        $jumlah_stok = $data->jumlah;
 
         $data->delete();
+
+        $barangmasuk = Barang_masuk::findOrFail($data->barangmasuk_id);
+        //update stok
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->stok = $barang->stok - $jumlah_stok;
+        $barang->update();
+
+        // update barang masuk
+        $jumlah = $barangmasuk->masukdetail->sum('jumlah');
+        $total = $barangmasuk->masukdetail->sum('subtotal');
+
+        $barangmasuk->jumlah = $jumlah;
+        $barangmasuk->total = $total;
+        $barangmasuk->update();
 
         return back();
     }

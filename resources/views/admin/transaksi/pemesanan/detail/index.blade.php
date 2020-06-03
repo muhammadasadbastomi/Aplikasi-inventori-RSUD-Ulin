@@ -27,6 +27,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
+                            {{-- <form action="{{Route('pemesananDetailUpdate')}}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="uuid" value="{{$pemesanan->uuid}}" id="">
+                            <button type="submit" class="btn btn-outline-info"><span><i class="feather icon-exit"></i>
+                                    Simpan Detail Pemesanan
+                                </span></button>
+                            </form> --}}
                             <!-- Modal Tambah-->
                             <button class="btn btn-outline-primary" data-toggle="modal"
                                 data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
@@ -57,8 +65,10 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>

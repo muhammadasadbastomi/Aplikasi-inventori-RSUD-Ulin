@@ -14,16 +14,17 @@ class CreatePemesanansTable extends Migration
     public function up()
     {
         Schema::create('pemesanans', function (Blueprint $table) {
-        $table->bigIncrements('id');
-        $table->string('uuid')->length(36);
-        $table->unsignedBigInteger('unit_id');
-        $table->unsignedBigInteger('user_id');
-        $table->date('tgl_pesan');
-        $table->text('alamat');
-        $table->timestamps();
-        $table->foreign('unit_id')->references('id')->on('units')->onDelete('restrict');
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-    });
+            $table->bigIncrements('id');
+            $table->string('uuid')->length(36);
+            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('user_id');
+            $table->date('tgl_pesan');
+            $table->text('alamat');
+            $table->string('jumlah')->length(50);
+            $table->timestamps();
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+        });
     }
 
     /**

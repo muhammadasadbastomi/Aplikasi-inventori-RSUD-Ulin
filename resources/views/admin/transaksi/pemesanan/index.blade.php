@@ -54,7 +54,7 @@
                                         <td scope="col" class="text-center">
                                             {{carbon\carbon::parse($d->tgl_pesan)->translatedFormat('d F Y')}}</td>
                                         <td scope="col" class="text-center">{{ $d->alamat }}</td>
-                                        {{-- <td scope="col" class="text-center">{{ $d->jumlah }}</td> --}}
+                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-success text-white"
                                                 href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">

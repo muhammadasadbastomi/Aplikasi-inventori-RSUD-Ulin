@@ -41,6 +41,7 @@
                                         <th scope="col" class="text-center">Nama User</th>
                                         <th scope="col" class="text-center">Tanggal Keluar</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col" class="text-center">Total</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->tgl_keluar }}</td>
                                         <td scope="col" class="text-center">{{ $d->jumlah }}</td>
+                                        <td scope="col" class="text-center">{{ $d->subtotal }}</td>
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-success text-white"
                                                 href="{{route('keluardetailIndex', ['id' => $d->uuid])}}">

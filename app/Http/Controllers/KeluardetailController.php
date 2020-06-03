@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
 use App\Barang_keluar;
 use App\Keluardetail;
-use App\Barang;
 use Illuminate\Http\Request;
 
 class KeluardetailController extends Controller
@@ -52,6 +52,17 @@ class KeluardetailController extends Controller
         $data->subtotal = $request->subtotal;
         $data->save();
 
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->stok = $barang->stok - $request->jumlah;
+        $barang->update();
+
+        $jumlah = $barangkeluar->keluardetail->sum('jumlah');
+        $total = $barangkeluar->keluardetail->sum('subtotal');
+
+        $barangkeluar->jumlah = $jumlah;
+        $barangkeluar->subtotal = $total;
+        $barangkeluar->update();
+
         return back()->with('success', 'Data berhasil ditambah');
     }
 
@@ -98,8 +109,19 @@ class KeluardetailController extends Controller
     public function destroy($id)
     {
         $data = Keluardetail::where('uuid', $id)->first();
+        $jumlah_stok = $data->jumlah;
 
         $data->delete();
+
+        $barangkeluar = Barang_keluar::findOrFail($data->barangkeluar_id);
+        //update stok
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->stok = $barang->stok + $jumlah_stok;
+        $barang->update();
+
+        // update barang keluar
+        $jumlah = $barangkeluar->keluardetail->sum('jumlah');
+        $total = $barangkeluar->keluardetail->sum('subtotal');
 
         return back();
     }

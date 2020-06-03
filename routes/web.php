@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('/auth/login');
@@ -72,7 +72,7 @@ Route::delete('/admin/keluar/delete/{id}', 'BarangkeluarController@destroy')->na
 Route::get('/admin/pemesanandetail/{id}', 'PemesanandetailController@index')->name('pemesanandetailIndex');
 Route::post('/admin/pemesanandetail/{id}', 'PemesanandetailController@store')->name('pemesanandetailStore');
 //Route::get('/admin/pemesanandetail/edit', 'PemesanandetailController@edit')->name('pemesanandetailEdit');
-//Route::put('/admin/pemesanandetail', 'PemesanandetailController@update')->name('pemesanandetailUpdate');
+Route::put('/admin/pemesananupdate', 'PemesanandetailController@update')->name('pemesananDetailUpdate');
 Route::delete('/admin/pemesanandetail/delete/{id}', 'PemesanandetailController@destroy')->name('pemesanandetailDelete');
 
 Route::get('/admin/masukdetail/{id}', 'MasukdetailController@index')->name('masukdetailIndex');

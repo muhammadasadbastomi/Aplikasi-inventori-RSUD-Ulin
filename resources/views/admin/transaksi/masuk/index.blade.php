@@ -40,6 +40,7 @@
                                         <th scope="col" class="text-center">Nama Supplier</th>
                                         <th scope="col" class="text-center">Nama User</th>
                                         <th scope="col" class="text-center">Tanggal Masuk</th>
+                                        <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Total</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
@@ -51,6 +52,7 @@
                                         <td scope="col" class="text-center">{{ $d->supplier->nama_suppliers }}</td>
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
+                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
                                         <td scope="col" class="text-center">{{ $d->total }}</td>
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-success text-white"

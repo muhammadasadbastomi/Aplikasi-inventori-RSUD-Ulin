@@ -22,4 +22,10 @@ class Barang_masuk extends Model
     {
         return $this->belongsTo(user::class);
     }
+
+    public function masukdetail()
+    {
+        return $this->hasMany('App\Masukdetail', 'barangmasuk_id');
+    }
+
 }

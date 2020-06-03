@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Barang;
 use App\pemesanan;
 use App\Unit;
-use App\Barang;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -103,7 +103,7 @@ class PemesananController extends Controller
         $messages = [
             'unique' => ':attribute sudah terdaftar.',
             'required' => ':attribute harus diisi.',
-            'mimes' => 'photo berupa :attribute.'
+            'mimes' => 'photo berupa :attribute.',
         ];
         $request->validate([
 

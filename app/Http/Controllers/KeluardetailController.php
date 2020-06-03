@@ -54,6 +54,10 @@ class KeluardetailController extends Controller
 
         $barang = Barang::findOrFail($data->barang_id);
         $barang->stok = $barang->stok - $request->jumlah;
+
+        if ($barang->stok < 0) {
+            return back()->with('warning', 'Stok tidak mencukupi');
+        }
         $barang->update();
 
         $jumlah = $barangkeluar->keluardetail->sum('jumlah');

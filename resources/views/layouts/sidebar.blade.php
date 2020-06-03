@@ -11,10 +11,10 @@
                     <i class="icon-layers menu-icon"></i><span class="nav-text"> Data Master</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{route('barangIndex')}}" aria-expanded="false">Data Barang</a></li>
+                    <li><a href="{{route('unitIndex')}}" aria-expanded="false">Data Unit</a></li>
                     <li><a href="{{route('satuanIndex')}}" aria-expanded="false">Data Satuan</a></li>
                     <li><a href="{{route('merkIndex')}}" aria-expanded="false">Data Merk</a></li>
-                    <li><a href="{{route('unitIndex')}}" aria-expanded="false">Data Unit</a></li>
+                    <li><a href="{{route('barangIndex')}}" aria-expanded="false">Data Barang</a></li>
                     <li><a href="{{route('supplierIndex')}}" aria-expanded="false">Data Suplier</a></li>
                 </ul>
             </li>

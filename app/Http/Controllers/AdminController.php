@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,8 +16,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = User::orderBy('id', 'DESC')->get();
-        return view('admin.user.index', compact('data'));
+        if (Auth::user()){
+            $user =  User::find(Auth::user()->id);
+
+            if ($user){
+            return view('admin.user.index')->withUser($user);
+            } else {
+                return redirect()->back();
+            }
+        }else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -45,9 +56,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $data = User::orderBy('id', 'desc')->get();
+
+        return redirect('admin.user.show', compact('data'));
     }
 
     /**
@@ -68,9 +81,62 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd($request);
+        $user = User::find(Auth::User()->id);
+
+        if ($user) {
+            $validate = null;
+            if (Auth::User()->email === $request['email']){
+                $validate = $request->validate([
+                    'name' => 'required|min:5',
+                    'email'=> 'required|email'
+                ]);
+            } else {
+                $validate = $request->validate([
+                    'name' => 'required|min:5',
+                    'email'=> 'required|email|unique:users'
+                ]);
+            }
+
+            if ($validate) {
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->telp = $request['telp'];
+            $user->alamat = $request['alamat'];
+
+            $user->save();
+
+            return redirect()->back()->with('success', 'Profil berhasil diubah');
+            } else {
+                return redirect()->back();
+            }
+        }else {
+            return redirect()->back();
+        }
+    }
+
+    public function updatepass(Request $request)
+    {
+        $validate = $request->validate([
+            'oldpassword' => 'required',
+            'password'=> 'required|required_with:password_confirmation',
+
+        ]);
+
+        $user = User::find(Auth::User()->id);
+
+        if($user){
+            if (Hash::check($request['oldpassword'], $user->password) && $validate) {
+                $user->password = Hash::make($request['password']);
+
+                $user->save();
+                return back()->with('success', 'Password berhasil diubah');
+            } else {
+                return back()->with('warning', 'Password yang dimasukan tidak sama');
+            }
+        }
     }
 
     /**

@@ -94,3 +94,11 @@ Route::put('/admin/stok', 'StokController@update')->name('stokUpdate');
 Route::delete('/admin/stok/delete/{id}', 'StokController@destroy')->name('stokDelete');
 
 Route::get('/admin/user/', 'AdminController@index')->name('userIndex');
+Route::put('/admin/user/', 'AdminController@update')->name('userUpdate');
+Route::put('/admin/user/', 'AdminController@updatepass')->name('userUpdatepass');
+
+Route::put('/admin/show/', 'AdminController@show')->name('userShow');
+Route::put('/admin/show/', 'AdminController@store')->name('userStore');
+Route::put('/admin/show/', 'AdminController@edit')->name('userEdit');
+Route::put('/admin/show/{id}', 'AdminController@destroy')->name('userDelete');
+

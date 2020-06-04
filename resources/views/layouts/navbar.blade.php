@@ -22,8 +22,11 @@
                                 <li>
                                     <a href="{{route('userIndex')}}"><i class="icon-user"></i> <span>Profile</span></a>
                                 </li>
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-power"></i> <span>Logout</span></a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <li><a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                            class="icon-power"></i> <span>Logout</span></a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
                                         @csrf
                                     </form>
                                 </li>

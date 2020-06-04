@@ -32,10 +32,16 @@
                         <br>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Edit Profile</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                    aria-controls="profile" aria-selected="false">Edit Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab"
+                                    aria-controls="password" aria-selected="false">Edit Password</a>
                             </li>
                         </ul>
                     </div>
@@ -101,46 +107,78 @@
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <form class="form-valide" method="post" enctype="multipart/form-data">
+                                {{ method_field('put') }}
+                                @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="name">Nama Lengkap <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="name">Nama Lengkap <span
+                                            class="text-danger">*</span>
+                                        @error('name')<span class="invalid-feedback"><strong> {{$message}}
+                                            </strong></span>@enderror
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Lengkap" value=" {{ Auth::user()->name }}">
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            placeholder="Masukkan Nama Lengkap" value=" {{ Auth::user()->name }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="email">E-mail <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="email">E-mail <span
+                                            class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan E-mail" value=" {{ Auth::user()->email }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="password">Password <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="konfirmasi">Confirm Password <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="konfirmasi" name="konfirmasi" placeholder="Konfirmasi Password">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Masukkan E-mail" value=" {{ Auth::user()->email }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="telp">Nomor Telepon
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telepon" value="{{Auth::user()->telp}}">
+                                        <input type="text" class="form-control" id="telp" name="telp"
+                                            placeholder="Masukkan Nomor Telepon" value="{{Auth::user()->telp}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="alamat">Alamat
                                     </label>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" id="alamat" name="alamat" rows="5" placeholder="Masukkan Alamat">{{Auth::user()->Alamat}}</textarea>
+                                        <textarea class="form-control" id="alamat" name="alamat" rows="5"
+                                            placeholder="Masukkan Alamat">{{Auth::user()->Alamat}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="margin-right: 45px;">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                            <form class="form-valide" method="post">
+                                {{ method_field('put') }}
+                                @csrf
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label" for="oldpassword">Password <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="password" class="form-control" id="oldpassword" name="oldpassword"
+                                            placeholder="Masukkan Password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label" for="password">New Password <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Masukkan Password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label" for="password_confirmation">Confirm Password
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="password" class="form-control" id="password_confirmation"
+                                            name="password_confirmation" placeholder="Konfirmasi Password">
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="margin-right: 45px;">

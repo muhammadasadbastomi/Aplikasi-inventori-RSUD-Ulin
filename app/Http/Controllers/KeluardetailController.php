@@ -56,6 +56,7 @@ class KeluardetailController extends Controller
         $barang->stok = $barang->stok - $request->jumlah;
 
         if ($barang->stok < 0) {
+            $delete = Keluardetail::findOrfail($data->id)->delete();
             return back()->with('warning', 'Stok tidak mencukupi');
         }
         $barang->update();

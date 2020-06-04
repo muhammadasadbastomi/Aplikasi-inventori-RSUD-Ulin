@@ -60,7 +60,7 @@ class AdminController extends Controller
     {
         $data = User::orderBy('id', 'desc')->get();
 
-        return redirect('admin.user.show', compact('data'));
+        return view('admin.user.show', compact('data'));
     }
 
     /**

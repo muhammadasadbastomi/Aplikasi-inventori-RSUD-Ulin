@@ -38,6 +38,11 @@
                     <i class="icon-settings menu-icon"></i><span class="nav-text"> Setting </span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('userShow')}}">
+                    <i class="icon-user menu-icon"></i><span class="nav-text"> Admin Lab </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

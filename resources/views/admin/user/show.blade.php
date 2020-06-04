@@ -13,8 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Master</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Barang</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data User</a></li>
             </ol>
         </div>
     </div>
@@ -37,9 +36,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
-                                        <th scope="col" class="text-center">Nama Barang</th>
-                                        <th scope="col" class="text-center">Merk</th>
-                                        <th scope="col" class="text-center">Satuan</th>
+                                        <th scope="col" class="text-center">Nama</th>
+                                        <th scope="col" class="text-center">Email</th>
+                                        <th scope="col" class="text-center">Telepon</th>
+                                        <th scope="col" class="text-center">Role</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -50,6 +50,7 @@
                                         <td scope="col" class="text-center">{{ $d->name }}</td>
                                         <td scope="col" class="text-center">{{ $d->email }}</td>
                                         <td scope="col" class="text-center">{{ $d->telp }}</td>
+                                        <td scope="col" class="text-center">{{ $d->role }}</td>
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
                                                 data-toggle="modal" data-target="#editModal">
@@ -71,8 +72,8 @@
     <!-- #/ container -->
     </div>
 
-    @include('admin.master.barang.create')
-    @include('admin.master.barang.edit')
+    {{-- @include('admin.master.barang.create')
+    @include('admin.master.barang.edit') --}}
     @endsection
 
     @section('script')

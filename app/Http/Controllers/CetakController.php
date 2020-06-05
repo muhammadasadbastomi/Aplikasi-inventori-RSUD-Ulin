@@ -74,7 +74,7 @@ class CetakController extends Controller
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
             ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
 
-        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data', 'start', 'end'));
         return $pdf->stream('laporan-pemesanantgl-pdf');
     }
 

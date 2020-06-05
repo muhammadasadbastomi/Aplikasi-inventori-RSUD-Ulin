@@ -14,15 +14,36 @@ class SatuanSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID');
+        // $faker = Faker::create('id_ID');
 
-        for ($i = 1; $i <= 12; $i++) {
+        // for ($i = 1; $i <= 12; $i++) {
 
-            // insert data ke table pegawai
-            DB::table('satuans')->insert([
-                'uuid' => Str::random(36),
-                'nama_satuan' => $faker->name
-            ]);
-        }
+        //     // insert data ke table pegawai
+        //     DB::table('satuans')->insert([
+        //         'uuid' => Str::random(36),
+        //         'nama_satuan' => $faker->name
+        //     ]);
+        // }
+
+        DB::table('satuans')->insert([
+            'uuid' => Str::random(36),
+            'nama_satuan' => 'botol'
+        ]);
+        DB::table('satuans')->insert([
+            'uuid' => Str::random(36),
+            'nama_satuan' => 'box'
+        ]);
+        DB::table('satuans')->insert([
+            'uuid' => Str::random(36),
+            'nama_satuan' => 'kit'
+        ]);
+        DB::table('satuans')->insert([
+            'uuid' => Str::random(36),
+            'nama_satuan' => 'pack'
+        ]);
+        DB::table('satuans')->insert([
+            'uuid' => Str::random(36),
+            'nama_satuan' => 'pcs'
+        ]);
     }
 }

@@ -14,15 +14,34 @@ class MerkSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID');
+        // $faker = Faker::create('id_ID');
 
-        for ($i = 1; $i <= 12; $i++) {
+        // for ($i = 1; $i <= 12; $i++) {
 
-            // insert data ke table pegawai
-            DB::table('merks')->insert([
-                'uuid' => Str::random(36),
-                'nama_merk' => $faker->name
-            ]);
-        }
+        //     // insert data ke table pegawai
+        //     DB::table('merks')->insert([
+        //         'uuid' => Str::random(36),
+        //         'nama_merk' => $faker->name
+        //     ]);
+        DB::table('merks')->insert([
+            'uuid' => Str::random(36),
+            'nama_merk' => 'Easy Lite Plus'
+        ]);
+        DB::table('merks')->insert([
+            'uuid' => Str::random(36),
+            'nama_merk' => 'Sysmex'
+        ]);
+        DB::table('merks')->insert([
+            'uuid' => Str::random(36),
+            'nama_merk' => 'Delta Diagnostik'
+        ]);
+        DB::table('merks')->insert([
+            'uuid' => Str::random(36),
+            'nama_merk' => 'Bio-Rad'
+        ]);
+        DB::table('merks')->insert([
+            'uuid' => Str::random(36),
+            'nama_merk' => 'Vitex 2'
+        ]);
     }
 }

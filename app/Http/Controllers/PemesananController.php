@@ -6,6 +6,7 @@ use App\Barang;
 use App\pemesanan;
 use App\Unit;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -50,7 +51,6 @@ class PemesananController extends Controller
         $request->validate([
 
             'unit_id' => 'required',
-            'user_id' => 'required',
             'alamat' => 'required',
             'tgl_pesan' => 'required',
 
@@ -60,7 +60,7 @@ class PemesananController extends Controller
         $pemesanan = new pemesanan;
         $request->request->add(['pemesanan_id' => $pemesanan->id]);
         $pemesanan->unit_id = $request->unit_id;
-        $pemesanan->user_id = $request->user_id;
+        $pemesanan->user_id = Auth::user()->id;
         $pemesanan->alamat = $request->alamat;
         $pemesanan->tgl_pesan = $request->tgl_pesan;
         $pemesanan->total = 0;
@@ -129,8 +129,10 @@ class PemesananController extends Controller
      * @param  \App\pemesanan  $pemesanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pemesanan $pemesanan)
+    public function destroy($id)
     {
-        //
+        $data = pemesanan::where('uuid', $id)->first()->delete();
+
+        return back();
     }
 }

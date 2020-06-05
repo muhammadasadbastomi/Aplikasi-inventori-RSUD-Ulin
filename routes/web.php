@@ -116,4 +116,6 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::get('/admin/laporan/supplier', 'CetakController@supplier')->name('cetakSupplier');
     Route::get('/admin/laporan/pemesanan', 'CetakController@pemesanan')->name('cetakPemesanan');
     Route::get('/admin/laporan/pemesanantgl', 'CetakController@pemesanantgl')->name('cetaktglPemesanan');
+    Route::get('/admin/laporan/masuk', 'CetakController@masuk')->name('cetakMasuk');
+    Route::get('/admin/laporan/masuktgl', 'CetakController@masuktgl')->name('cetaktglMasuk');
 });

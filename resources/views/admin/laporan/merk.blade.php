@@ -94,8 +94,8 @@
             <img class="sizeimg" src="logo/logo.png">
         </div>
         <div class="headtext">
-            <h3 style="margin:0px;">Gudang Laboratorium Patologi Klinik</h3>
-            <h1 style="margin:0px;">Rumah Sakit Umum Daerah Ulin</h1>
+            <h2 style="margin:0px;">Gudang Laboratorium Patologi Klinik</h2>
+            <h2 style="margin:0px;">Rumah Sakit Umum Daerah Ulin</h2>
             <p style="margin:0px;">Jl. A.Yani Km 2,5 Kota Banjarmasin, Kalimantan Selatan 70233</p>
         </div>
         <hr>

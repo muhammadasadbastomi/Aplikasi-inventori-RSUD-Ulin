@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="get" action="{{route('cetaktglPemesanan')}}" target="_blank">
+                <form method="get" action="{{route('cetaktglMasuk')}}" target="_blank">
                     {{ method_field('put') }}
                     @csrf
                     <div class=" modal-body">

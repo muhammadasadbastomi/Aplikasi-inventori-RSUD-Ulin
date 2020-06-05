@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use App\Barang;
+use App\Barang_masuk;
+use App\Masukdetail;
 use App\Merk;
 use App\Pemesanandetail;
-use App\Pemesanan;
 use App\Satuan;
 use App\Supplier;
 use App\Unit;
-use CreatePemesanandetailsTable;
+use Illuminate\Support\Facades\DB;
 
 class CetakController extends Controller
 {
@@ -59,7 +60,7 @@ class CetakController extends Controller
     {
         $data = Pemesanandetail::all();
 
-        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data', 'total'));
+        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data'));
         return $pdf->stream('laporan-pemesanan-pdf');
     }
 
@@ -71,7 +72,27 @@ class CetakController extends Controller
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
             ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
 
-        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data', 'data1'));
+        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data'));
         return $pdf->stream('laporan-pemesanantgl-pdf');
+    }
+
+    public function masuk()
+    {
+        $data = Masukdetail::all();
+
+        $pdf = PDF::loadview('admin/laporan/barangmasuk', compact('data'));
+        return $pdf->stream('laporan-barangmasuk-pdf');
+    }
+
+    public function masuktgl(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        $data = Masukdetail::join('barangmasuks', 'barangmasuks.id', '=', 'barangmasukdetails.barangmasuk_id')
+            ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/barangmasuktgl', compact('data', 'start', 'end'));
+        return $pdf->stream('laporan-barangmasuktgl-pdf');
     }
 }

@@ -78,6 +78,13 @@ class AdminController extends Controller
         $data->email = $request->email;
         $data->role = 2;
         $data->password = Hash::make($request->password);
+        $data->photos = $request->photos;
+        if ($request->hasfile('photos')) {
+            $request->file('photos')->move('images/user/', $request->file('photos')->getClientOriginalName());
+            $data->photos = $request->file('photos')->getClientOriginalName();
+            $data->save();
+        }
+
         $data->save();
 
         return back()->with('success', 'Data berhasil disimpan');
@@ -129,7 +136,28 @@ class AdminController extends Controller
             $user->email = $request['email'];
             $user->telp = $request['telp'];
             $user->alamat = $request['alamat'];
+            if ($request->photos != '') {
+                $path = public_path() . '/images/user/';
 
+                //code for remove old photos
+                if ($user->photos != ''  && $user->photos != null) {
+                    $file_old = $path . $user->photos;
+                    unlink($file_old);
+                }
+                if (!$request->photos) {
+                    $photos = $user->photos;
+                } else {
+                    //upload new photos
+                    $photos = $request->photos;
+                    $filename = $photos->getClientOriginalName();
+                    $photos->move($path, $filename);
+                }
+
+                //for update in table
+                $user->update(['photos' => $filename]);
+            }
+
+            //dd($user);
             $user->save();
             }
             return redirect()->back()->with('success', 'Profil berhasil diubah');

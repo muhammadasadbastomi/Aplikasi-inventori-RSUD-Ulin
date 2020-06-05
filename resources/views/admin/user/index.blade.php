@@ -145,6 +145,14 @@
                                             placeholder="Masukkan Alamat">{{Auth::user()->alamat}}</textarea>
                                     </div>
                                 </div>
+                                {{-- <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label" for="photos">Foto
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="file" class="form-control" id="photos" name="photos" rows="5"
+                                            placeholder="Masukkan Foto">
+                                    </div>
+                                </div> --}}
                                 <div class="modal-footer" style="margin-right: 45px;">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>

@@ -1,4 +1,5 @@
-<div class="modal fade text-left" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" style="display: none;">
+<div class="modal fade text-left" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,7 +14,9 @@
                         @csrf
                         <label>Nama Barang</label>
                         <div class="form-group">
-                            <input type="text" name="nama_barang" id="nama_barang" placeholder="Masukkan Nama Barang" value="{{old('nama_barang')}}" class="form-control  @error ('nama_barang') is-invalid @enderror">
+                            <input type="text" name="nama_barang" id="nama_barang" placeholder="Masukkan Nama Barang"
+                                value="{{old('nama_barang')}}"
+                                class="form-control  @error ('nama_barang') is-invalid @enderror">
                             @error('nama_barang')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
 
@@ -37,7 +40,8 @@
 
                         <label>Stok</label>
                         <div class="form-group">
-                            <input type="number" name="stok" id="stok" placeholder="Masukkan Stok" value="{{old('stok')}}" class="form-control ">
+                            <input type="number" name="stok" id="stok" placeholder="Masukkan Stok"
+                                value="{{old('stok')}}" class="form-control ">
                             @error('stok')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
 

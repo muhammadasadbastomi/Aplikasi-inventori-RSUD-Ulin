@@ -142,7 +142,7 @@
                                     </label>
                                     <div class="col-lg-8">
                                         <textarea class="form-control" id="alamat" name="alamat" rows="5"
-                                            placeholder="Masukkan Alamat">{{Auth::user()->Alamat}}</textarea>
+                                            placeholder="Masukkan Alamat">{{Auth::user()->alamat}}</textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="margin-right: 45px;">

@@ -72,8 +72,8 @@
     <!-- #/ container -->
     </div>
 
-    {{-- @include('admin.master.barang.create')
-    @include('admin.master.barang.edit') --}}
+    @include('admin.user.create')
+    {{-- @include('admin.master.barang.edit') --}}
     @endsection
 
     @section('script')

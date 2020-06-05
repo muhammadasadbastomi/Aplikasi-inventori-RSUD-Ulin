@@ -39,16 +39,7 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -58,9 +49,28 @@ class AdminController extends Controller
      */
     public function show()
     {
-        $data = User::orderBy('id', 'desc')->get();
+        $data = User::where('role', [2])->orderBy('id', 'desc')->get();
 
         return view('admin.user.show', compact('data'));
+    }
+
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = new User;
+        $data->request->add(['user_id' => $data->id]);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->role = 2;
+        $data->password = Hash::make($request->password);
+        $data->save();
+
+        return back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -87,6 +97,7 @@ class AdminController extends Controller
         $user = User::find(Auth::User()->id);
 
         if ($user) {
+            if (isset($request->email)){
             $validate = null;
             if (Auth::User()->email === $request['email']){
                 $validate = $request->validate([
@@ -107,36 +118,48 @@ class AdminController extends Controller
             $user->alamat = $request['alamat'];
 
             $user->save();
-
-            return redirect()->back()->with('success', 'Profil berhasil diubah');
-            } else {
-                return redirect()->back();
             }
-        }else {
-            return redirect()->back();
-        }
+            return redirect()->back()->with('success', 'Profil berhasil diubah');
+            } elseif (isset($request->password)){
+                $validate = $request->validate([
+                    'oldpassword' => 'required',
+                    'password'=> 'required|required_with:password_confirmation',
+
+                ]);
+
+                if (Hash::check($request['oldpassword'], $user->password) && $validate) {
+                    $user->password = Hash::make($request['password']);
+
+                    $user->save();
+                    return back()->with('success', 'Password berhasil diubah');
+                } else {
+                    return back()->with('warning', 'Password yang dimasukan tidak sama');
+                }
+            }
+
+    }
     }
 
     public function updatepass(Request $request)
     {
-        $validate = $request->validate([
-            'oldpassword' => 'required',
-            'password'=> 'required|required_with:password_confirmation',
+        // $validate = $request->validate([
+        //     'oldpassword' => 'required',
+        //     'password'=> 'required|required_with:password_confirmation',
 
-        ]);
+        // ]);
 
-        $user = User::find(Auth::User()->id);
+        // $user = User::find(Auth::User()->id);
 
-        if($user){
-            if (Hash::check($request['oldpassword'], $user->password) && $validate) {
-                $user->password = Hash::make($request['password']);
+        // if($user){
+        //     if (Hash::check($request['oldpassword'], $user->password) && $validate) {
+        //         $user->password = Hash::make($request['password']);
 
-                $user->save();
-                return back()->with('success', 'Password berhasil diubah');
-            } else {
-                return back()->with('warning', 'Password yang dimasukan tidak sama');
-            }
-        }
+        //         $user->save();
+        //         return back()->with('success', 'Password berhasil diubah');
+        //     } else {
+        //         return back()->with('warning', 'Password yang dimasukan tidak sama');
+        //     }
+        // }
     }
 
     /**

@@ -62,8 +62,18 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'unique' => ':attribute sudah terdaftar.',
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+            'email'=> 'required|email|unique:users',
+            'password'=> 'required|required_with:password_confirmation',
+
+        ], $messages);
+
         $data = new User;
-        $data->request->add(['user_id' => $data->id]);
+        if ($data) {
         $data->name = $request->name;
         $data->email = $request->email;
         $data->role = 2;
@@ -71,6 +81,9 @@ class AdminController extends Controller
         $data->save();
 
         return back()->with('success', 'Data berhasil disimpan');
+        } else {
+            return back()->with('danger', 'data gagal disimpan');
+        }
     }
 
     /**

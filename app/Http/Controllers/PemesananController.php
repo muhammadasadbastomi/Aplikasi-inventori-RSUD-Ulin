@@ -108,14 +108,12 @@ class PemesananController extends Controller
         $request->validate([
 
             'unit_id' => 'required',
-            'user_id' => 'required',
             'alamat' => 'required',
             'tgl_pesan' => 'required',
 
         ], $messages);
         $pemesanan = pemesanan::findOrFail($request->id);
         $pemesanan->unit_id = $request->unit_id;
-        $pemesanan->user_id = $request->user_id;
         $pemesanan->alamat = $request->alamat;
         $pemesanan->tgl_pesan = $request->tgl_pesan;
         $pemesanan->update();

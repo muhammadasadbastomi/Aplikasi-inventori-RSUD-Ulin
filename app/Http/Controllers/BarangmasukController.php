@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Barang_masuk;
 use App\Supplier;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class BarangmasukController extends Controller
@@ -48,7 +49,6 @@ class BarangmasukController extends Controller
         $request->validate([
 
             'supplier_id' => 'required',
-            'user_id' => 'required',
             'tgl_masuk' => 'required',
 
         ], $messages);
@@ -57,7 +57,7 @@ class BarangmasukController extends Controller
         $barangmasuk = new Barang_masuk;
         $request->request->add(['barangmasuk_id' => $barangmasuk->id]);
         $barangmasuk->supplier_id = $request->supplier_id;
-        $barangmasuk->user_id = $request->user_id;
+        $barangmasuk->user_id = Auth::user()->id;
         $barangmasuk->tgl_masuk = $request->tgl_masuk;
         $barangmasuk->total = 0;
         $barangmasuk->save();
@@ -104,13 +104,12 @@ class BarangmasukController extends Controller
         $request->validate([
 
             'supplier_id' => 'required',
-            'user_id' => 'required',
             'tgl_masuk' => 'required',
 
         ], $messages);
         $barangmasuk = Barang_masuk::findOrFail($request->id);
         $barangmasuk->supplier_id = $request->supplier_id;
-        $barangmasuk->user_id = $request->user_id;
+        $barangmasuk->user_id = Auth::user()->id;
         $barangmasuk->tgl_masuk = $request->tgl_masuk;
         $barangmasuk->update();
 
@@ -123,8 +122,10 @@ class BarangmasukController extends Controller
      * @param  \App\Barang_masuk  $barang_masuk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang_masuk $barang_masuk)
+    public function destroy($id)
     {
-        //
+        $data = Barang_masuk::where('uuid', $id)->first()->delete();
+
+        return back();
     }
 }

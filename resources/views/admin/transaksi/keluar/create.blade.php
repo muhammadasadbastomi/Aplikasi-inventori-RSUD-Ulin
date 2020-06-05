@@ -21,15 +21,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="user_id">Nama User</label>
-                            <select class="custom-select" name="user_id" id="user_id">
-                                @foreach($user as $d)
-                                <option value="{{$d->id}}">{{ $d->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <label>Tanggal Keluar</label>
                         <div class="form-group">
                             <input type="date" name="tgl_keluar" id="tgl_keluar" value="{{old('tgl_keluar')}}"

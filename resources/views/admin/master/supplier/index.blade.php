@@ -26,8 +26,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
-                            <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
+                            <!-- Modal Tambah & Cetak -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah">
+                                    <span><i class="feather icon-plus"></i> Tambah Data</span>
+                                </button>
+                                &emsp14;
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span><i class="feather icon-printer"></i> Cetak Data</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakSupplier')}}">Keseluruhan</a>
+                                    <!-- <a class="dropdown-item" href="#">Another action</a> -->
+                                </div>
+                            </div>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">

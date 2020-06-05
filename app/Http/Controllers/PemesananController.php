@@ -63,7 +63,7 @@ class PemesananController extends Controller
         $pemesanan->user_id = $request->user_id;
         $pemesanan->alamat = $request->alamat;
         $pemesanan->tgl_pesan = $request->tgl_pesan;
-        $pemesanan->jumlah = 0;
+        $pemesanan->total = 0;
         $pemesanan->save();
 
         return back()->with('success', 'Data berhasil disimpan');

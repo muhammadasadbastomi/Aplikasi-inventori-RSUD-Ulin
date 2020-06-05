@@ -97,8 +97,16 @@ Route::get('/admin/user/', 'AdminController@index')->name('userIndex');
 Route::put('/admin/user/', 'AdminController@update')->name('userUpdate');
 //Route::put('/admin/user/', 'AdminController@updatepass')->name('userUpdatepass');
 
+
 Route::get('/admin/show/', 'AdminController@show')->name('userShow');
 Route::post('/admin/show/', 'AdminController@store')->name('userStore');
 Route::put('/admin/show/', 'AdminController@edit')->name('userEdit');
-Route::put('/admin/show/{id}', 'AdminController@destroy')->name('userDelete');
+Route::put('/admin/show/{id}', 'AdminController@supplier')->name('userDelete');
 
+Route::get('/admin/laporan/barang', 'CetakController@barang')->name('cetakBarang');
+Route::get('/admin/laporan/unit', 'CetakController@unit')->name('cetakUnit');
+Route::get('/admin/laporan/satuan', 'CetakController@satuan')->name('cetakSatuan');
+Route::get('/admin/laporan/merk', 'CetakController@merk')->name('cetakMerk');
+Route::get('/admin/laporan/supplier', 'CetakController@supplier')->name('cetakSupplier');
+Route::get('/admin/laporan/pemesanan', 'CetakController@pemesanan')->name('cetakPemesanan');
+Route::get('/admin/laporan/pemesanantgl', 'CetakController@pemesanantgl')->name('cetaktglPemesanan');

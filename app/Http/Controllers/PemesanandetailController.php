@@ -65,7 +65,7 @@ class PemesanandetailController extends Controller
 
         $sum = $pemesanan->pemesanandetail->sum('jumlah');
 
-        $pemesanan->jumlah = $sum;
+        $pemesanan->total = $sum;
         $pemesanan->update();
 
         return back()->with('success', 'Data berhasil ditambah');
@@ -105,9 +105,8 @@ class PemesanandetailController extends Controller
         $pemesanan = Pemesanan::where('uuid', $request->uuid)->first();
         $sum = $pemesanan->pemesanandetail->sum('jumlah');
 
-        $pemesanan->jumlah = $sum;
+        $pemesanan->total = $sum;
         $pemesanan->update();
-
     }
 
     /**
@@ -125,7 +124,7 @@ class PemesanandetailController extends Controller
         $data->delete();
 
         $sum = $pemesanan->pemesanandetail->sum('jumlah');
-        $pemesanan->jumlah = $sum;
+        $pemesanan->total = $sum;
         $pemesanan->update();
 
         return back();

@@ -20,7 +20,7 @@ class CreatePemesanansTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('tgl_pesan');
             $table->text('alamat');
-            $table->string('jumlah')->length(50);
+            $table->string('total')->length(50);
             $table->timestamps();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');

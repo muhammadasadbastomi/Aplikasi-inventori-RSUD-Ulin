@@ -26,10 +26,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right" style="margin-right: 30px;">
-                            <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah
-                                    Data</span></button>
+                            <!-- Modal Tambah & Cetak -->
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah">
+                                    <span><i class="feather icon-plus"></i> Tambah Data</span>
+                                </button>
+                                &emsp14;
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span><i class="feather icon-printer"></i> Cetak Data</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakPemesanan')}}" style="margin-left: -5px;">Keseluruhan</a>
+                                    <button class="btn nohover dropdown-item" data-toggle="modal" data-target="#tglModal">Berdasarkan Tanggal</button>
+                                </div>
+                            </div>
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -54,21 +64,15 @@
                                         <td scope="col" class="text-center">
                                             {{carbon\carbon::parse($d->tgl_pesan)->translatedFormat('d F Y')}}</td>
                                         <td scope="col" class="text-center">{{ $d->alamat }}</td>
-                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
+                                        <td scope="col" class="text-center">{{ $d->total }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-success text-white"
-                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                            <a class="btn btn-sm btn-success text-white" href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
-                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
-                                                data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}"
-                                                data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}" data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
-                                                href="#" data-toggle="tooltip" data-placement="top"><i
-                                                    class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -85,6 +89,7 @@
 
 @include('admin.transaksi.pemesanan.create')
 @include('admin.transaksi.pemesanan.edit')
+@include('admin.transaksi.pemesanan.cetaktgl')
 @endsection
 
 @section('script')
@@ -94,20 +99,20 @@
 
 <script>
     $('#editModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('id')
-            var unit_id = button.data('unit_id')
-            var user_id = button.data('user_id')
-            var alamat = button.data('alamat')
-            var tgl_pesan = button.data('tgl_pesan')
-            var modal = $(this)
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var unit_id = button.data('unit_id')
+        var user_id = button.data('user_id')
+        var alamat = button.data('alamat')
+        var tgl_pesan = button.data('tgl_pesan')
+        var modal = $(this)
 
-            modal.find('.modal-body #id').val(id)
-            modal.find('.modal-body #unit_id').val(unit_id)
-            modal.find('.modal-body #user_id').val(user_id)
-            modal.find('.modal-body #alamat').val(alamat)
-            modal.find('.modal-body #tgl_pesan').val(tgl_pesan)
-        })
+        modal.find('.modal-body #id').val(id)
+        modal.find('.modal-body #unit_id').val(unit_id)
+        modal.find('.modal-body #user_id').val(user_id)
+        modal.find('.modal-body #alamat').val(alamat)
+        modal.find('.modal-body #tgl_pesan').val(tgl_pesan)
+    })
 </script>
 
 <script>

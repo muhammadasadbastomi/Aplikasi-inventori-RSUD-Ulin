@@ -13,8 +13,8 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Transaksi</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Pemesanan</a></li>
+                <li class="breadcrumb-item"><a href="{{route('pemesananIndex')}}">Transaksi</a></li>
+                <li class="breadcrumb-item active"><a href="{{route('pemesananIndex')}}">Data Pemesanan</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Data Detail Pemesanan</a></li>
             </ol>
         </div>
@@ -36,8 +36,7 @@
                                 </span></button>
                             </form> --}}
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             <!-- Modal End -->
                         </div>
@@ -58,9 +57,7 @@
                                         <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
                                         <td scope="col" class="text-center">{{ $p->jumlah }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}"
-                                                href="#" data-toggle="tooltip" data-placement="top"><i
-                                                    class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -88,45 +85,45 @@
 
     <script>
         $(document).on('click', '.delete', function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        swal.fire({
-            title: "Apakah anda yakin?",
-            icon: "warning",
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: "Ya",
-            cancelButtonText: "Tidak",
-            showCancelButton: true,
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: "{{ url('/admin/pemesanandetail/delete')}}" + '/' + id,
-                    type: "POST",
-                    data: {
-                        '_method': 'DELETE',
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Data Berhasil Dihapus',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        setTimeout(function() {
-                            document.location.reload(true);
-                        }, 1000);
-                    },
-                })
-            } else if (result.dismiss === swal.DismissReason.cancel) {
-                Swal.fire(
-                    'Dibatalkan',
-                    'data batal dihapus',
-                    'error'
-                )
-            }
-        })
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal.fire({
+                title: "Apakah anda yakin?",
+                icon: "warning",
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak",
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: "{{ url('/admin/pemesanandetail/delete')}}" + '/' + id,
+                        type: "POST",
+                        data: {
+                            '_method': 'DELETE',
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data Berhasil Dihapus',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(function() {
+                                document.location.reload(true);
+                            }, 1000);
+                        },
+                    })
+                } else if (result.dismiss === swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Dibatalkan',
+                        'data batal dihapus',
+                        'error'
+                    )
+                }
+            })
         });
     </script>
 

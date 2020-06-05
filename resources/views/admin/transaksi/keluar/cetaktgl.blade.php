@@ -2,13 +2,13 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="edit-modal-label" style="padding-left: 10px;">Cetak Berdasarkan Tanggal Barang Masuk</h4>
+                <h4 class="modal-title" id="edit-modal-label" style="padding-left: 10px;">Cetak Berdasarkan Tanggal Barang Keluar</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="get" action="{{route('cetaktglMasuk')}}" target="_blank">
+                <form method="get" action="{{route('cetaktglKeluar')}}" target="_blank">
                     {{ method_field('put') }}
                     @csrf
                     <div class=" modal-body">

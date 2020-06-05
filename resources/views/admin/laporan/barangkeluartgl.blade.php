@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laporan Data Barang Masuk</title>
+    <title>Laporan Data Barang Keluar</title>
     <link rel="icon" type="image/png" href="{{url('logo/logo.png')}}">
     <style>
         .logo {
@@ -102,14 +102,17 @@
     </div>
 
     <div class="container" style="margin-top:-40px;">
-        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Barang Masuk</h3>
+        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Barang Keluar</h3>
+        <div style="text-align:right; margin-bottom:5px;">
+            <small>Rekap : {{$start}} s/d {{$end}}</small>
+        </div>
         <table class="table table-bordered nowrap">
             <thead>
                 <tr>
                     <th rowspan="2" class="text-center">No</th>
                     <th rowspan="2" class="text-center">Tanggal</th>
-                    <th rowspan="2" class="text-center">ID Barang Masuk</th>
-                    <th rowspan="2" class="text-center">Supplier</th>
+                    <th rowspan="2" class="text-center">ID Barang Keluar</th>
+                    <th rowspan="2" class="text-center">Unit</th>
                     <th rowspan="2" class="text-center">User</th>
                     <th colspan="6" class="text-center">Detail Barang</th>
                 </tr>
@@ -120,20 +123,20 @@
                     <th>Satuan</th>
                     <th>Jumlah</th>
                     <th>Harga Satuan</th>
-                    <th>Total</th>
+                    <th>Subtotal</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $d)
                 <tr>
                     <td scope="col" class="text-center align-center">{{$loop->iteration}}</td>
-                    <td scope="col" class="text-center align-center">{{\carbon\carbon::parse($d->barangmasuk->tgl_masuk)->translatedFormat('d F Y')}}</td>
-                    <td scope="col" class="text-center align-center">PM-{{$d->barangmasuk->id}}</td>
-                    <td scope="col" class="text-center">{{$d->barangmasuk->supplier->nama_suppliers }}</td>
-                    <td scope="col" class="text-center">{{$d->barangmasuk->user->name }}</td>
+                    <td scope="col" class="text-center align-center">{{\carbon\carbon::parse($d->barangkeluar->tgl_keluar)->translatedFormat('d F Y')}}</td>
+                    <td scope="col" class="text-center align-center">PM-{{$d->barangkeluar->id}}</td>
+                    <td scope="col" class="text-center">{{$d->barangkeluar->unit->nama_unit }}</td>
+                    <td scope="col" class="text-center">{{$d->barangkeluar->user->name }}</td>
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
-                    <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
+                    <td scope="col" class="text-center align-center">{{$d->barang->satuan->nama_satuan }}</td>
                     <td scope="col" class="text-center align-center">{{$d->jumlah}}</td>
                     <td scope="col" class="text-center align-right">Rp. {{number_format($d->harga, 0, ',', '.')}},-</td>
                     <td scope="col" class="text-center align-right">Rp. {{number_format($d->subtotal, 0, ',', '.')}},-</td>

@@ -61,7 +61,7 @@ class MasukdetailController extends Controller
         $jumlah = $barangmasuk->masukdetail->sum('jumlah');
         $total = $barangmasuk->masukdetail->sum('subtotal');
 
-        $barangmasuk->jumlah = $jumlah;
+        $barangmasuk->jumlah_barang = $jumlah;
         $barangmasuk->total = $total;
         $barangmasuk->update();
 
@@ -125,7 +125,7 @@ class MasukdetailController extends Controller
         $jumlah = $barangmasuk->masukdetail->sum('jumlah');
         $total = $barangmasuk->masukdetail->sum('subtotal');
 
-        $barangmasuk->jumlah = $jumlah;
+        $barangmasuk->jumlah_barang = $jumlah;
         $barangmasuk->total = $total;
         $barangmasuk->update();
 

@@ -111,15 +111,16 @@
                 <tr>
                     <th rowspan="2" class="text-center">No</th>
                     <th rowspan="2" class="text-center">Tanggal</th>
-                    <th rowspan="2" class="text-center">ID Pemesanan</th>
+                    <th rowspan="2" class="text-center">ID Barang Masuk</th>
                     <th rowspan="2" class="text-center">Supplier</th>
                     <th rowspan="2" class="text-center">User</th>
-                    <th colspan="5" class="text-center">Detail Barang</th>
+                    <th colspan="6" class="text-center">Detail Barang</th>
                 </tr>
 
                 <tr>
                     <th>Nama</th>
                     <th>Merk</th>
+                    <th>Satuan</th>
                     <th>Jumlah</th>
                     <th>Harga Satuan</th>
                     <th>Subtotal</th>
@@ -135,7 +136,8 @@
                     <td scope="col" class="text-center">{{$d->barangmasuk->user->name }}</td>
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
-                    <td scope="col" class="text-center align-center">{{$d->jumlah}} {{$d->barang->satuan->nama_satuan }}</td>
+                    <td scope="col" class="text-center align-center">{{$d->barang->satuan->nama_satuan }}</td>
+                    <td scope="col" class="text-center align-center">{{$d->jumlah}}</td>
                     <td scope="col" class="text-center align-right">Rp. {{number_format($d->harga, 0, ',', '.')}},-</td>
                     <td scope="col" class="text-center align-right">Rp. {{number_format($d->subtotal, 0, ',', '.')}},-</td>
                 </tr>
@@ -143,9 +145,9 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th scope="col" class="align-right" colspan="7">Total</th>
-                    <th scope="col" class="align-center">{{$d->barangmasuk->jumlah}}</th>
-                    <th scope="col" class="align-right" colspan="2">Rp. {{number_format($d->barangmasuk->total, 0, ',', '.')}},-</th>
+                    <th scope="col" class="align-right" colspan="8">Total</th>
+                    <th scope="col" class="align-center">{{$jumlah}}</th>
+                    <th scope="col" class="align-right" colspan="2">Rp. {{number_format($total, 0, ',', '.')}},-</th>
                 </tr>
             </tfoot>
         </table>

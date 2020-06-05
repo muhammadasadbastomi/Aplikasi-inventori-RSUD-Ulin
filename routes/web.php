@@ -114,8 +114,10 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::get('/admin/laporan/satuan', 'CetakController@satuan')->name('cetakSatuan');
     Route::get('/admin/laporan/merk', 'CetakController@merk')->name('cetakMerk');
     Route::get('/admin/laporan/supplier', 'CetakController@supplier')->name('cetakSupplier');
-    Route::get('/admin/laporan/pemesanan', 'CetakController@pemesanan')->name('cetakPemesanan');
-    Route::get('/admin/laporan/pemesanantgl', 'CetakController@pemesanantgl')->name('cetaktglPemesanan');
-    Route::get('/admin/laporan/masuk', 'CetakController@masuk')->name('cetakMasuk');
-    Route::get('/admin/laporan/masuktgl', 'CetakController@masuktgl')->name('cetaktglMasuk');
+    Route::get('/admin/laporan/barangpemesanan', 'CetakController@pemesanan')->name('cetakPemesanan');
+    Route::get('/admin/laporan/barangpemesanantgl', 'CetakController@pemesanantgl')->name('cetaktglPemesanan');
+    Route::get('/admin/laporan/barangmasuk', 'CetakController@masuk')->name('cetakMasuk');
+    Route::get('/admin/laporan/barangmasuktgl', 'CetakController@masuktgl')->name('cetaktglMasuk');
+    Route::get('/admin/laporan/barangkeluar', 'CetakController@keluar')->name('cetakKeluar');
+    Route::get('/admin/laporan/barangkeluartgl', 'CetakController@keluartgl')->name('cetaktglKeluar');
 });

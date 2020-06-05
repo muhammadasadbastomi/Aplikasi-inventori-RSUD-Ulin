@@ -59,7 +59,7 @@ class BarangkeluarController extends Controller
         $barangkeluar->unit_id = $request->unit_id;
         $barangkeluar->user_id = $request->user_id;
         $barangkeluar->tgl_keluar = $request->tgl_keluar;
-        $barangkeluar->jumlah = 0;
+        $barangkeluar->jumlah_barang = 0;
         $barangkeluar->save();
 
         return back()->with('success', 'Data berhasil disimpan');

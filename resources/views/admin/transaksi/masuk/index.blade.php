@@ -61,9 +61,17 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $d->supplier->nama_suppliers }}</td>
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $d->tgl_masuk }}</td>
-                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
+                                        <td scope="col" class="text-center"> {{carbon\carbon::parse($d->tgl_masuk)->translatedFormat('d F Y')}}</td>
+                                        @if($d->jumlah_barang > 0 )
+                                        <td scope="col" class="text-center">{{ $d->jumlah_barang}}</td>
+                                        @else
+                                        <td scope="col" class="text-center"> - </td>
+                                        @endif
+                                        @if($d->jumlah_barang > 0 )
                                         <td scope="col" class="text-center">Rp. {{number_format($d->total, 0, ',', '.')}},-</td>
+                                        @else
+                                        <td scope="col" class="text-center"> - </td>
+                                        @endif
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-success text-white" href="{{route('masukdetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>

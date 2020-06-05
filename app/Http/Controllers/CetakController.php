@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use App\Barang;
+use App\Barang_keluar;
 use App\Barang_masuk;
+use App\Keluardetail;
 use App\Masukdetail;
 use App\Merk;
 use App\Pemesanandetail;
@@ -79,8 +81,10 @@ class CetakController extends Controller
     public function masuk()
     {
         $data = Masukdetail::all();
+        $jumlah = Barang_masuk::sum('jumlah_barang');
+        $total = Barang_masuk::sum('total');
 
-        $pdf = PDF::loadview('admin/laporan/barangmasuk', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/barangmasuk', compact('data', 'total', 'jumlah'));
         return $pdf->stream('laporan-barangmasuk-pdf');
     }
 
@@ -90,9 +94,45 @@ class CetakController extends Controller
         $end = $request->end;
 
         $data = Masukdetail::join('barangmasuks', 'barangmasuks.id', '=', 'barangmasukdetails.barangmasuk_id')
-            ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])->get();
+            ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])
+            ->get();
+        $jumlah = Masukdetail::join('barangmasuks', 'barangmasuks.id', '=', 'barangmasukdetails.barangmasuk_id')
+            ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])
+            ->sum('barangmasukdetails.jumlah');
+        $total = Masukdetail::join('barangmasuks', 'barangmasuks.id', '=', 'barangmasukdetails.barangmasuk_id')
+            ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])
+            ->sum('barangmasukdetails.subtotal');
 
-        $pdf = PDF::loadview('admin/laporan/barangmasuktgl', compact('data', 'start', 'end'));
+        $pdf = PDF::loadview('admin/laporan/barangmasuktgl', compact('data', 'start', 'end', 'jumlah', 'total'));
         return $pdf->stream('laporan-barangmasuktgl-pdf');
+    }
+
+    public function keluar()
+    {
+        $data = Keluardetail::all();
+        $jumlah = Barang_keluar::sum('jumlah_barang');
+        $total = Barang_keluar::sum('total');
+
+        $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'total', 'jumlah'));
+        return $pdf->stream('laporan-barangkeluar-pdf');
+    }
+
+    public function keluartgl(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        $data = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+            ->get();
+        $jumlah = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+            ->sum('barangkeluardetails.jumlah');
+        $total = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+            ->sum('barangkeluardetails.subtotal');
+
+        $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total'));
+        return $pdf->stream('laporan-barangkeluartgl-pdf');
     }
 }

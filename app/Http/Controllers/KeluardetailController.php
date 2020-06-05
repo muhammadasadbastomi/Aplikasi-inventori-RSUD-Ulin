@@ -64,8 +64,8 @@ class KeluardetailController extends Controller
         $jumlah = $barangkeluar->keluardetail->sum('jumlah');
         $total = $barangkeluar->keluardetail->sum('subtotal');
 
-        $barangkeluar->jumlah = $jumlah;
-        $barangkeluar->subtotal = $total;
+        $barangkeluar->jumlah_barang = $jumlah;
+        $barangkeluar->total = $total;
         $barangkeluar->update();
 
         return back()->with('success', 'Data berhasil ditambah');

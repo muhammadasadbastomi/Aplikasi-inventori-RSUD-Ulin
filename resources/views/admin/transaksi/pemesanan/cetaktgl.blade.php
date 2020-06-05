@@ -14,11 +14,11 @@
                     <div class=" modal-body">
                         <div class="form-group">
                             <label for="start">Dari Tanggal</label>
-                            <input type="date" class="form-control" name="start" id="start">
+                            <input type="date" class="form-control" name="start" id="start" required>
                         </div>
                         <div class="form-group">
                             <label for="end">Sampai Tanggal</label>
-                            <input type="date" class="form-control" name="end" id="end">
+                            <input type="date" class="form-control" name="end" id="end" required>
                         </div>
                     </div>
                     <div class="edit modal-footer">

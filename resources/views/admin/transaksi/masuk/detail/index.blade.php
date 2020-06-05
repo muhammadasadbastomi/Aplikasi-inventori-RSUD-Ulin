@@ -38,9 +38,9 @@
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
-                                        <th scope="col" class="text-center">Harga</th>
+                                        <th scope="col" class="text-center">Harga Satuan</th>
                                         <th scope="col" class="text-center">Jumlah</th>
-                                        <th scope="col" class="text-center">Total</th>
+                                        <th scope="col" class="text-center">Harga Total</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>

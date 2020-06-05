@@ -49,4 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Barang_keluar::class);
     }
+    public function photos()
+    {
+        if (!$this->photos) {
+            return asset('img/default.png');
+        }
+        return asset('images/user/' . $this->photos);
+    }
 }

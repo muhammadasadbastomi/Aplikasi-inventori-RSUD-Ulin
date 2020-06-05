@@ -35,10 +35,10 @@ Route::group(['middleware' => ['auth', 'Checkrole:1,2']], function () {
     Route::delete('/admin/pemesanandetail/delete/{id}', 'PemesanandetailController@destroy')->name('pemesanandetailDelete');
 
     Route::get('/admin/stok', 'StokController@index')->name('stokIndex');
-    Route::post('/admin/stok', 'StokController@store')->name('stokStore');
+    //Route::post('/admin/stok', 'StokController@store')->name('stokStore');
     //Route::get('/admin/stok/edit', 'stokController@edit')->name('stokEdit');
-    Route::put('/admin/stok', 'StokController@update')->name('stokUpdate');
-    Route::delete('/admin/stok/delete/{id}', 'StokController@destroy')->name('stokDelete');
+    //Route::put('/admin/stok', 'StokController@update')->name('stokUpdate');
+    //Route::delete('/admin/stok/delete/{id}', 'StokController@destroy')->name('stokDelete');
 
     Route::get('/admin/user/', 'AdminController@index')->name('userIndex');
     Route::put('/admin/user/', 'AdminController@update')->name('userUpdate');

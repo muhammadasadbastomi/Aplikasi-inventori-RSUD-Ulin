@@ -13,19 +13,11 @@
                     {{ method_field('put') }}
                     @csrf
                     <div class="form-group">
+                        <input type="hidden" name="id" id="id">
                         <label for="unit_id">Nama Unit</label>
                         <select class="custom-select" name="unit_id" id="unit_id">
                             @foreach($unit as $d)
                             <option value="{{$d->id}}">{{ $d->nama_unit}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_id">Nama User</label>
-                        <select class="custom-select" name="user_id" id="user_id">
-                            @foreach($user as $d)
-                            <option value="{{$d->id}}">{{ $d->name}}</option>
                             @endforeach
                         </select>
                     </div>

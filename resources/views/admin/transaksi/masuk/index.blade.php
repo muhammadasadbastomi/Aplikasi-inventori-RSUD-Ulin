@@ -79,7 +79,7 @@
                                             <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-supplier_id="{{$d->supplier->id}}" data-user_id="{{$d->user->id}}" data-tgl_masuk="{{$d->tgl_masuk}}" data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-danger text-white" data-id="{{ $d->uuid }}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{ $d->uuid }}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

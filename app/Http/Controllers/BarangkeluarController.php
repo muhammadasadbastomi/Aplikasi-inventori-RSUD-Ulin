@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Barang_keluar;
 use App\Unit;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class BarangkeluarController extends Controller
@@ -48,7 +49,6 @@ class BarangkeluarController extends Controller
         $request->validate([
 
             'unit_id' => 'required',
-            'user_id' => 'required',
             'tgl_keluar' => 'required',
 
         ], $messages);
@@ -57,7 +57,7 @@ class BarangkeluarController extends Controller
         $barangkeluar = new Barang_keluar;
         $request->request->add(['barangkeluar_id' => $barangkeluar->id]);
         $barangkeluar->unit_id = $request->unit_id;
-        $barangkeluar->user_id = $request->user_id;
+        $barangkeluar->user_id = Auth::user()->id;
         $barangkeluar->tgl_keluar = $request->tgl_keluar;
         $barangkeluar->jumlah_barang = 0;
         $barangkeluar->save();
@@ -103,14 +103,13 @@ class BarangkeluarController extends Controller
         $request->validate([
 
             'unit_id' => 'required',
-            'user_id' => 'required',
             'tgl_keluar' => 'required',
 
         ], $messages);
 
         $barangkeluar = Barang_keluar::findOrFail($request->id);
         $barangkeluar->unit_id = $request->unit_id;
-        $barangkeluar->user_id = $request->user_id;
+        $barangkeluar->user_id = Auth::user()->id;
         $barangkeluar->tgl_keluar = $request->tgl_keluar;
         $barangkeluar->update();
 
@@ -125,7 +124,7 @@ class BarangkeluarController extends Controller
      */
     public function destroy($id)
     {
-        $unit = Barang_keluar::where('uuid', $id)->first()->delete();
+        $data = Barang_keluar::where('uuid', $id)->first()->delete();
 
         return back();
     }

@@ -24,11 +24,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="float-right" style="margin-right: 30px;">
+                        {{-- <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
                             <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah"><span><i class="feather icon-plus"></i> Tambah Data</span></button>
                             <!-- Modal End -->
-                        </div>
+                        </div> --}}
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration nowrap">
                                 <thead>
@@ -37,7 +37,7 @@
                                         <th scope="col" class="text-center">Nama Barang</th>
                                         <th scope="col" class="text-center">Merk</th>
                                         <th scope="col" class="text-center">Stok</th>
-                                        <th scope="col" class="text-center">Aksi</th>
+                                        {{-- <th scope="col" class="text-center">Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,12 +47,16 @@
                                         <td scope="col" class="text-center">{{ $d->nama_barang }}</td>
                                         <td scope="col" class="text-center">{{ $d->merk->nama_merk }}</td>
                                         <td scope="col" class="text-center">{{ $d->stok }}</td>
-                                        <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-nama_barang="{{$d->nama_barang}}" data-merk_id="{{$d->merk->id}}" data-satuan_id="{{$d->satuan->id}}" data-stok="{{$d->stok}}" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil color-muted m-r-5"></i>
-                                            </a>
-                                            <a class="btn btn-sm btn-danger text-white" href="#"><i class="fa fa-close color-danger"></i></a>
-                                        </td>
+                                        {{-- <td scope="col" class="text-center">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                        data-nama_barang="{{$d->nama_barang}}" data-merk_id="{{$d->merk->id}}"
+                                        data-satuan_id="{{$d->satuan->id}}" data-stok="{{$d->stok}}" data-toggle="modal"
+                                        data-target="#editModal">
+                                        <i class="fa fa-pencil color-muted m-r-5"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-danger text-white" href="#"><i
+                                                class="fa fa-close color-danger"></i></a>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -66,8 +70,8 @@
     <!-- #/ container -->
     </div>
 
-    @include('admin.master.barang.create')
-    @include('admin.master.barang.edit')
+    {{-- @include('admin.master.barang.create')
+    @include('admin.master.barang.edit') --}}
     @endsection
 
     @section('script')

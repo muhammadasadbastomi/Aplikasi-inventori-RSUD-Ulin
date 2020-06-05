@@ -183,6 +183,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::where('uuid', $id)->first()->delete();
+
+        return back();
     }
 }

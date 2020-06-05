@@ -14,9 +14,9 @@
                         @csrf
                         <label>Nama</label>
                         <div class="form-group">
-                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
-                                value="{{old('nama')}}" class="form-control  @error ('nama') is-invalid @enderror">
-                            @error('nama')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                            <input type="text" name="name" id="name" placeholder="Masukkan Nama Lengkap"
+                                value="{{old('name')}}" class="form-control  @error ('name') is-invalid @enderror">
+                            @error('name')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
 
                         <label>Email</label>

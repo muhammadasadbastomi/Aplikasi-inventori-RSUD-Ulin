@@ -123,8 +123,10 @@ class BarangkeluarController extends Controller
      * @param  \App\Barang_keluar  $barang_keluar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang_keluar $barang_keluar)
+    public function destroy($id)
     {
-        //
+        $unit = Barang_keluar::where('uuid', $id)->first()->delete();
+
+        return back();
     }
 }

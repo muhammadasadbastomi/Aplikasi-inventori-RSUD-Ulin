@@ -74,7 +74,7 @@
     </div>
 
     @include('admin.user.create')
-    {{-- @include('admin.master.barang.edit') --}}
+    @include('admin.user.edit')
     @endsection
 
     @section('script')

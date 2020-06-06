@@ -103,9 +103,24 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, User $user )
     {
-        //
+        $validate = $request->validate([
+             'password'=> 'required|required_with:passwordconfirm',
+
+         ]);
+
+         $user = User::findOrFail($request->id);
+
+         if($user){
+                $user->password = Hash::make($request->password);
+
+                $user->save();
+                return back()->with('success', 'Password berhasil diubah');
+             }  else {
+                return back()->with('warning', 'Password yang dimasukan tidak sama');
+             }
+
     }
 
     /**

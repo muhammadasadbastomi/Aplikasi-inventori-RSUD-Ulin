@@ -17,7 +17,7 @@ class CreatePemesanandetailsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
             $table->foreignId('barang_id')->constrained()->OnDelete('restrict');
-            $table->foreignId('pemesanan_id')->constrained()->OnDelete('cascade');
+            $table->foreignId('pemesanan_id')->OnDelete('cascade');
             $table->string('jumlah', 50);
             $table->timestamps();
         });

@@ -57,7 +57,8 @@
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
                                             <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
-                                                href="#"><i class="fa fa-close color-danger"></i></a>
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -110,7 +111,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "{{ url('/admin/show/delete')}}" + '/' + id,
+                    url: "{{ url('/admin/delete')}}" + '/' + id,
                     type: "POST",
                     data: {
                         '_method': 'DELETE',

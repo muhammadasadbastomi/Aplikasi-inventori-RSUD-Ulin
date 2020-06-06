@@ -23,7 +23,8 @@
             <div class="row" style="margin-top:47px; margin-bottom: -95px;">
                 <div class="col-md-4">
                     <div class="profile-img">
-                        <img src="{{ url('img/default.png')}}" alt="">
+                        <img src="{{ url('images/user/'. Auth::user()->photos )}}" alt="">
+                        {{-- <img src="{{ url('img/default.png' )}}" alt=""> --}}
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -50,7 +51,7 @@
             <div class="row">
                 <div class="col-md-4" style="margin-top:150px; margin-bottom:47px;">
                     <div class="profile-img">
-                        <img src="{{ url('logo/blank.jpg')}}" alt="">
+                        {{-- <img src="{{ url('logo/blank.jpg')}}" alt=""> --}}
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -145,14 +146,14 @@
                                             placeholder="Masukkan Alamat">{{Auth::user()->alamat}}</textarea>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="photos">Foto
                                     </label>
                                     <div class="col-lg-8">
                                         <input type="file" class="form-control" id="photos" name="photos" rows="5"
                                             placeholder="Masukkan Foto">
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="modal-footer" style="margin-right: 45px;">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>

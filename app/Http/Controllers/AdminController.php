@@ -80,9 +80,13 @@ class AdminController extends Controller
         $data->password = Hash::make($request->password);
         $data->photos = $request->photos;
         if ($request->hasfile('photos')) {
-            $request->file('photos')->move('images/user/', $request->file('photos')->getClientOriginalName());
-            $data->photos = $request->file('photos')->getClientOriginalName();
-            $data->save();
+            $img = $request->file('photos');
+            $FotoExt = $img->getClientOriginalExtension();
+            $FotoName = $request->name;
+            $photos = $FotoName . '.' . $FotoExt;
+            $img->move('images/user', $photos);
+            $data->photos = $photos;
+            $data->update();
         }
 
         $data->save();
@@ -136,29 +140,18 @@ class AdminController extends Controller
             $user->email = $request['email'];
             $user->telp = $request['telp'];
             $user->alamat = $request['alamat'];
-            if ($request->photos != '') {
-                $path = public_path() . '/images/user/';
-
-                //code for remove old photos
-                if ($user->photos != ''  && $user->photos != null) {
-                    $file_old = $path . $user->photos;
-                    unlink($file_old);
-                }
-                if (!$request->photos) {
-                    $photos = $user->photos;
-                } else {
-                    //upload new photos
-                    $photos = $request->photos;
-                    $filename = $photos->getClientOriginalName();
-                    $photos->move($path, $filename);
-                }
-
-                //for update in table
-                $user->update(['photos' => $filename]);
+            if ($request->photos != null) {
+                $img = $request->file('photos');
+                $FotoExt = $img->getClientOriginalExtension();
+                $FotoName = $request->name;
+                $photos = $FotoName . '.' . $FotoExt;
+                $img->move('images/user', $photos);
+                $user->photos = $photos;
+                $user->update();
             }
 
-            //dd($user);
-            $user->save();
+
+            $user->update();
             }
             return redirect()->back()->with('success', 'Profil berhasil diubah');
             } elseif (isset($request->password)){

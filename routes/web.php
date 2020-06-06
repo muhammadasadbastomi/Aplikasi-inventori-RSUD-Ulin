@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::get('/admin/show/', 'AdminController@show')->name('userShow');
     Route::post('/admin/show/', 'AdminController@store')->name('userStore');
     Route::put('/admin/show/', 'AdminController@edit')->name('userEdit');
-    Route::delete('/admin/show/delete/{id}', 'AdminController@destroy')->name('userDelete');
+    Route::delete('/admin/delete/{id}', 'AdminController@destroy')->name('userDelete');
 
     Route::get('/admin/laporan/barang', 'CetakController@barang')->name('cetakBarang');
     Route::get('/admin/laporan/unit', 'CetakController@unit')->name('cetakUnit');

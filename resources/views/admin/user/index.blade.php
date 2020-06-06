@@ -168,12 +168,12 @@
                                 {{ method_field('put') }}
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label" for="oldpassword">Password <span
+                                    <label class="col-lg-3 col-form-label" for="oldpassword" required>Password <span
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
                                         <input type="password" class="form-control" id="oldpassword" name="oldpassword"
-                                            placeholder="Masukkan Password">
+                                            placeholder="Masukkan Password" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -182,7 +182,7 @@
                                     </label>
                                     <div class="col-lg-8">
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="Masukkan Password">
+                                            placeholder="Masukkan Password" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -191,9 +191,23 @@
                                     </label>
                                     <div class="col-lg-8">
                                         <input type="password" class="form-control" id="password_confirmation"
-                                            name="password_confirmation" placeholder="Konfirmasi Password">
+                                            class="form-control  @error ('password_confirmation') is-invalid @enderror"
+                                            name="password_confirmation" placeholder="Konfirmasi Password" required>
                                     </div>
+                                    <!--menampilkan error validasi-->
+                                    @if (count($errors) > 0)
+                                    <div class="alert alert-danger" style="margin-left:250px; margin-top:10px;">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
+                                    <!--End menampilkan error validasi-->
                                 </div>
+
+
                                 <div class="modal-footer" style="margin-right: 45px;">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>

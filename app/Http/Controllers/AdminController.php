@@ -170,19 +170,19 @@ class AdminController extends Controller
             }
             return redirect()->back()->with('success', 'Profil berhasil diubah');
             } elseif (isset($request->password)){
+                $messages = [
+                    'confirmed' => ':attribute tidak sama.',
+                    'same' => ':attribute tidak sama.'
+                ];
                 $validate = $request->validate([
-                    'oldpassword' => 'required',
-                    'password'=> 'required|required_with:password_confirmation',
+                    'password'=> 'same:password_confirmation', 'confirmed',
 
-                ]);
+                ], $messages);
 
                 if (Hash::check($request['oldpassword'], $user->password) && $validate) {
                     $user->password = Hash::make($request['password']);
-
-                    $user->save();
-                    return back()->with('success', 'Password berhasil diubah');
                 } else {
-                    return back()->with('warning', 'Password yang dimasukan tidak sama');
+                    return back()->with('warning', 'Password Salah');
                 }
             }
 

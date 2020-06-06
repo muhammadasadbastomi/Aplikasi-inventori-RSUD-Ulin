@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         // insert data ke table pegawai
         DB::table('users')->insert([
+            'uuid' => Str::random(36),
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123'),

@@ -110,6 +110,8 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::delete('/admin/delete/{id}', 'AdminController@destroy')->name('userDelete');
 
     Route::get('/admin/laporan/barang', 'CetakController@barang')->name('cetakBarang');
+    Route::get('/admin/laporan/stok', 'CetakController@stok')->name('cetakStok');
+    Route::get('/admin/laporan/stokhbs', 'CetakController@stokhbs')->name('cetakStokhbs');
     Route::get('/admin/laporan/unit', 'CetakController@unit')->name('cetakUnit');
     Route::get('/admin/laporan/satuan', 'CetakController@satuan')->name('cetakSatuan');
     Route::get('/admin/laporan/merk', 'CetakController@merk')->name('cetakMerk');

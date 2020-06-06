@@ -64,7 +64,11 @@
                                         <td scope="col" class="text-center">
                                             {{carbon\carbon::parse($d->tgl_pesan)->translatedFormat('d F Y')}}</td>
                                         <td scope="col" class="text-center">{{ $d->alamat }}</td>
+                                        @if($d->total > 0)
                                         <td scope="col" class="text-center">{{ $d->total }}</td>
+                                        @else
+                                        <td scope="col" class="text-center"> - </td>
+                                        @endif
                                         <td scope="col" class="text-center">
                                             <a class="btn btn-sm btn-success text-white" href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>

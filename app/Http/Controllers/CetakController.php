@@ -74,7 +74,7 @@ class CetakController extends Controller
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
             ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
 
-        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data', 'start', 'end'));
         return $pdf->stream('laporan-pemesanantgl-pdf');
     }
 
@@ -134,5 +134,22 @@ class CetakController extends Controller
 
         $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total'));
         return $pdf->stream('laporan-barangkeluartgl-pdf');
+    }
+
+    public function stok()
+    {
+        $data = Barang::all();
+
+        $pdf = PDF::loadview('admin/laporan/stok', compact('data'));
+        return $pdf->stream('laporan-stok-pdf');
+    }
+
+    public function stokhbs()
+    {
+        $data = Barang::where('stok', '<', 6)->get();
+
+
+        $pdf = PDF::loadview('admin/laporan/stokhbs', compact('data'));
+        return $pdf->stream('laporan-stokhbs-pdf');
     }
 }

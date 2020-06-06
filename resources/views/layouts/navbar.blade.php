@@ -14,7 +14,12 @@
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                         <span class="activity active"></span>
-                        <img src="{{url('img/default.png')}}" height="50" width="50" alt="">
+                        @if(Auth::user()->photos)
+                        <img src="{{ url('images/user/'. Auth::user()->photos )}}" height="50" width="50" alt="">
+                        @else
+                        <img src="{{ url('img/default.png' )}}" height="50" width="50" alt="">
+
+                        @endif
                     </div>
                     <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                         <div class="dropdown-content-body">
@@ -22,8 +27,11 @@
                                 <li>
                                     <a href="{{route('userIndex')}}"><i class="icon-user"></i> <span>Profile</span></a>
                                 </li>
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-power"></i> <span>Logout</span></a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <li><a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                            class="icon-power"></i> <span>Logout</span></a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
                                         @csrf
                                     </form>
                                 </li>

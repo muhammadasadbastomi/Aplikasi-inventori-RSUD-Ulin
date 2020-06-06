@@ -23,8 +23,12 @@
             <div class="row" style="margin-top:47px; margin-bottom: -95px;">
                 <div class="col-md-4">
                     <div class="profile-img">
+                        @if(Auth::user()->photos)
                         <img src="{{ url('images/user/'. Auth::user()->photos )}}" alt="">
-                        {{-- <img src="{{ url('img/default.png' )}}" alt=""> --}}
+                        @else
+
+                        <img src="{{ url('img/default.png' )}}" alt="">
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6">

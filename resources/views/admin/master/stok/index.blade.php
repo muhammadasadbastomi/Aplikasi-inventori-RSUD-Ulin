@@ -31,12 +31,15 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button> -->
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakStok')}}">Keseluruhan</a>
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakStokhbs')}}">Hampir Habis</a>
+                                    <a class="dropdown-item" target="_blank"
+                                        href="{{route('cetakStok')}}">Keseluruhan</a>
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakStokhbs')}}">Hampir
+                                        Habis</a>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -49,7 +52,7 @@
                                         <th scope="col" class="text-center">Nama Barang</th>
                                         <th scope="col" class="text-center">Merk</th>
                                         <th scope="col" class="text-center">Stok</th>
-                                        <!-- <th scope="col" class="text-center">Aksi</th> -->
+                                        <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,10 +61,18 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $d->nama_barang }}</td>
                                         <td scope="col" class="text-center">{{ $d->merk->nama_merk }}</td>
-                                        @if($d->stok < 6) <td scope="col" class="text-center text-red">{{ $d->stok }}</td>
+                                        @if($d->stok < 6) <td scope="col" class="text-center text-red">{{ $d->stok }}
+                                            </td>
                                             @else
                                             <td scope="col" class="text-center">{{ $d->stok }}</td>
                                             @endif
+                                            <td scope="col" class="text-center">
+                                                <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                    data-stok="{{$d->stok}}" data-toggle="modal"
+                                                    data-target="#editstok">
+                                                    <i class="fa fa-pencil color-muted m-r-5"></i>
+                                                </a>
+                                            </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -74,6 +85,8 @@
     </div>
     <!-- #/ container -->
     </div>
+
+    @include('admin.master.stok.editstok')
     @endsection
 
     @section('script')
@@ -82,19 +95,13 @@
     <script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
 
     <script>
-        $('#editModal').on('show.bs.modal', function(event) {
+        $('#editstok').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id = button.data('id')
-            var nama_barang = button.data('nama_barang')
-            var merk_id = button.data('merk_id')
-            var satuan_id = button.data('satuan_id')
             var stok = button.data('stok')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id)
-            modal.find('.modal-body #nama_barang').val(nama_barang);
-            modal.find('.modal-body #merk_id').val(merk_id);
-            modal.find('.modal-body #satuan_id').val(satuan_id);
             modal.find('.modal-body #stok').val(stok);
         })
     </script>

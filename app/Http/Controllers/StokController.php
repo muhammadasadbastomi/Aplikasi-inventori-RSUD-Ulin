@@ -73,9 +73,19 @@ class StokController extends Controller
      * @param  \App\Stok  $stok
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Barang $barang)
     {
-        //
+        $messages = [
+            'required' => ':attribute harus diisi.',
+        ];
+        $request->validate([
+            'stok' => 'required',
+        ], $messages);
+        $barang = Barang::findOrFail($request->id);
+        $barang->stok = $request->stok;
+        $barang->update();
+
+        return back()->with('success', 'Data berhasil diubah');
     }
 
     /**

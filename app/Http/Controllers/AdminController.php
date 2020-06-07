@@ -151,24 +151,24 @@ class AdminController extends Controller
             }
 
             if ($validate) {
-            $user->name = $request['name'];
-            $user->email = $request['email'];
-            $user->telp = $request['telp'];
-            $user->alamat = $request['alamat'];
-            if ($request->photos != null) {
-                $img = $request->file('photos');
-                $FotoExt = $img->getClientOriginalExtension();
-                $FotoName = $request->name;
-                $photos = $FotoName . '.' . $FotoExt;
-                $img->move('images/user', $photos);
-                $user->photos = $photos;
+                $user->name = $request['name'];
+                $user->email = $request['email'];
+                $user->telp = $request['telp'];
+                $user->alamat = $request['alamat'];
+                if ($request->photos != null) {
+                    $img = $request->file('photos');
+                    $FotoExt = $img->getClientOriginalExtension();
+                    $FotoName = $request->name;
+                    $photos = $FotoName . '.' . $FotoExt;
+                    $img->move('images/user', $photos);
+                    $user->photos = $photos;
+                    $user->update();
+                }
+
                 $user->update();
             }
-
-
-            $user->update();
-            }
             return redirect()->back()->with('success', 'Profil berhasil diubah');
+
             } elseif (isset($request->password)){
                 $messages = [
                     'confirmed' => ':attribute tidak sama.',

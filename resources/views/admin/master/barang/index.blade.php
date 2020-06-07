@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<<div class="content-body">
+<div class="content-body">
 
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -32,11 +32,13 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button>
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakBarang')}}">Keseluruhan</a>
+                                    <a class="dropdown-item" target="_blank"
+                                        href="{{route('cetakBarang')}}">Keseluruhan</a>
                                     <!-- <a class="dropdown-item" href="#">Another action</a> -->
                                 </div>
                             </div>
@@ -61,10 +63,14 @@
                                         <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
                                         <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}" data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}"
+                                                data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}"
+                                                data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$b->uuid}}" href="#"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$b->uuid}}"
+                                                href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -77,19 +83,19 @@
         </div>
     </div>
     <!-- #/ container -->
-    </div>
+</div>
 
-    @include('admin.master.barang.create')
-    @include('admin.master.barang.edit')
-    @endsection
+@include('admin.master.barang.create')
+@include('admin.master.barang.edit')
+@endsection
 
-    @section('script')
-    <script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+@section('script')
+<script src="{{asset('plugins/tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
 
-    <script>
-        $('#editModal').on('show.bs.modal', function(event) {
+<script>
+    $('#editModal').on('show.bs.modal', function(event) {
             let button = $(event.relatedTarget)
             let id = button.data('id')
             let nama_barang = button.data('nama_barang')
@@ -104,10 +110,22 @@
             modal.find('.modal-body #satuan_id').val(satuan_id);
             modal.find('.modal-body #stok').val(stok);
         })
-    </script>
+</script>
 
-    <script>
-        $(document).on('click', '.delete', function(e) {
+<script>
+    $('#editstok').on('show.bs.modal', function(event) {
+            let button = $(event.relatedTarget)
+            let id = button.data('id')
+            let stok = button.data('stok')
+            let modal = $(this)
+
+            modal.find('.modal-body #id').val(id)
+            modal.find('.modal-body #stok').val(stok);
+        })
+</script>
+
+<script>
+    $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
             swal.fire({
@@ -148,6 +166,6 @@
                 }
             })
         });
-    </script>
+</script>
 
-    @endsection
+@endsection

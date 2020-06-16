@@ -1,5 +1,4 @@
-<div class="modal fade text-left" id="modalTambah1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-    aria-hidden="true" style="display: none;">
+<div class="modal fade text-left" id="modalTambah1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,10 +19,14 @@
                                 @endforeach
                             </select>
                         </div>
+                        <label>Harga</label>
+                        <div class="form-group">
+                            <input type="number" name="harga" id="harga" placeholder="Masukkan harga" class="form-control  @error ('harga') is-invalid @enderror" value="{{('harga')}}">
+                            @error('harga')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                        </div>
                         <label>Jumlah</label>
                         <div class="form-group">
-                            <input type="number" name="jumlah" id="jumlah" value="{{old('jumlah')}}"
-                                class="form-control  @error ('jumlah') is-invalid @enderror">
+                            <input type="number" name="jumlah" id="jumlah" value="{{old('jumlah')}}" class="form-control  @error ('jumlah') is-invalid @enderror">
                             @error('jumlah')<div class="invalid-feedback"> {{$message}} </div>@enderror
                         </div>
                     </div>

@@ -15,7 +15,6 @@ class Pemesanandetail extends Model
     {
         return $this->belongsTo(Pemesanan::class);
     }
-
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

@@ -27,5 +27,4 @@ class Barang_masuk extends Model
     {
         return $this->hasMany('App\Masukdetail', 'barangmasuk_id');
     }
-
 }

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use PDF;
 use App\Barang;
 use App\Barang_keluar;
 use App\Barang_masuk;
@@ -14,7 +12,8 @@ use App\Pemesanandetail;
 use App\Satuan;
 use App\Supplier;
 use App\Unit;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use PDF;
 
 class CetakController extends Controller
 {
@@ -64,6 +63,14 @@ class CetakController extends Controller
 
         $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data'));
         return $pdf->stream('laporan-pemesanan-pdf');
+    }
+
+    public function invoicePemesanan($uuid)
+    {
+        $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
+
+        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data'));
+        return $pdf->stream('invoice');
     }
 
     public function pemesanantgl(Request $request)
@@ -147,7 +154,6 @@ class CetakController extends Controller
     public function stokhbs()
     {
         $data = Barang::where('stok', '<', 6)->get();
-
 
         $pdf = PDF::loadview('admin/laporan/stokhbs', compact('data'));
         return $pdf->stream('laporan-stokhbs-pdf');

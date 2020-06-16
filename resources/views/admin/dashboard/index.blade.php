@@ -115,6 +115,12 @@
             </div>
 
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <img style="height: auto; width: 100%;" src="{{asset('logo/rsulin.jpg')}}" alt="">
+            </div>
+        </div>
     </div>
 </div>
 @endsection

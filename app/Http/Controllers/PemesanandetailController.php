@@ -68,6 +68,8 @@ class PemesanandetailController extends Controller
         $pemesanan->total = $sum;
         $pemesanan->update();
 
+        // Mail::to($pemesanan->user->email)->send(new TagihanEmail($pemesanan));
+
         return back()->with('success', 'Data berhasil ditambah');
     }
 

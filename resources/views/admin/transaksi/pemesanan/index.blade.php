@@ -32,12 +32,15 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button>
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakPemesanan')}}" style="margin-left: -5px;">Keseluruhan</a>
-                                    <button class="btn nohover dropdown-item" data-toggle="modal" data-target="#tglModal">Berdasarkan Tanggal</button>
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakPemesanan')}}"
+                                        style="margin-left: -5px;">Keseluruhan</a>
+                                    <button class="btn nohover dropdown-item" data-toggle="modal"
+                                        data-target="#tglModal">Berdasarkan Tanggal</button>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -70,13 +73,23 @@
                                         <td scope="col" class="text-center"> - </td>
                                         @endif
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-success text-white" href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                            <a class="btn btn-sm btn-primary text-white" target="_blank"
+                                                href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
+                                                <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
+                                            </a>
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}" data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
+                                                data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

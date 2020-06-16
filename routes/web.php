@@ -122,4 +122,5 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::get('/admin/laporan/barangmasuktgl', 'CetakController@masuktgl')->name('cetaktglMasuk');
     Route::get('/admin/laporan/barangkeluar', 'CetakController@keluar')->name('cetakKeluar');
     Route::get('/admin/laporan/barangkeluartgl', 'CetakController@keluartgl')->name('cetaktglKeluar');
+    Route::get('/admin/laporan/invoicePemesanan/{uuid}', 'CetakController@invoicePemesanan')->name('cetakInvoicePemesanan');
 });

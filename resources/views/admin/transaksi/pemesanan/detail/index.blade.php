@@ -46,6 +46,7 @@
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
+                                        <th scope="col" class="text-center">Harga Jual</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
@@ -55,6 +56,7 @@
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
+                                        <td scope="col" class="text-center">{{ $p->harga }}</td>
                                         <td scope="col" class="text-center">{{ $p->jumlah }}</td>
                                         <td scope="col" class="text-center">
                                             <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>

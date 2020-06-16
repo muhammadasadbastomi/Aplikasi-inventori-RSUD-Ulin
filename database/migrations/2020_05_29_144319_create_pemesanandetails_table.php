@@ -16,6 +16,7 @@ class CreatePemesanandetailsTable extends Migration
         Schema::create('pemesanandetails', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->length(36);
+            $table->integer('harga');
             $table->foreignId('barang_id')->constrained()->OnDelete('restrict');
             $table->foreignId('pemesanan_id')->OnDelete('cascade');
             $table->string('jumlah', 50);

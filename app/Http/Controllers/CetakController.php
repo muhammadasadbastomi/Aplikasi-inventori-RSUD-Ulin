@@ -6,13 +6,16 @@ use App\Barang;
 use App\Barang_keluar;
 use App\Barang_masuk;
 use App\Keluardetail;
+use App\Mail\TagihanEmail;
 use App\Masukdetail;
 use App\Merk;
+use App\pemesanan;
 use App\Pemesanandetail;
 use App\Satuan;
 use App\Supplier;
 use App\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 class CetakController extends Controller
@@ -68,9 +71,21 @@ class CetakController extends Controller
     public function invoicePemesanan($uuid)
     {
         $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
+        $pemesanan = pemesanan::findOrFail($uuid);
+        $count = $pemesanan->pemesanandetail->sum('harga');
+        $jumlah = $pemesanan->pemesanandetail->sum('jumlah');
+        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'count', 'jumlah', 'pemesanan'));
+        $path = public_path('invoice/');
+        $fileName = 'invoice-' . $pemesanan->id . '.' . 'pdf';
+        $pdf->save($path . '/' . $fileName);
+        Mail::to($pemesanan->user->email)->send(new TagihanEmail($pemesanan));
+        // $message->to($pemesanan->user->email, $pemesanan->unit->nama_uit)
 
-        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data'));
-        return $pdf->stream('invoice');
+        //     ->subject('Informasi tagihan unit' . $pemesanan->unit->nama_unit)
+
+        //     ->attachData($pdf->output(), "invoice.pdf");
+
+        return redirect()->back()->withSuccess('Berhasil mengirim email');
     }
 
     public function pemesanantgl(Request $request)

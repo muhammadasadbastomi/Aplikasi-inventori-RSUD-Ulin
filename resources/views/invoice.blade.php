@@ -1,15 +1,5 @@
-<h1>Informasi tagihan pemesanan</h1>
-<tr>
-    <th>No</th>
-    <th>Nama Barang</th>
-</tr>
-<tr>
-    <td>1</td>
-    <td>{{$alamat}}</td>
-</tr>
-@foreach($pemesanan->pemesanan_detail as $d)
-<tr>
-    <td>{{$loop->iteration}}</td>
-    <td>{{$d->barang->nama_barang}}</td>
-</tr>
-@endforeach
+<h1>Informasi tagihan pemesanan Unit {{$unit}}</h1>
+<h5>Silahkan download informasi tagihan pada bagian lampiran</h5>
+
+<p>ttd</p>
+<p>{{$nama}}</p>

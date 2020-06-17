@@ -23,6 +23,7 @@
 
         td,
         th {
+            font-size: 10px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -126,7 +127,8 @@
                 @foreach($data as $d)
                 <tr>
                     <td scope="col" class="text-center">{{$loop->iteration}}</td>
-                    <td scope="col" class="text-center">{{\carbon\carbon::parse($d->pemesanan->tgl_pesan)->translatedFormat('d F Y')}}</td>
+                    <td scope="col" class="text-center">
+                        {{\carbon\carbon::parse($d->pemesanan->tgl_pesan)->translatedFormat('d F Y')}}</td>
                     <td scope="col" class="text-center">PM-{{$d->pemesanan->id}}</td>
                     <td scope="col" class="text-center">{{$d->pemesanan->unit->nama_unit }}</td>
                     <td scope="col" class="text-center">{{$d->pemesanan->user->name }}</td>
@@ -141,17 +143,17 @@
         </table>
         <br>
         <br>
-        <!-- <div class="ttd">
+        <div class="ttd">
             <h5>
-                Banjarbaru,
+                Banjarmasin,
             </h5>
-            <h5>isi jabatan</h5>
+            <h5>Kepala Gudang</h5>
             <br>
             <br>
-            <h5 style="text-decoration:underline;">nama pejabat</h5>
-            <h5>golongan / kode golongan</h5>
-            <h5>NIP.</h5>
-        </div> -->
+            <h5 style="text-decoration:underline;">Maulana Irfan, S.Kom</h5>
+            <h5>Penanggung jawab</h5>
+            <h5>NIK. 201101 19920709 7</h5>
+        </div>
     </div>
 </body>
 

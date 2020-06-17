@@ -34,8 +34,11 @@ class TagihanEmail extends Mailable
             ->with(
                 [
                     'nama' => 'Admin Gudang RSUD Ulin',
-                    'alamat' => $this->pemesanan->alamat,
-                    'pemesanan' => $this->pemesanan,
-                ]);
+                    'unit' => $this->pemesanan->unit->nama_unit,
+                ])
+            ->attach(public_path('/invoice') . '/invoice-' . $this->pemesanan->id . '.' . 'pdf', [
+                'as' => $this->pemesanan->id . '.pdf',
+                'mime' => 'application/pdf',
+            ]);
     }
 }

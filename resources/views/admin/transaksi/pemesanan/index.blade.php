@@ -73,7 +73,7 @@
                                         <td scope="col" class="text-center"> - </td>
                                         @endif
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-primary text-white" target="_blank"
+                                            <a class="btn btn-sm btn-primary text-white"
                                                 href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
                                                 <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
                                             </a>

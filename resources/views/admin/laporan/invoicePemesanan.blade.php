@@ -23,6 +23,7 @@
 
         td,
         th {
+            font-size: 10px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -102,14 +103,14 @@
     </div>
 
     <div class="container" style="margin-top:-40px;">
-        <h3 style="text-align:center;text-transform: uppercase;">Informasi Tagihan Pemesanan Barang</h3>
+        <h3 style="text-align:center;text-transform: uppercase;">Informasi Tagihan Pemesanan Barang
+            {{$pemesanan->unit->nama_unit}}</h3>
         <table class="table table-bordered nowrap">
             <thead>
                 <tr>
                     <th rowspan="2" class="text-center">No</th>
                     <th rowspan="2" class="text-center">Tanggal</th>
                     <th rowspan="2" class="text-center">ID Pemesanan</th>
-                    <th rowspan="2" class="text-center">Unit</th>
                     <th rowspan="2" class="text-center">Admin</th>
                     <th colspan="5" class="text-center">Detail Barang</th>
                 </tr>
@@ -119,7 +120,7 @@
                     <th>Merk</th>
                     <th>Satuan</th>
                     <th>Jumlah Pesan</th>
-                    <th>Total Pesan</th>
+                    <th>Harga Jual</th>
                 </tr>
             </thead>
             <tbody>
@@ -129,16 +130,22 @@
                     <td scope="col" class="text-center">
                         {{\carbon\carbon::parse($d->pemesanan->tgl_pesan)->translatedFormat('d F Y')}}</td>
                     <td scope="col" class="text-center">PM-{{$d->pemesanan->id}}</td>
-                    <td scope="col" class="text-center">{{$d->pemesanan->unit->nama_unit }}</td>
                     <td scope="col" class="text-center">{{$d->pemesanan->user->name }}</td>
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
                     <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
                     <td scope="col" class="text-center">{{$d->jumlah}}</td>
-                    <td scope="col" class="text-center">{{$d->pemesanan->total}}</td>
+                    <td scope="col" class="text-center">@currency($d->harga),-</td>
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">Total</td>
+                    <td>{{$jumlah}}</td>
+                    <td>@currency($count),-</td>
+                </tr>
+            </tfoot>
         </table>
         <br>
         <br>

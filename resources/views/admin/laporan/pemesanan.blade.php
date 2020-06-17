@@ -23,7 +23,7 @@
 
         td,
         th {
-            font-size: 10px;
+            font-size: 13px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -120,7 +120,7 @@
                     <th>Merk</th>
                     <th>Satuan</th>
                     <th>Jumlah Pesan</th>
-                    <th>Total Pesan</th>
+                    <th>Harga Jual</th>
                 </tr>
             </thead>
             <tbody>
@@ -135,12 +135,20 @@
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
                     <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
-                    <td scope="col" class="text-center">{{$d->jumlah}}</td>
-                    <td scope="col" class="text-center">{{$d->pemesanan->total}}</td>
+                    <td scope="col" class="text-center">{{$d->jumlah}} </td>
+                    <td scope="col" class="text-center">@currency($d->harga),-</td>
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">Total</td>
+                    <td>{{$jumlah}}</td>
+                    <td>@currency($count),-</td>
+                </tr>
+            </tfoot>
         </table>
+        <small>Dicetak Pada : {{$now}}</small>
         <br>
         <br>
         <div class="ttd">

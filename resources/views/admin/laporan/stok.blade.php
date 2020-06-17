@@ -124,19 +124,21 @@
                         @else
                         <td scope="col" class="text-center"> {{ $d->stok }}</td> @endif
                 </tr> @endforeach </tbody>
-        </table> <br>
+        </table>
+        <small>Dicetak Pada : {{$now}}</small>
         <br>
-        <!-- <div class="ttd">
+        <br>
+        <div class="ttd">
             <h5>
-                Banjarbaru,
+                Banjarmasin,
             </h5>
-            <h5>isi jabatan</h5>
+            <h5>Kepala Gudang</h5>
             <br>
             <br>
-            <h5 style="text-decoration:underline;">nama pejabat</h5>
-            <h5>golongan / kode golongan</h5>
-            <h5>NIP.</h5>
-        </div> -->
+            <h5 style="text-decoration:underline;">Maulana Irfan, S.Kom</h5>
+            <h5>Penanggung jawab</h5>
+            <h5>NIK. 201101 19920709 7</h5>
+        </div>
     </div>
 </body>
 

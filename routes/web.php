@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,9 @@ Route::group(['middleware' => ['auth', 'Checkrole:1,2']], function () {
 
     Route::get('/admin/laporan/stok', 'CetakController@stok')->name('cetakStok');
     Route::get('/admin/laporan/stokhbs', 'CetakController@stokhbs')->name('cetakStokhbs');
+    Route::get('/admin/laporan/stok/tanggal', 'CetakController@stoktgl')->name('cetakStoktgl');
     Route::get('/admin/laporan/barangpemesanan', 'CetakController@pemesanan')->name('cetakPemesanan');
     Route::get('/admin/laporan/barangpemesanantgl', 'CetakController@pemesanantgl')->name('cetaktglPemesanan');
-
 });
 
 Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
@@ -113,11 +114,15 @@ Route::group(['middleware' => ['auth', 'Checkrole:1']], function () {
     Route::delete('/admin/delete/{id}', 'AdminController@destroy')->name('userDelete');
 
     Route::get('/admin/laporan/barang', 'CetakController@barang')->name('cetakBarang');
-
+    Route::get('/admin/laporan/barang/tanggal', 'CetakController@barangtgl')->name('cetakBarangtgl');
     Route::get('/admin/laporan/unit', 'CetakController@unit')->name('cetakUnit');
+    Route::get('/admin/laporan/unit/tanggal', 'CetakController@unittgl')->name('cetakUnittgl');
     Route::get('/admin/laporan/satuan', 'CetakController@satuan')->name('cetakSatuan');
+    Route::get('/admin/laporan/satuan/tanggal', 'CetakController@satuantgl')->name('cetakSatuantgl');
     Route::get('/admin/laporan/merk', 'CetakController@merk')->name('cetakMerk');
+    Route::get('/admin/laporan/merk/tanggal', 'CetakController@merktgl')->name('cetakMerktgl');
     Route::get('/admin/laporan/supplier', 'CetakController@supplier')->name('cetakSupplier');
+    Route::get('/admin/laporan/supplier/tanggal', 'CetakController@suppliertgl')->name('cetakSuppliertgl');
     Route::get('/admin/laporan/barangmasuk', 'CetakController@masuk')->name('cetakMasuk');
     Route::get('/admin/laporan/barangmasuktgl', 'CetakController@masuktgl')->name('cetaktglMasuk');
     Route::get('/admin/laporan/barangkeluar', 'CetakController@keluar')->name('cetakKeluar');

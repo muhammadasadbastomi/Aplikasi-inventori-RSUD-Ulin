@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laporan Data Pemesanan Barang</title>
+    <title>Laporan Data Stok Barang</title>
     <link rel="icon" type="image/png" href="{{url('logo/logo.png')}}">
     <style>
         .logo {
@@ -23,7 +23,6 @@
 
         td,
         th {
-            font-size: 13px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -103,52 +102,31 @@
     </div>
 
     <div class="container" style="margin-top:-40px;">
-        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Pemesanan Barang</h3>
+        <h3 style="text-align:center;text-transform: uppercase;">Laporan Data Stok Barang</h3>
         <div style="text-align:right; margin-bottom:5px;">
             <small>Rekap : {{$start}} s/d {{$end}}</small>
         </div>
         <table class="table table-bordered nowrap">
             <thead>
                 <tr>
-                    <th rowspan="2" class="text-center">No</th>
-                    <th rowspan="2" class="text-center"> Tanggal </th>
-                    <th rowspan="2" class="text-center">ID Pemesanan</th>
-                    <th rowspan="2" class="text-center">Unit</th>
-                    <th rowspan="2" class="text-center">Admin</th>
-                    <th colspan="5" class="text-center">Detail Barang</th>
-                </tr>
-
-                <tr>
-                    <th>Nama</th>
-                    <th>Merk</th>
-                    <th>Satuan</th>
-                    <th>Jumlah Pesan</th>
-                    <th>Harga Jual</th>
+                    <th scope="col" class="text-center">No</th>
+                    <th scope="col" class="text-center">Nama Barang</th>
+                    <th scope="col" class="text-center">Merk</th>
+                    <th scope="col" class="text-center">Satuan</th>
+                    <th scope="col" class="text-center">Stok</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $d)
                 <tr>
                     <td scope="col" class="text-center">{{$loop->iteration}}</td>
-                    <td scope="col" class="text-center">{{\carbon\carbon::parse($d->pemesanan->tgl_pesan)->translatedFormat('d F Y')}}</td>
-                    <td scope="col" class="text-center">PM-{{$d->pemesanan->id}}</td>
-                    <td scope="col" class="text-center">{{$d->pemesanan->unit->nama_unit }}</td>
-                    <td scope="col" class="text-center">{{$d->pemesanan->user->name }}</td>
-                    <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
-                    <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
-                    <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
-                    <td scope="col" class="text-center">{{$d->jumlah}}</td>
-                    <td scope="col" class="text-center">@currency($d->harga),-</td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="8">Total</td>
-                    <td>{{$jumlah}}</td>
-                    <td>@currency($count),-</td>
-                </tr>
-            </tfoot>
+                    <td scope="col" class="text-center">{{$d->nama_barang }}</td>
+                    <td scope="col" class="text-center">{{$d->merk->nama_merk }}</td>
+                    <td scope="col" class="text-center">{{$d->satuan->nama_satuan }}</td>
+                    @if($d->stok < 6) <td scope="col" class="text-center" style="border-color: black; color:red;">{{ $d->stok }}</td>
+                        @else
+                        <td scope="col" class="text-center"> {{ $d->stok }}</td> @endif
+                </tr> @endforeach </tbody>
         </table>
         <small>Dicetak Pada : {{$now}}</small>
         <br>

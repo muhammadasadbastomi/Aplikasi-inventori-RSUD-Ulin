@@ -37,7 +37,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" target="_blank" href="{{route('cetakSatuan')}}">Keseluruhan</a>
-                                    <!-- <a class="dropdown-item" href="#">Another action</a> -->
+                                    <button class="dropdown-item" target="_blank" data-toggle="modal" data-target="#modalcetaktgl">Berdasarkan Tanggal</button>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -75,6 +75,7 @@
     <!-- #/ container -->
     </div>
 
+    @include('admin.master.satuan.cetaktgl')
     @include('admin.master.satuan.create')
     @include('admin.master.satuan.edit')
 

@@ -31,15 +31,14 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button> -->
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank"
-                                        href="{{route('cetakStok')}}">Keseluruhan</a>
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakStok')}}">Keseluruhan</a>
                                     <a class="dropdown-item" target="_blank" href="{{route('cetakStokhbs')}}">Hampir
                                         Habis</a>
+                                    <button class="dropdown-item" target="_blank" data-toggle="modal" data-target="#modalcetaktgl">Berdasarkan Tanggal</button>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -67,9 +66,7 @@
                                             <td scope="col" class="text-center">{{ $d->stok }}</td>
                                             @endif
                                             <td scope="col" class="text-center">
-                                                <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
-                                                    data-stok="{{$d->stok}}" data-toggle="modal"
-                                                    data-target="#editstok">
+                                                <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-stok="{{$d->stok}}" data-toggle="modal" data-target="#editstok">
                                                     <i class="fa fa-pencil color-muted m-r-5"></i>
                                                 </a>
                                             </td>
@@ -86,6 +83,7 @@
     <!-- #/ container -->
     </div>
 
+    @include('admin.master.stok.cetaktgl')
     @include('admin.master.stok.editstok')
     @endsection
 

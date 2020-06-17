@@ -23,6 +23,7 @@
 
         td,
         th {
+            font-size: 13px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -148,17 +149,21 @@
                 </tr>
             </tfoot>
         </table>
-        <!-- <div class="ttd">
+        <small>Dicetak Pada : {{$now}}</small>
+        <br>
+        <br>
+        <div class="ttd">
             <h5>
-                Banjarbaru,
+                Banjarmasin,
             </h5>
-            <h5>isi jabatan</h5>
+            <h5>Kepala Gudang</h5>
             <br>
             <br>
-            <h5 style="text-decoration:underline;">nama pejabat</h5>
-            <h5>golongan / kode golongan</h5>
-            <h5>NIP.</h5>
-        </div> -->
+            <h5 style="text-decoration:underline;">Maulana Irfan, S.Kom</h5>
+            <h5>Penanggung jawab</h5>
+            <h5>NIK. 201101 19920709 7</h5>
+        </div>
+    </div>
     </div>
 </body>
 

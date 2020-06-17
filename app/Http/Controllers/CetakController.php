@@ -14,6 +14,7 @@ use App\Pemesanandetail;
 use App\Satuan;
 use App\Supplier;
 use App\Unit;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use PDF;
@@ -22,49 +23,114 @@ class CetakController extends Controller
 {
     public function barang()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Barang::all();
 
-        $pdf = PDF::loadview('admin/laporan/barang', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/barang', compact('data', 'now'));
+        return $pdf->stream('laporan-barang-pdf');
+    }
+
+    public function barangtgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+
+        $data = Barang::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/barangtgl', compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-barang-pdf');
     }
 
     public function unit()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Unit::all();
 
-        $pdf = PDF::loadview('admin/laporan/unit', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/unit', compact('data', 'now'));
+        return $pdf->stream('laporan-unit-pdf');
+    }
+
+    public function unittgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+
+        $data = Unit::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/unittgl',  compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-unit-pdf');
     }
 
     public function satuan()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Satuan::all();
 
-        $pdf = PDF::loadview('admin/laporan/satuan', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/satuan', compact('data', 'now'));
+        return $pdf->stream('laporan-satuan-pdf');
+    }
+
+    public function satuantgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+        $data = Satuan::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/satuantgl', compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-satuan-pdf');
     }
 
     public function merk()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Merk::all();
 
-        $pdf = PDF::loadview('admin/laporan/merk', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/merk', compact('data', 'now'));
+        return $pdf->stream('laporan-merk-pdf');
+    }
+
+    public function merktgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+        $data = Merk::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/merktgl', compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-merk-pdf');
     }
 
     public function supplier()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Supplier::all();
 
-        $pdf = PDF::loadview('admin/laporan/supplier', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/supplier', compact('data', 'now'));
+        return $pdf->stream('laporan-supplier-pdf');
+    }
+
+    public function suppliertgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+        $data = Supplier::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/suppliertgl', compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-supplier-pdf');
     }
 
     public function pemesanan()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Pemesanandetail::all();
+        $count = $data->sum('harga');
+        $jumlah = $data->sum('jumlah');
 
-        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data', 'now', 'count', 'jumlah'));
         return $pdf->stream('laporan-pemesanan-pdf');
     }
 
@@ -90,28 +156,34 @@ class CetakController extends Controller
 
     public function pemesanantgl(Request $request)
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $start = $request->start;
         $end = $request->end;
 
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
             ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
 
-        $pdf = PDF::loadview('admin/laporan/pemesanantgl', compact('data', 'start', 'end'));
+        $count = $data->sum('harga');
+        $jumlah = $data->sum('jumlah');
+
+        $pdf = PDF::loadview('admin/laporan/pemesanantgl',  compact('data', 'now', 'start', 'end', 'jumlah', 'count'));
         return $pdf->stream('laporan-pemesanantgl-pdf');
     }
 
     public function masuk()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Masukdetail::all();
         $jumlah = Barang_masuk::sum('jumlah_barang');
         $total = Barang_masuk::sum('total');
 
-        $pdf = PDF::loadview('admin/laporan/barangmasuk', compact('data', 'total', 'jumlah'));
+        $pdf = PDF::loadview('admin/laporan/barangmasuk', compact('data', 'total', 'jumlah', 'now'));
         return $pdf->stream('laporan-barangmasuk-pdf');
     }
 
     public function masuktgl(Request $request)
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $start = $request->start;
         $end = $request->end;
 
@@ -125,22 +197,24 @@ class CetakController extends Controller
             ->whereBetween('barangmasuks.tgl_masuk', [$start, $end])
             ->sum('barangmasukdetails.subtotal');
 
-        $pdf = PDF::loadview('admin/laporan/barangmasuktgl', compact('data', 'start', 'end', 'jumlah', 'total'));
+        $pdf = PDF::loadview('admin/laporan/barangmasuktgl', compact('data', 'start', 'end', 'jumlah', 'total', 'now'));
         return $pdf->stream('laporan-barangmasuktgl-pdf');
     }
 
     public function keluar()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Keluardetail::all();
         $jumlah = Barang_keluar::sum('jumlah_barang');
         $total = Barang_keluar::sum('total');
 
-        $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'total', 'jumlah'));
+        $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'total', 'jumlah', 'now'));
         return $pdf->stream('laporan-barangkeluar-pdf');
     }
 
     public function keluartgl(Request $request)
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $start = $request->start;
         $end = $request->end;
 
@@ -154,23 +228,36 @@ class CetakController extends Controller
             ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
             ->sum('barangkeluardetails.subtotal');
 
-        $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total'));
+        $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total', 'now'));
         return $pdf->stream('laporan-barangkeluartgl-pdf');
     }
 
     public function stok()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Barang::all();
 
-        $pdf = PDF::loadview('admin/laporan/stok', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/stok', compact('data', 'now'));
+        return $pdf->stream('laporan-stok-pdf');
+    }
+
+    public function stoktgl(Request $request)
+    {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
+        $start = $request->start;
+        $end = $request->end;
+        $data = Barang::whereBetween('created_at', [$start, $end])->get();
+
+        $pdf = PDF::loadview('admin/laporan/stoktgl', compact('data', 'now', 'start', 'end'));
         return $pdf->stream('laporan-stok-pdf');
     }
 
     public function stokhbs()
     {
+        $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Barang::where('stok', '<', 6)->get();
 
-        $pdf = PDF::loadview('admin/laporan/stokhbs', compact('data'));
+        $pdf = PDF::loadview('admin/laporan/stokhbs', compact('data', 'now'));
         return $pdf->stream('laporan-stokhbs-pdf');
     }
 }

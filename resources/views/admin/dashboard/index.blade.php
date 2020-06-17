@@ -107,11 +107,10 @@
                 </div>
             </div>
         </div>
-
-        <hr>
+        <br>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <img style="height: auto; width: 100%;" src="{{asset('logo/rsulin.jpg')}}" alt="">
+                <img style="height:87%; width: 50%;" src="{{asset('logo/logo.png')}}" alt="">
             </div>
         </div>
     </div>

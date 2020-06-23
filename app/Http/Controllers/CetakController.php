@@ -138,6 +138,10 @@ class CetakController extends Controller
     {
         $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
         $pemesanan = pemesanan::findOrFail($uuid);
+
+        $pemesanan->status = 1;
+        $pemesanan->update();
+
         $count = $pemesanan->pemesanandetail->sum('harga');
         $jumlah = $pemesanan->pemesanandetail->sum('jumlah');
         $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'count', 'jumlah', 'pemesanan'));
@@ -151,7 +155,7 @@ class CetakController extends Controller
 
         //     ->attachData($pdf->output(), "invoice.pdf");
 
-        return redirect()->back()->withSuccess('Berhasil mengirim email');
+        return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke '.$pemesanan->user->name.'');
     }
 
     public function pemesanantgl(Request $request)

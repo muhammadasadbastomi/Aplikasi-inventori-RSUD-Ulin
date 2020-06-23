@@ -36,8 +36,11 @@
                                 </span></button>
                             </form> --}}
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
+                            @if($pemesanan->status == 0)
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
+                            @endif
                             <!-- Modal End -->
                         </div>
                         <div class="table-responsive">
@@ -46,9 +49,13 @@
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
+                                        @if(Auth::user()->role == 1)
                                         <th scope="col" class="text-center">Harga Jual</th>
+                                        @endif
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        @if($pemesanan->status == 0)
                                         <th scope="col" class="text-center">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,11 +63,26 @@
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
-                                        <td scope="col" class="text-center">{{ $p->harga }}</td>
+                                        @if(Auth::user()->role == 1 && $p->harga == null)
+                                        <td scope="col" class="text-center">Silahkan update harga</td>
+                                        @elseif(Auth::user()->role == 1 && $p->harga != null)
+                                        <td scope="col" class="text-center">@currency($p->harga)</td>
+                                        @else
+                                        @endif
                                         <td scope="col" class="text-center">{{ $p->jumlah }}</td>
+                                        @if($pemesanan->status == 0)
                                         <td scope="col" class="text-center">
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            @if(Auth::user()->role == 1)
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$p->id}}"
+                                                data-hrg="{{$p->harga}}" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil color-muted m-r-5"></i>
+                                            </a>
+                                            @endif
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -74,6 +96,45 @@
         </div>
     </div>
     <!-- #/ container -->
+
+    </div>
+
+    <div class="modal fade text-left" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel1" style="padding-left: 10px;">Tambah Barang</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ Route('updateHarga') }}" method="POST" }}>
+                        <div class="body">
+                            @method('PUT')
+                            @csrf
+                            @if(Auth::user()->role == 1)
+                            <input type="hidden" name="detail_id" id="detail_id">
+                            <div class="form-group">
+                                <label>Harga</label>
+                                <div class="form-group">
+                                    <input type="number" name="harga" id="hrg" placeholder="Masukkan harga"
+                                        class="form-control  @error ('harga') is-invalid @enderror">
+                                    @error('harga')<div class="invalid-feedback"> {{$message}} </div>@enderror
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary text-white"
+                                data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update harga</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     @include('admin.transaksi.pemesanan.detail.create')
@@ -127,6 +188,17 @@
                 }
             })
         });
+    </script>
+    <script>
+        $('#editModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var harga = button.data('hrg')
+        var modal = $(this)
+
+        modal.find('.modal-body #detail_id').val(id)
+        modal.find('.modal-body #hrg').val(harga)
+    })
     </script>
 
     @endsection

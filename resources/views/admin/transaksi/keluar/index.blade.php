@@ -32,12 +32,15 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button>
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakKeluar')}}" style="margin-left: -5px;">Keseluruhan</a>
-                                    <button class="btn nohover dropdown-item" data-toggle="modal" data-target="#tglModal">Berdasarkan Tanggal</button>
+                                    <a class="dropdown-item" target="_blank" href="{{route('cetakKeluar')}}"
+                                        style="margin-left: -5px;">Keseluruhan</a>
+                                    <button class="btn nohover dropdown-item" data-toggle="modal"
+                                        data-target="#tglModal">Berdasarkan Tanggal</button>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -61,25 +64,43 @@
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
                                         <td scope="col" class="text-center">{{ $d->unit->nama_unit }}</td>
                                         <td scope="col" class="text-center">{{ $d->user->name }}</td>
-                                        <td scope="col" class="text-center">{{\carbon\carbon::parse($d->tgl_keluar)->translatedFormat('d F Y')}}</td>
-                                        @if($d->jumlah_barang > 0 )
-                                        <td scope="col" class="text-center">{{ $d->jumlah_barang }}</td>
-                                        @else
-                                        <td scope="col" class="text-center"> - </td>
-                                        @endif
-                                        @if($d->total > 0 )
-                                        <td scope="col" class="text-center">Rp. {{number_format($d->total, 0, ',', '.')}},-</td>
-                                        @else
-                                        <td scope="col" class="text-center"> - </td>
-                                        @endif
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-success text-white" href="{{route('keluardetailIndex', ['id' => $d->uuid])}}">
+                                            {{carbon\carbon::parse($d->tgl_pesan)->translatedFormat('d F Y')}}</td>
+                                        @if($d->total > 0)
+                                        <td scope="col" class="text-center">{{ $d->total }}</td>
+                                        @else
+                                        <td scope="col" class="text-center"> - </td>
+                                        @endif
+                                        <td scope="col" class="text-center">@currency($d->totalharga)</td>
+                                        <td scope="col" class="text-center">
+                                            {{-- <a class="btn btn-sm btn-primary text-white"
+                                                href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
+                                            <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
+                                            </a> --}}
+                                            @if(Auth::user()->role && $d->status == 0)
+                                            <a class="btn btn-sm btn-primary text-white"
+                                                href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
+                                                <i class="fa icon-check color-muted m-r-5"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}" data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}" data-tgl_keluar="{{$d->tgl_keluar}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
+                                                data-unit_id="{{$d->unit->id}}" data-user_id="{{$d->user->id}}"
+                                                data-tgl_pesan="{{$d->tgl_pesan}}" data-alamat="{{$d->alamat}}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{ $d->uuid }}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
+                                            @else
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                                <i class="fa icon-plus color-muted m-r-5"></i>
+                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

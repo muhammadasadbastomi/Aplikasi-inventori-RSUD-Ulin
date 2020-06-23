@@ -21,6 +21,11 @@ class PemesananController extends Controller
         $unit = Unit::OrderBy('id', 'desc')->get();
         $user = User::OrderBy('id', 'desc')->get();
         $pemesanan = pemesanan::OrderBy('id', 'desc')->get();
+        $pemesanan = $pemesanan->map(function($item){
+            $data = $item->pemesanandetail->sum('harga');
+            $item['totalharga'] = $item->pemesanandetail->sum('harga');
+            return $item;
+        });
         $barang = barang::OrderBy('id', 'desc')->get();
 
         return view('admin.transaksi.pemesanan.index', compact('pemesanan', 'barang', 'unit', 'user'));
@@ -90,6 +95,15 @@ class PemesananController extends Controller
     {
         //
     }
+
+    // public function pemesananVerifikasi($id)
+    // {
+    //     $data = Pemesanan::findOrFail($id);
+    //     $data->status = 1;
+    //     $data->update();
+
+    //     return back()->withSuccess('Berhasil di verifikasi');
+    // }
 
     /**
      * Update the specified resource in storage.

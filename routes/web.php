@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth', 'Checkrole:1,2']], function () {
     Route::post('/admin/pemesanandetail/{id}', 'PemesanandetailController@store')->name('pemesanandetailStore');
     //Route::get('/admin/pemesanandetail/edit', 'PemesanandetailController@edit')->name('pemesanandetailEdit');
     Route::put('/admin/pemesananupdate', 'PemesanandetailController@update')->name('pemesananDetailUpdate');
+    Route::put('/admin/pemesananupdateHarga', 'PemesanandetailController@updateHarga')->name('updateHarga');
+    Route::get('/admin/pemesananVerifikasi/{id}', 'PemesananController@pemesananVerifikasi')->name('pemesananVerifikasi');
     Route::delete('/admin/pemesanandetail/delete/{id}', 'PemesanandetailController@destroy')->name('pemesanandetailDelete');
 
     Route::get('/admin/stok', 'StokController@index')->name('stokIndex');

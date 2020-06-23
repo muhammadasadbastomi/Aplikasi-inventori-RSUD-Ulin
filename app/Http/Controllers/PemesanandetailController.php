@@ -6,6 +6,7 @@ use App\Barang;
 use App\pemesanan;
 use App\pemesanandetail;
 use App\Supplier;
+use Auth;
 use Illuminate\Http\Request;
 
 class PemesanandetailController extends Controller
@@ -60,7 +61,11 @@ class PemesanandetailController extends Controller
         $request->request->add(['pemesanandetail_id' => $pemesanandet->id]);
         $pemesanandet->barang_id = $request->barang_id;
         $pemesanandet->pemesanan_id = $pemesanan->id;
-        $pemesanandet->harga = $request->harga;
+        if($request->harga){
+
+            $pemesanandet->harga = $request->harga;
+        }
+
         $pemesanandet->jumlah = $request->jumlah;
         $pemesanandet->save();
 
@@ -70,6 +75,15 @@ class PemesanandetailController extends Controller
         $pemesanan->update();
 
         return back()->with('success', 'Data berhasil ditambah');
+    }
+
+    public function updateHarga(Request $req)
+    {
+        $data = Pemesanandetail::findOrFail($req->detail_id);
+        $data->harga = $req->harga;
+        $data->update();
+
+        return back()->withSuccess('Data berhasil disimpan');
     }
 
     /**

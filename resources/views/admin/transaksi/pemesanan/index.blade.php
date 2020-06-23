@@ -55,6 +55,7 @@
                                         <th scope="col" class="text-center">Tanggal Pesanan</th>
                                         <th scope="col" class="text-center">Alamat</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col" class="text-center">Status</th>
                                         <th scope="col" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -72,10 +73,22 @@
                                         @else
                                         <td scope="col" class="text-center"> - </td>
                                         @endif
+                                        @if($d->status == 0)
+                                        <td scope="col" class="text-center"> <span
+                                                class="badge badge-warning">Pending</span> </td>
+                                        @else
+                                        <td scope="col" class="text-center"> <span
+                                                class="badge badge-primary">Verifikasi</span> </td>
+                                        @endif
                                         <td scope="col" class="text-center">
+                                            {{-- <a class="btn btn-sm btn-primary text-white"
+                                                href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
+                                            <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
+                                            </a> --}}
+                                            @if(Auth::user()->role && $d->status == 0)
                                             <a class="btn btn-sm btn-primary text-white"
                                                 href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
-                                                <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
+                                                <i class="fa icon-check color-muted m-r-5"></i>
                                             </a>
                                             <a class="btn btn-sm btn-success text-white"
                                                 href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
@@ -90,6 +103,12 @@
                                             <a class="delete btn btn-sm btn-danger text-white" data-id="{{$d->uuid}}"
                                                 href="#" data-toggle="tooltip" data-placement="top"><i
                                                     class="fa fa-close color-danger"></i></a>
+                                            @else
+                                            <a class="btn btn-sm btn-success text-white"
+                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                                <i class="fa icon-plus color-muted m-r-5"></i>
+                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

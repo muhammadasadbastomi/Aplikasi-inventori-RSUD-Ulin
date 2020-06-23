@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Barang_keluar;
+use App\Pemesanan;
 use App\Unit;
 use App\User;
 use Auth;
@@ -19,7 +19,12 @@ class BarangkeluarController extends Controller
     {
         $unit = Unit::OrderBy('id', 'desc')->get();
         $user = User::OrderBy('id', 'desc')->get();
-        $data = Barang_keluar::OrderBy('id', 'desc')->get();
+        $data = Pemesanan::where('status',1)->OrderBy('id', 'desc')->get();
+        $data = $data->map(function($item){
+            $data = $item->pemesanandetail->sum('harga');
+            $item['totalharga'] = $item->pemesanandetail->sum('harga');
+            return $item;
+        });
 
         return view('admin.transaksi.keluar.index', compact('data', 'unit', 'user'));
     }

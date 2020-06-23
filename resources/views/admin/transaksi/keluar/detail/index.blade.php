@@ -26,38 +26,57 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="float-right" style="margin-right: 30px;">
+                        {{-- <div class="float-right" style="margin-right: 30px;">
                             <!-- Modal Tambah-->
-                            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
+                            <button class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modalTambah1"><span><i class="feather icon-plus"></i> Tambah
                                     Data</span></button>
                             <!-- Modal End -->
-                        </div>
+                        </div> --}}
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered zero-configuration nowrap">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Nama Barang</th>
-                                        <th scope="col" class="text-center">Harga Satuan</th>
+                                        @if(Auth::user()->role == 1)
+                                        <th scope="col" class="text-center">Harga Jual</th>
+                                        @endif
                                         <th scope="col" class="text-center">Jumlah</th>
-                                        <th scope="col" class="text-center">Total</th>
+                                        @if($pemesanan->status == 0)
                                         <th scope="col" class="text-center">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $d)
+                                    @foreach ($pemesanandetail as $p)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $loop->iteration }}</td>
-                                        <td scope="col" class="text-center">{{ $d->barang->nama_barang }}</td>
-                                        <td scope="col" class="text-center">Rp. {{number_format($d->harga, 0, ',', '.')}},-</td>
-                                        <td scope="col" class="text-center">{{ $d->jumlah }}</td>
-                                        <td scope="col" class="text-center">Rp. {{number_format($d->subtotal, 0, ',', '.')}},-</td>
+                                        <td scope="col" class="text-center">{{ $p->barang->nama_barang }}</td>
+                                        @if(Auth::user()->role == 1 && $p->harga == null)
+                                        <td scope="col" class="text-center">Silahkan update harga</td>
+                                        @elseif(Auth::user()->role == 1 && $p->harga != null)
+                                        <td scope="col" class="text-center">@currency($p->harga)</td>
+                                        @else
+                                        @endif
+                                        <td scope="col" class="text-center">{{ $p->jumlah }}</td>
+                                        @if($pemesanan->status == 0)
                                         <td scope="col" class="text-center">
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{ $d->uuid }}" href="#" data-toggle="tooltip" data-placement="top"><i class="fa fa-close color-danger"></i></a>
+                                            @if(Auth::user()->role == 1)
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$p->id}}"
+                                                data-hrg="{{$p->harga}}" data-toggle="modal" data-target="#editModal">
+                                                <i class="fa fa-pencil color-muted m-r-5"></i>
+                                            </a>
+                                            @endif
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$p->uuid}}"
+                                                href="#" data-toggle="tooltip" data-placement="top"><i
+                                                    class="fa fa-close color-danger"></i></a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

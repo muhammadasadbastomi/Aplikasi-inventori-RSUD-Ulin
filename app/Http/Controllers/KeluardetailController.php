@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
-use App\Barang_keluar;
-use App\Keluardetail;
+use App\Pemesanan;
+use App\Supplier;
+use App\Pemesanandetail;
 use Illuminate\Http\Request;
 
 class KeluardetailController extends Controller
@@ -14,14 +15,16 @@ class KeluardetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
-    {
-        $barangkeluar = Barang_keluar::where('uuid', $id)->first();
-        $data = Keluardetail::OrderBy('id', 'desc')->where('barangkeluar_id', $barangkeluar->id)->get();
-        $barang = barang::OrderBy('id', 'desc')->get();
 
-        return view('admin.transaksi.keluar.detail.index', compact('barangkeluar', 'barang', 'data'));
-    }
+        public function index($id)
+        {
+            $pemesanan = pemesanan::where('uuid', $id)->first();
+            $pemesanandetail = pemesanandetail::OrderBy('id', 'desc')->where('pemesanan_id', $pemesanan->id)->get();
+            $barang = barang::OrderBy('id', 'desc')->get();
+            $supplier = supplier::OrderBy('id', 'desc')->get();
+
+            return view('admin.transaksi.keluar.detail.index', compact('pemesanan', 'barang', 'supplier', 'pemesanandetail'));
+        }
 
     /**
      * Show the form for creating a new resource.

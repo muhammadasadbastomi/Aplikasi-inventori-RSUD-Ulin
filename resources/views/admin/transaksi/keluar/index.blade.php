@@ -83,7 +83,7 @@
                                                 <i class="fa icon-check color-muted m-r-5"></i>
                                             </a>
                                             <a class="btn btn-sm btn-success text-white"
-                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                                href="{{route('keluardetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>
                                             </a>
                                             <a class="btn btn-sm btn-info text-white" data-id="{{$d->id}}"
@@ -97,7 +97,7 @@
                                                     class="fa fa-close color-danger"></i></a>
                                             @else
                                             <a class="btn btn-sm btn-success text-white"
-                                                href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
+                                                href="{{route('keluardetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>
                                             </a>
                                             @endif

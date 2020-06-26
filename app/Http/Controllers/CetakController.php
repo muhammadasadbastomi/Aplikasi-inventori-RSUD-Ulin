@@ -127,24 +127,35 @@ class CetakController extends Controller
     {
         $now = Carbon::now()->translatedFormat('l, d F Y');
         $data = Pemesanandetail::all();
-        $count = $data->sum('harga');
+        $data =  $data->map(function ($item) {
+            $item['total'] = $item->harga * $item->jumlah;
+
+            return $item;
+        });
+        $total = $data->sum('total');
         $jumlah = $data->sum('jumlah');
 
-        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data', 'now', 'count', 'jumlah'));
+        $pdf = PDF::loadview('admin/laporan/pemesanan', compact('data', 'now', 'total', 'jumlah'));
         return $pdf->stream('laporan-pemesanan-pdf');
     }
 
     public function invoicePemesanan($uuid)
     {
         $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
+        $data =  $data->map(function ($item) {
+            $item['total'] = $item->harga * $item->jumlah;
+
+            return $item;
+        });
         $pemesanan = pemesanan::findOrFail($uuid);
 
         $pemesanan->status = 1;
         $pemesanan->update();
 
-        $count = $pemesanan->pemesanandetail->sum('harga');
+        // $count = $pemesanan->pemesanandetail->sum('harga');
         $jumlah = $pemesanan->pemesanandetail->sum('jumlah');
-        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'count', 'jumlah', 'pemesanan'));
+        $total = $data->sum('total');
+        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'jumlah', 'pemesanan', 'total'));
         $path = public_path('invoice/');
         $fileName = 'invoice-' . $pemesanan->id . '.' . 'pdf';
         $pdf->save($path . '/' . $fileName);
@@ -155,7 +166,7 @@ class CetakController extends Controller
 
         //     ->attachData($pdf->output(), "invoice.pdf");
 
-        return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke '.$pemesanan->user->name.'');
+        return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke ' . $pemesanan->user->name . '');
     }
 
     public function pemesanantgl(Request $request)

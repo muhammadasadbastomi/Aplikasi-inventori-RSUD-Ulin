@@ -119,8 +119,9 @@
                     <th>Nama</th>
                     <th>Merk</th>
                     <th>Satuan</th>
-                    <th>Jumlah Pesan</th>
                     <th>Harga Jual</th>
+                    <th>Jumlah Pesan</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -134,32 +135,33 @@
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
                     <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
-                    <td scope="col" class="text-center">{{$d->jumlah}}</td>
                     <td scope="col" class="text-center">@currency($d->harga),-</td>
+                    <td scope="col" class="text-center">{{$d->jumlah}}</td>
+                    <td scope="col" class="text-center">@currency($d->total),-</td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">Total</td>
+                    <td colspan="8">Total</td>
                     <td>{{$jumlah}}</td>
-                    <td>@currency($count),-</td>
+                    <td>@currency($total),-</td>
                 </tr>
             </tfoot>
         </table>
         <br>
         <br>
-        <!-- <div class="ttd">
+        <div class="ttd">
             <h5>
-                Banjarbaru,
+                Banjarmasin,
             </h5>
-            <h5>isi jabatan</h5>
+            <h5>Kepala Gudang</h5>
             <br>
             <br>
-            <h5 style="text-decoration:underline;">nama pejabat</h5>
-            <h5>golongan / kode golongan</h5>
-            <h5>NIP.</h5>
-        </div> -->
+            <h5 style="text-decoration:underline;">Maulana Irfan, S.Kom</h5>
+            <h5>Penanggung jawab</h5>
+            <h5>NIK. 201101 19920709 7</h5>
+        </div>
     </div>
 </body>
 

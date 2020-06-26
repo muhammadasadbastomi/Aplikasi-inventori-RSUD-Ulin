@@ -85,11 +85,14 @@
                                                 href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
                                             <i class="fa icon-print color-muted m-r-5">Kirim Email</i>
                                             </a> --}}
-                                            @if(Auth::user()->role && $d->status == 0)
+                                            @if(Auth::user()->role == 1)
                                             <a class="btn btn-sm btn-primary text-white"
                                                 href="{{route('cetakInvoicePemesanan', ['uuid' => $d->id])}}">
                                                 <i class="fa icon-check color-muted m-r-5"></i>
                                             </a>
+                                            @endif
+                                            @if(Auth::user()->role && $d->status == 0)
+
                                             <a class="btn btn-sm btn-success text-white"
                                                 href="{{route('pemesanandetailIndex', ['id' => $d->uuid])}}">
                                                 <i class="fa icon-plus color-muted m-r-5"></i>

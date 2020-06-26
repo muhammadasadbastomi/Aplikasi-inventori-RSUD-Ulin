@@ -141,6 +141,10 @@ class CetakController extends Controller
 
     public function invoicePemesanan($uuid)
     {
+        $check = Pemesanandetail::where('pemesanan_id', $uuid)->whereNull('harga')->get();
+        if(count($check) > 0){
+            return back()->withWarning('Silahkan isi harga jual pada detail pemesanan');
+        }else{
         $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
         $data =  $data->map(function ($item) {
             $item['total'] = $item->harga * $item->jumlah;
@@ -167,6 +171,7 @@ class CetakController extends Controller
         //     ->attachData($pdf->output(), "invoice.pdf");
 
         return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke ' . $pemesanan->user->name . '');
+    }
     }
 
     public function pemesanantgl(Request $request)

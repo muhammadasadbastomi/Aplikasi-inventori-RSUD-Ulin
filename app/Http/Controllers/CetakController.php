@@ -156,7 +156,6 @@ class CetakController extends Controller
                 return $item;
             });
             $pemesanan = pemesanan::findOrFail($uuid);
-
             $pemesanan->status = 1;
             $pemesanan->update();
 
@@ -168,6 +167,8 @@ class CetakController extends Controller
             $fileName = 'invoice-' . $pemesanan->id . '.' . 'pdf';
             $pdf->save($path . '/' . $fileName);
             Mail::to($pemesanan->user->email)->send(new TagihanEmail($pemesanan));
+
+            // dd($jumlah);
             // $message->to($pemesanan->user->email, $pemesanan->unit->nama_uit)
 
             //     ->subject('Informasi tagihan unit' . $pemesanan->unit->nama_unit)

@@ -120,7 +120,7 @@
                     <th>Merk</th>
                     <th>Harga Jual</th>
                     <th>Jumlah Pesan</th>
-                    <th style="width:75px;">Total</th>
+                    <th style="width:70px;">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -142,7 +142,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="9">Total</td>
+                    <td colspan="8">Total</td>
+                    <td>{{$jumlah}}</td>
                     <td>@currency($total),-</td>
                 </tr>
             </tfoot>

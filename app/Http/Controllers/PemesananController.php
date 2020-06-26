@@ -20,8 +20,8 @@ class PemesananController extends Controller
     {
         $unit = Unit::OrderBy('id', 'desc')->get();
         $user = User::OrderBy('id', 'desc')->get();
-        $pemesanan = pemesanan::OrderBy('id', 'desc')->get();
-        $pemesanan = $pemesanan->map(function($item){
+        $pemesanan = pemesanan::OrderBy('id', 'desc')->where('status', 0)->get();
+        $pemesanan = $pemesanan->map(function ($item) {
             $data = $item->pemesanandetail->sum('harga');
             $item['totalharga'] = $item->pemesanandetail->sum('harga');
             return $item;

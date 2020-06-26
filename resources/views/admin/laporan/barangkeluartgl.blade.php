@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laporan Data Barang Keluar</title>
+    <title>Laporan Data Pemesanan Barang</title>
     <link rel="icon" type="image/png" href="{{url('logo/logo.png')}}">
     <style>
         .logo {
@@ -23,7 +23,7 @@
 
         td,
         th {
-            font-size: 13px;
+            font-size: 12px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -111,44 +111,41 @@
             <thead>
                 <tr>
                     <th rowspan="2" class="text-center">No</th>
-                    <th rowspan="2" class="text-center">Tanggal</th>
-                    <th rowspan="2" class="text-center">ID Barang Keluar</th>
+                    <th rowspan="2" class="text-center">Tanggal </th>
+                    <th rowspan="2" class="text-center">ID<br>Barang</th>
                     <th rowspan="2" class="text-center">Unit</th>
-                    <th rowspan="2" class="text-center">User</th>
-                    <th colspan="6" class="text-center">Detail Barang</th>
+                    <th rowspan="2" class="text-center">Admin</th>
+                    <th colspan="5" class="text-center">Detail Barang</th>
                 </tr>
 
                 <tr>
                     <th>Nama</th>
                     <th>Merk</th>
-                    <th>Satuan</th>
-                    <th>Jumlah</th>
-                    <th>Harga Satuan</th>
-                    <th>Subtotal</th>
+                    <th>Harga Jual</th>
+                    <th>Jumlah Pesan</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $d)
                 <tr>
-                    <td scope="col" class="text-center align-center">{{$loop->iteration}}</td>
-                    <td scope="col" class="text-center align-center">{{\carbon\carbon::parse($d->barangkeluar->tgl_keluar)->translatedFormat('d F Y')}}</td>
-                    <td scope="col" class="text-center align-center">PM-{{$d->barangkeluar->id}}</td>
-                    <td scope="col" class="text-center">{{$d->barangkeluar->unit->nama_unit }}</td>
-                    <td scope="col" class="text-center">{{$d->barangkeluar->user->name }}</td>
+                    <td scope="col" class="text-center">{{$loop->iteration}}</td>
+                    <td scope="col" class="text-center">{{\carbon\carbon::parse($d->pemesanan->tgl_pesan)->translatedFormat('d F Y')}}</td>
+                    <td scope="col" class="text-center">PM-{{$d->pemesanan->id}}</td>
+                    <td scope="col" class="text-center">{{$d->pemesanan->unit->nama_unit }}</td>
+                    <td scope="col" class="text-center">{{$d->pemesanan->user->name }}</td>
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
-                    <td scope="col" class="text-center align-center">{{$d->barang->satuan->nama_satuan }}</td>
-                    <td scope="col" class="text-center align-center">{{$d->jumlah}}</td>
-                    <td scope="col" class="text-center align-right">Rp. {{number_format($d->harga, 0, ',', '.')}},-</td>
-                    <td scope="col" class="text-center align-right">Rp. {{number_format($d->subtotal, 0, ',', '.')}},-</td>
+                    <td scope="col" class="text-center">@currency($d->harga),-</td>
+                    <td scope="col" class="text-center">{{$d->jumlah}} {{$d->barang->satuan->nama_satuan }}</td>
+                    <td scope="col" class="text-center" style="width: 75px;">@currency($d->total),-</td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th scope="col" class="align-right" colspan="8">Total</th>
-                    <th scope="col" class="align-center">{{$jumlah}}</th>
-                    <th scope="col" class="align-right" colspan="2">Rp. {{number_format($total, 0, ',', '.')}},-</th>
+                    <td colspan="9">Total</td>
+                    <td>@currency($total),-</td>
                 </tr>
             </tfoot>
         </table>
@@ -166,7 +163,6 @@
             <h5>Penanggung jawab</h5>
             <h5>NIK. 201101 19920709 7</h5>
         </div>
-    </div>
     </div>
 </body>
 

@@ -126,7 +126,11 @@ class CetakController extends Controller
     public function pemesanan()
     {
         $now = Carbon::now()->translatedFormat('l, d F Y');
-        $data = Pemesanandetail::all();
+        // $data = Pemesanandetail::whereNotNUll('harga')->orderBy('id', 'asc')->get();
+
+        $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
+            ->where('pemesanans.status', 0)->get();
+
         $data =  $data->map(function ($item) {
             $item['total'] = $item->harga * $item->jumlah;
 
@@ -142,36 +146,36 @@ class CetakController extends Controller
     public function invoicePemesanan($uuid)
     {
         $check = Pemesanandetail::where('pemesanan_id', $uuid)->whereNull('harga')->get();
-        if(count($check) > 0){
+        if (count($check) > 0) {
             return back()->withWarning('Silahkan isi harga jual pada detail pemesanan');
-        }else{
-        $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
-        $data =  $data->map(function ($item) {
-            $item['total'] = $item->harga * $item->jumlah;
+        } else {
+            $data = Pemesanandetail::where('pemesanan_id', $uuid)->get();
+            $data =  $data->map(function ($item) {
+                $item['total'] = $item->harga * $item->jumlah;
 
-            return $item;
-        });
-        $pemesanan = pemesanan::findOrFail($uuid);
+                return $item;
+            });
+            $pemesanan = pemesanan::findOrFail($uuid);
 
-        $pemesanan->status = 1;
-        $pemesanan->update();
+            $pemesanan->status = 1;
+            $pemesanan->update();
 
-        // $count = $pemesanan->pemesanandetail->sum('harga');
-        $jumlah = $pemesanan->pemesanandetail->sum('jumlah');
-        $total = $data->sum('total');
-        $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'jumlah', 'pemesanan', 'total'));
-        $path = public_path('invoice/');
-        $fileName = 'invoice-' . $pemesanan->id . '.' . 'pdf';
-        $pdf->save($path . '/' . $fileName);
-        Mail::to($pemesanan->user->email)->send(new TagihanEmail($pemesanan));
-        // $message->to($pemesanan->user->email, $pemesanan->unit->nama_uit)
+            // $count = $pemesanan->pemesanandetail->sum('harga');
+            $jumlah = $pemesanan->pemesanandetail->sum('jumlah');
+            $total = $data->sum('total');
+            $pdf = PDF::loadview('admin/laporan/invoicePemesanan', compact('data', 'jumlah', 'pemesanan', 'total'));
+            $path = public_path('invoice/');
+            $fileName = 'invoice-' . $pemesanan->id . '.' . 'pdf';
+            $pdf->save($path . '/' . $fileName);
+            Mail::to($pemesanan->user->email)->send(new TagihanEmail($pemesanan));
+            // $message->to($pemesanan->user->email, $pemesanan->unit->nama_uit)
 
-        //     ->subject('Informasi tagihan unit' . $pemesanan->unit->nama_unit)
+            //     ->subject('Informasi tagihan unit' . $pemesanan->unit->nama_unit)
 
-        //     ->attachData($pdf->output(), "invoice.pdf");
+            //     ->attachData($pdf->output(), "invoice.pdf");
 
-        return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke ' . $pemesanan->user->name . '');
-    }
+            return redirect()->back()->withSuccess('Berhasil verifikasi dan mengirim email ke ' . $pemesanan->user->name . '');
+        }
     }
 
     public function pemesanantgl(Request $request)
@@ -181,7 +185,7 @@ class CetakController extends Controller
         $end = $request->end;
 
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
-            ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
+            ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->where('pemesanans.status', 0)->get();
 
         $data =  $data->map(function ($item) {
             $item['total'] = $item->harga * $item->jumlah;
@@ -226,36 +230,78 @@ class CetakController extends Controller
         return $pdf->stream('laporan-barangmasuktgl-pdf');
     }
 
+    // public function keluar()
+    // {
+    //     $now = Carbon::now()->translatedFormat('l, d F Y');
+    //     $data = Keluardetail::all();
+    //     $jumlah = Barang_keluar::sum('jumlah_barang');
+    //     $total = Barang_keluar::sum('total');
+
+    //     $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'total', 'jumlah', 'now'));
+    //     return $pdf->stream('laporan-barangkeluar-pdf');
+    // }
     public function keluar()
     {
         $now = Carbon::now()->translatedFormat('l, d F Y');
-        $data = Keluardetail::all();
-        $jumlah = Barang_keluar::sum('jumlah_barang');
-        $total = Barang_keluar::sum('total');
+        // $data = Pemesanandetail::whereNotNUll('harga')->orderBy('id', 'asc')->get();
 
-        $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'total', 'jumlah', 'now'));
+        $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
+            ->where('pemesanans.status', 1)->get();
+
+        // dd($data);
+
+        $data =  $data->map(function ($item) {
+            $item['total'] = $item->harga * $item->jumlah;
+
+            return $item;
+        });
+        $total = $data->sum('total');
+        $jumlah = $data->sum('jumlah');
+
+        $pdf = PDF::loadview('admin/laporan/barangkeluar', compact('data', 'now', 'total', 'jumlah'));
         return $pdf->stream('laporan-barangkeluar-pdf');
     }
 
+    // public function keluartgl(Request $request)
+    // {
+    //     $now = Carbon::now()->translatedFormat('l, d F Y');
+    //     $start = $request->start;
+    //     $end = $request->end;
+
+    //     $data = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+    //         ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+    //         ->get();
+    //     $jumlah = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+    //         ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+    //         ->sum('barangkeluardetails.jumlah');
+    //     $total = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
+    //         ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
+    //         ->sum('barangkeluardetails.subtotal');
+
+    //     $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total', 'now'));
+    //     return $pdf->stream('laporan-barangkeluartgl-pdf');
+    // }
     public function keluartgl(Request $request)
     {
         $now = Carbon::now()->translatedFormat('l, d F Y');
         $start = $request->start;
         $end = $request->end;
 
-        $data = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
-            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
-            ->get();
-        $jumlah = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
-            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
-            ->sum('barangkeluardetails.jumlah');
-        $total = Keluardetail::join('barangkeluars', 'barangkeluars.id', '=', 'barangkeluardetails.barangkeluar_id')
-            ->whereBetween('barangkeluars.tgl_keluar', [$start, $end])
-            ->sum('barangkeluardetails.subtotal');
+        $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
+            ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->where('pemesanans.status', 1)->get();
 
-        $pdf = PDF::loadview('admin/laporan/barangkeluartgl', compact('data', 'start', 'end', 'jumlah', 'total', 'now'));
+        $data =  $data->map(function ($item) {
+            $item['total'] = $item->harga * $item->jumlah;
+
+            return $item;
+        });
+        $total = $data->sum('total');
+        $jumlah = $data->sum('jumlah');
+
+        $pdf = PDF::loadview('admin/laporan/barangkeluartgl',  compact('data', 'now', 'start', 'end', 'jumlah', 'total'));
         return $pdf->stream('laporan-barangkeluartgl-pdf');
     }
+
 
     public function stok()
     {

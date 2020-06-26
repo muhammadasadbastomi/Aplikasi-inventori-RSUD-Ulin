@@ -178,10 +178,15 @@ class CetakController extends Controller
         $data = Pemesanandetail::join('pemesanans', 'pemesanans.id', '=', 'pemesanandetails.pemesanan_id')
             ->whereBetween('pemesanans.tgl_pesan', [$start, $end])->get();
 
-        $count = $data->sum('harga');
+        $data =  $data->map(function ($item) {
+            $item['total'] = $item->harga * $item->jumlah;
+
+            return $item;
+        });
+        $total = $data->sum('total');
         $jumlah = $data->sum('jumlah');
 
-        $pdf = PDF::loadview('admin/laporan/pemesanantgl',  compact('data', 'now', 'start', 'end', 'jumlah', 'count'));
+        $pdf = PDF::loadview('admin/laporan/pemesanantgl',  compact('data', 'now', 'start', 'end', 'jumlah', 'total'));
         return $pdf->stream('laporan-pemesanantgl-pdf');
     }
 

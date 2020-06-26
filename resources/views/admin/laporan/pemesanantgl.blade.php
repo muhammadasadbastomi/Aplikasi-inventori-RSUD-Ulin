@@ -23,7 +23,7 @@
 
         td,
         th {
-            font-size: 13px;
+            font-size: 12px;
             border: 1px solid;
             padding-left: 5px;
             text-align: center;
@@ -111,8 +111,8 @@
             <thead>
                 <tr>
                     <th rowspan="2" class="text-center">No</th>
-                    <th rowspan="2" class="text-center"> Tanggal </th>
-                    <th rowspan="2" class="text-center">ID Pemesanan</th>
+                    <th rowspan="2" class="text-center">Tanggal </th>
+                    <th rowspan="2" class="text-center">ID<br>Pemesanan</th>
                     <th rowspan="2" class="text-center">Unit</th>
                     <th rowspan="2" class="text-center">Admin</th>
                     <th colspan="5" class="text-center">Detail Barang</th>
@@ -121,9 +121,9 @@
                 <tr>
                     <th>Nama</th>
                     <th>Merk</th>
-                    <th>Satuan</th>
-                    <th>Jumlah Pesan</th>
                     <th>Harga Jual</th>
+                    <th>Jumlah Pesan</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -136,17 +136,16 @@
                     <td scope="col" class="text-center">{{$d->pemesanan->user->name }}</td>
                     <td scope="col" class="text-center">{{$d->barang->nama_barang }}</td>
                     <td scope="col" class="text-center">{{$d->barang->merk->nama_merk }}</td>
-                    <td scope="col" class="text-center">{{$d->barang->satuan->nama_satuan }}</td>
-                    <td scope="col" class="text-center">{{$d->jumlah}}</td>
                     <td scope="col" class="text-center">@currency($d->harga),-</td>
+                    <td scope="col" class="text-center">{{$d->jumlah}} {{$d->barang->satuan->nama_satuan }}</td>
+                    <td scope="col" class="text-center" style="width: 75px;">@currency($d->total),-</td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="8">Total</td>
-                    <td>{{$jumlah}}</td>
-                    <td>@currency($count),-</td>
+                    <td colspan="9">Total</td>
+                    <td>@currency($total),-</td>
                 </tr>
             </tfoot>
         </table>

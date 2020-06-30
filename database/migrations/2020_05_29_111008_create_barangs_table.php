@@ -21,8 +21,8 @@ class CreateBarangsTable extends Migration
             $table->string('nama_barang', 100);
             $table->integer('stok')->nullable();
             $table->timestamps();
-            $table->foreign('merk_id')->references('id')->on('merks')->onDelete('restrict');
-            $table->foreign('satuan_id')->references('id')->on('satuans')->onDelete('restrict');
+            $table->foreign('merk_id')->references('id')->on('merks')->onDelete('cascade');
+            $table->foreign('satuan_id')->references('id')->on('satuans')->onDelete('cascade');
         });
     }
 

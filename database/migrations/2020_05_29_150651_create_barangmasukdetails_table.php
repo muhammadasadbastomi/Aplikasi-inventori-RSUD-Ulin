@@ -22,8 +22,8 @@ class CreateBarangmasukdetailsTable extends Migration
             $table->string('jumlah', 50);
             $table->string('subtotal', 50);
             $table->timestamps();
-            $table->foreign('barangmasuk_id')->references('id')->on('barangmasuks')->onDelete('restrict');
-            $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('restrict');
+            $table->foreign('barangmasuk_id')->references('id')->on('barangmasuks')->onDelete('cascade');
+            $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
         });
     }
 

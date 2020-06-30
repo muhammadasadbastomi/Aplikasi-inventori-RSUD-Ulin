@@ -22,8 +22,8 @@ class CreateBarangmasuksTable extends Migration
             $table->string('jumlah_barang', 50)->default(0);
             $table->string('total', 50)->default(0);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
         });
     }
 

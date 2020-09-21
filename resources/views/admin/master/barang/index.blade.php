@@ -32,12 +32,15 @@
                                     <span><i class="feather icon-plus"></i> Tambah Data</span>
                                 </button>
                                 &emsp14;
-                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-outline-info dropdown-toggle" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="feather icon-printer"></i> Cetak Data</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" target="_blank" href="{{route('cetakBarang')}}">Keseluruhan</a>
-                                    <button class="dropdown-item" target="_blank" data-toggle="modal" data-target="#modalcetaktgl">Berdasarkan Tanggal</button>
+                                    <a class="dropdown-item" target="_blank"
+                                        href="{{route('cetakBarang')}}">Keseluruhan</a>
+                                    <button class="dropdown-item" target="_blank" data-toggle="modal"
+                                        data-target="#modalcetaktgl">Berdasarkan Tanggal</button>
                                 </div>
                             </div>
                             <!-- Modal End -->
@@ -61,10 +64,14 @@
                                         <td scope="col" class="text-center">{{ $b->merk->nama_merk }}</td>
                                         <td scope="col" class="text-center">{{ $b->satuan->nama_satuan }}</td>
                                         <td scope="col" class="text-center">
-                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}" data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}" data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}" data-toggle="modal" data-target="#editModal">
+                                            <a class="btn btn-sm btn-info text-white" data-id="{{$b->id}}"
+                                                data-nama_barang="{{$b->nama_barang}}" data-merk_id="{{$b->merk->id}}"
+                                                data-satuan_id="{{$b->satuan->id}}" data-stok="{{$b->stok}}"
+                                                data-toggle="modal" data-target="#editModal">
                                                 <i class="fa fa-pencil color-muted m-r-5"></i>
                                             </a>
-                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$b->uuid}}" href="#"><i class="fa fa-close color-danger"></i></a>
+                                            <a class="delete btn btn-sm btn-danger text-white" data-id="{{$b->uuid}}"
+                                                href="#"><i class="fa fa-close color-danger"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -151,6 +158,17 @@
                             document.location.reload(true);
                         }, 1000);
                     },
+                    error: function(response){
+                         Swal.fire({
+                            icon: 'error',
+                            title: 'Data Gagal Dihapus',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            document.location.reload(true);
+                        }, 1000);
+                    }
                 })
             } else if (result.dismiss === swal.DismissReason.cancel) {
                 Swal.fire(

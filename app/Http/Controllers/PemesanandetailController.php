@@ -74,6 +74,15 @@ class PemesanandetailController extends Controller
         $pemesanan->total = $sum;
         $pemesanan->update();
 
+
+        $barang = Barang::findOrFail($request->barang_id);
+        $barang->stok = $barang->stok - $request->jumlah;
+        if ($barang->stok < 0) {
+            $delete = pemesanandetail::findOrfail($pemesanandet->id)->delete();
+            return back()->with('warning', 'Stok tidak mencukupi');
+        }
+        $barang->update();
+
         return back()->with('success', 'Data berhasil ditambah');
     }
 
@@ -133,10 +142,17 @@ class PemesanandetailController extends Controller
     public function destroy($id)
     {
         $data = Pemesanandetail::where('uuid', $id)->first();
+        $jumlah = $data->jumlah;
 
         $pemesanan = pemesanan::where('id', $data->pemesanan_id)->first();
 
         $data->delete();
+
+        $barangkeluar = pemesanan::findOrFail($data->pemesanan_id);
+        //update stok
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->stok = $barang->stok + $jumlah;
+        $barang->update();
 
         $sum = $pemesanan->pemesanandetail->sum('jumlah');
         $pemesanan->total = $sum;

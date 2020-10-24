@@ -20,6 +20,7 @@
                         <span class="float-right display-5 opacity-5"><i class="icon-chart"></i></span>
                     </div>
                 </div>
+
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-2">
